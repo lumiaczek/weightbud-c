@@ -5,6 +5,8 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
 
-add_executable(weightbud src/main.c)
+add_executable(weightbud src/main.c src/gui.c)
+
+target_include_directories(weightbud PRIVATE include)
 
 target_link_libraries(weightbud PRIVATE PkgConfig::GTK3)
