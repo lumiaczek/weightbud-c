@@ -1,3 +1,16 @@
+/**
+ * @file storage.h
+ * @author Daniel Borowski (daniel.borowski@student.put.poznan.pl)
+ * @brief Deklaracje głównych struktur aplikacji Weightbud
+ * @version 0.1
+ * @date 2026-04-14
+ * Plik zawiera deklaracje wszystkich struktur potrzebnych do przechowywania danych:
+ * Habit Tracker, Workout Tracker, Diet Tracker oraz konfigurację użytkownika.
+ *
+ * @copyright Copyright (c) 2026
+ *
+ */
+
 #ifndef STORAGE_H
 #define STORAGE_H
 
@@ -7,43 +20,6 @@
 #define MAX_SUPPLEMENTS 10
 #define MAX_WORKOUTS_PER_DAY 3
 #define MAX_MEALS 10
-
-/*
-
-    DEFINICJA STRUKTUR APLIKACJI WEIGHTBUD
-    ======================================
-
-    PODSTAWOWA STRUKTURA DANYCH
-    --------------------------------------
-
-    DailyRecord - struktura przechowuje informacje z wszystkich trackerów, inicjalizowany przy pomocy struktury UserSettings
-
-    STRUKTURY DANYCH MODUŁÓW
-    --------------------------------------
-
-    # MODUŁ WORKOUT TRACKER
-
-    Workout - struktura zawiera dane dotyczące treningu (śr. tętno, spalone kcal, czas treningu, dystans, tempo)
-    WorkoutType - enumeracja rodzaju treningów  (Triathlon i Siła)
-
-    # MODUŁ HABIT TRACKER
-
-    Habit - struktura przechowująca nawyk
-
-    # MODUŁ WEIGHT TRACKER
-
-    BodyMeasurement - struktura przechowuje pomiary ciała (Waga, BF%, MM%, Talia(CM), Ramie(CM))
-
-    # MODUŁ SUPPLEMENT TRACKER
-
-    Supplement - struktura przechowuje informacje o suplementacji i porze przyjęcia
-
-    # MODUŁ DIET TRACKER
-
-    Meal - struktura pomocniczna przechowująca informacje o ostatnim posiłku (Kcal, protein, fat, carbs)
-    Diet - struktura przechowuje informacje o obecnej diecie i spożytych posiłkach
-
-*/
 
 typedef enum {
     WORKOUT_NONE = 0,
