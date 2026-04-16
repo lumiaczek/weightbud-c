@@ -81,7 +81,7 @@ typedef struct {
     int workout_count;
 
     Habit habits[MAX_HABITS];
-    int Habit_count;
+    int habit_count;
 
     BodyMeasurement body_measure;
 
@@ -102,11 +102,11 @@ typedef struct {
     float starting_bf;
     float starting_mm;
 
-    float goal_weigth;
+    float goal_weight;
     float goal_bf;
     float goal_mm;
 
-    char Habit_names[MAX_HABITS][32];
+    char habit_names[MAX_HABITS][32];
     int habit_count;
 
     char supplement_names[MAX_SUPPLEMENTS][32];
