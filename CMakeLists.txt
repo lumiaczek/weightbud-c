@@ -2,10 +2,11 @@ cmake_minimum_required(VERSION 3.10.0)
 project(weightbud VERSION 0.0.1 LANGUAGES C)
 
 find_package(PkgConfig REQUIRED)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
 
-add_executable(weightbud src/main.c src/gui.c)
+add_executable(weightbud src/main.c src/gui.c
+    src/data_managment.c)
 
 target_include_directories(weightbud PRIVATE include)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
