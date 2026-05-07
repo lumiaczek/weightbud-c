@@ -11,6 +11,7 @@ static void load_css(void) {
     GdkScreen *screen = gdk_display_get_default_screen(display);
 
     gtk_css_provider_load_from_path(provider, "assets/style.css", NULL);
+
     gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     g_object_unref(provider);
@@ -75,7 +76,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder,"btn_start"));
     
     g_signal_connect(btn_start,"clicked",G_CALLBACK(change_view_on_click),stack);
-    
+
 
 
     g_object_unref(builder);

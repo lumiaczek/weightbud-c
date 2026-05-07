@@ -67,3 +67,19 @@
 .start-button:hover {
     background-color: @accent_hover;
 }
+
+
+/*Formularz */
+.form-card{
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 14px;
+    padding: 30px 20px;
+    min-width: 100px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+.form-text{
+    color: #3C3C3C;
+    font-size: 24px;
+    font-family: "Montserrat", sans-serif;
+}

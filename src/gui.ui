@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
     <requires lib="gtk+" version="3.24" />
 
@@ -9,13 +9,13 @@
         <style>
             <class name="main-window" />
         </style>
-        
+
         <child>
             <object class="GtkStack" id="main_stack">
                 <property name="visible">True</property>
 
                 <child>
-                    
+
                     <object class="GtkBox" id="main_hbox">
                         <property name="visible">True</property>
                         <property name="orientation">horizontal</property>
@@ -56,7 +56,8 @@
                                 <child>
                                     <object class="GtkLabel" id="subtitle_label">
                                         <property name="visible">True</property>
-                                        <property name="label">Osiągaj swoje cele sportowe&#10;szybciej i łatwiej z WeightBud.</property>
+                                        <property name="label">Osiągaj swoje cele
+                                            sportowe&#10;szybciej i łatwiej z WeightBud.</property>
                                         <property name="justify">center</property>
                                         <style>
                                             <class name="subtitle-label" />
@@ -174,52 +175,297 @@
                                     </object>
                                 </child>
 
-                                <child>
-                                    <object class="GtkButton" id="btn_start">
-                                        <property name="visible">True</property>
-                                        <property name="label">Rozpocznij</property>
-                                        <property name="halign">center</property>
-                                        <property name="margin-top">10</property>
-                                        <style>
+                                
+
+
+                                    <child>
+                                        <object class="GtkButton" id="btn_start">
+                                            <property name="visible">True</property>
+                                            <property name="label">Rozpocznij</property>
+                                            <property name="halign">center</property>
+                                            <property name="margin-top">10</property>
+                                            <style>
                                             <class name="start-button" />
                                         </style>
+                                        </object>
+                                    </child>
+
+                                
+
+                            </object>
+                        </child>
+                    </object>
+
+
+                    <packing>
+                        <property name="name">menu_view</property>
+                    </packing>
+                </child>
+
+                <!-- ========================================== -->
+                <!-- PAGE 2: FUTURE VIEW GOES HERE              -->
+                <!-- ========================================== -->
+                <!-- -->
+                <child>
+                    <object class="GtkBox" id="form_view">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">30</property>
+                        <property name="halign">center</property>
+                        <property name="valign">start</property>
+                        <property name="margin-top">40</property>
+                        <property name="margin-bottom">40</property>
+
+                        <child>
+                            <object class="GtkBox" id="form_header_vbox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">5</property>
+                                <property name="halign">center</property>
+                                
+                                <child>
+                                    <object class="GtkLabel" id="pref_title_label">
+                                        <property name="visible">True</property>
+                                        <property name="label">PREFERENCJE</property>
+                                        <style>
+                                            <class name="title-label" />
+                                        </style>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkLabel" id="pref_subtitle_label">
+                                        <property name="visible">True</property>
+                                        <property name="label">Skonfigurujmy Twój profil, aby zacząć śledzić postępy.</property>
+                                        <style>
+                                            <class name="subtitle-label" />
+                                        </style>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkLabel" id="pref_page_label">
+                                        <property name="visible">True</property>
+                                        <property name="label">1 z 2</property>
+                                        <property name="margin-top">10</property>
+                                        <style>
+                                            <class name="form-page-indicator" />
+                                        </style>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+
+                        <child>
+                            <object class="GtkBox" id="form_cards_hbox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">30</property>
+                                <property name="halign">center</property>
+
+                                <child>
+                                    <object class="GtkBox" id="card_basic_data">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">15</property>
+                                        <property name="width-request">450</property>
+                                        <property name="margin">20</property>
+                                        <style>
+                                            <class name="form-card" />
+                                        </style>
+
+                                        <child>
+                                            <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="label">Dane Podstawowe</property>
+                                                <property name="halign">start</property>
+                                                <style >
+                                                    <class name="form-text"></class>
+                                                </style>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">vertical</property>
+                                                <property name="spacing">5</property>
+                                                <child>
+                                                    <object class="GtkLabel"><property name="visible">True</property><property name="label">Imię</property><property name="halign">start</property></object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="entry_name">
+                                                        <property name="visible">True</property>
+                                                        <property name="placeholder-text">np. Jan</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">vertical</property>
+                                                <property name="spacing">5</property>
+                                                <child>
+                                                    <object class="GtkLabel"><property name="visible">True</property><property name="label">Płeć</property><property name="halign">start</property></object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">horizontal</property>
+                                                        <property name="spacing">10</property>
+                                                        <property name="homogeneous">True</property> <child>
+                                                            <object class="GtkRadioButton" id="radio_male">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Mężczyzna</property>
+                                                                <property name="draw-indicator">False</property> </object>
+                                                        </child>
+                                                        <child>
+                                                            <object class="GtkRadioButton" id="radio_female">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Kobieta</property>
+                                                                <property name="draw-indicator">False</property>
+                                                                <property name="group">radio_male</property> </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">horizontal</property>
+                                                <property name="spacing">20</property>
+                                                <property name="homogeneous">True</property>
+                                                
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="spacing">5</property>
+                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Waga (kg)</property><property name="halign">start</property></object></child>
+                                                        <child><object class="GtkEntry" id="entry_weight"><property name="visible">True</property><property name="placeholder-text">80</property></object></child>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="spacing">5</property>
+                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Wzrost (cm)</property><property name="halign">start</property></object></child>
+                                                        <child><object class="GtkEntry" id="entry_height"><property name="visible">True</property><property name="placeholder-text">178</property></object></child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                    </object>
+                                </child>
+
+                                <child>
+                                    <object class="GtkBox" id="card_goals">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">15</property>
+                                        <property name="width-request">450</property>
+                                        <property name="margin">20</property>
+                                        <style>
+                                            <class name="form-card" />
+                                        </style>
+
+                                        <child>
+                                            <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="label">Twoje cele</property>
+                                                <property name="halign">start</property>
+                                                <style>
+                                                    <class name="form-text"></class>
+                                                </style>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">vertical</property>
+                                                <property name="spacing">5</property>
+                                                <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Cel wagowy</property><property name="halign">start</property></object></child>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">horizontal</property>
+                                                        <property name="spacing">10</property>
+                                                        <property name="homogeneous">True</property>
+                                                        <child><object class="GtkRadioButton" id="radio_redukcja"><property name="visible">True</property><property name="label">Redukcja</property><property name="draw-indicator">False</property></object></child>
+                                                        <child><object class="GtkRadioButton" id="radio_utrzymanie"><property name="visible">True</property><property name="label">Utrzymanie</property><property name="draw-indicator">False</property><property name="group">radio_redukcja</property></object></child>
+                                                        <child><object class="GtkRadioButton" id="radio_masa"><property name="visible">True</property><property name="label">Masa</property><property name="draw-indicator">False</property><property name="group">radio_redukcja</property></object></child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">vertical</property>
+                                                <property name="spacing">5</property>
+                                                <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa waga</property><property name="halign">start</property></object></child>
+                                                <child><object class="GtkEntry" id="entry_target_weight"><property name="visible">True</property><property name="placeholder-text">83.0</property></object></child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="visible">True</property>
+                                                <property name="orientation">horizontal</property>
+                                                <property name="spacing">20</property>
+                                                <property name="homogeneous">True</property>
+                                                
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="spacing">5</property>
+                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa masa mięśniowa (%)</property><property name="halign">start</property></object></child>
+                                                        <child><object class="GtkEntry" id="entry_target_muscle"><property name="visible">True</property><property name="placeholder-text">73.0</property></object></child>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="spacing">5</property>
+                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa tkanka tłuszczowa (%)</property><property name="halign">start</property></object></child>
+                                                        <child><object class="GtkEntry" id="entry_target_fat"><property name="visible">True</property><property name="placeholder-text">18.0</property></object></child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
                                     </object>
                                 </child>
 
                             </object>
                         </child>
-                    </object>
-                    
-                    
-                    <packing>
-                        <property name="name">menu_view</property>
-                    </packing>
-                </child>
-                
-                <!-- ========================================== -->
-                <!-- PAGE 2: FUTURE VIEW GOES HERE              -->
-                <!-- ========================================== -->
-            <!-- -->
-                <child>
-                    <object class="GtkBox" id="form_view">
+
                         <child>
-                                    <object class="GtkButton" id="btn_form">
-                                        <property name="visible">True</property>
-                                        <property name="label">Przejdź dalej</property>
-                                        <property name="halign">center</property>
-                                        <property name="margin-top">10</property>
-                                        <style>
-                                            <class name="start-button" />
-                                        </style>
-                                    </object>
-                                </child>
+                            <object class="GtkButton" id="btn_form_next">
+                                <property name="visible">True</property>
+                                <property name="label">Przejdź dalej ➔</property>
+                                <property name="halign">center</property>
+                                <property name="margin-top">30</property>
+                                <style>
+                                    <class name="start-button" />
+                                </style>
+                            </object>
+                        </child>
+
                     </object>
                     <packing>
                         <property name="name">form_view</property>
                     </packing>
                 </child>
-                
-            </object> 
-        </child> 
-    </object> 
+            </object>
+        </child>
+    </object>
 </interface>
