@@ -77,9 +77,43 @@
     padding: 30px 20px;
     min-width: 100px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    min-width: 600px;
+    min-height: 300px;
 }
 .form-text{
     color: #3C3C3C;
     font-size: 24px;
     font-family: "Montserrat", sans-serif;
+}
+
+.form_label{
+    color: #3C3C3C;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+.form-input{
+    padding:5px;
+    background-color: #FBFAF9;
+    border: 1px solid #a5b0a3;
+    font-family: "Montserrat", sans-serif;
+
+}
+.form-radio{
+    padding:16px;
+    background-color: #FBFAF9;
+   
+    border: 1px solid #a5b0a3;
+    
+    color: #3C3C3C;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    
+}
+
+.form-radio:checked{
+    background-color: #ffc38b;
+    border: 2.5px solid #FF7D00;
+   
 }

@@ -255,6 +255,7 @@
                         </child>
 
                         <child>
+                           
                             <object class="GtkBox" id="form_cards_hbox">
                                 <property name="visible">True</property>
                                 <property name="orientation">horizontal</property>
@@ -289,12 +290,23 @@
                                                 <property name="orientation">vertical</property>
                                                 <property name="spacing">5</property>
                                                 <child>
-                                                    <object class="GtkLabel"><property name="visible">True</property><property name="label">Imię</property><property name="halign">start</property></object>
+                                                    <object class="GtkLabel">
+                                                        <property name="visible">True</property>
+                                                        <property name="label">Imię</property>
+                                                        <property name="halign">start</property>
+                                                        <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                    </object>
                                                 </child>
                                                 <child>
                                                     <object class="GtkEntry" id="entry_name">
                                                         <property name="visible">True</property>
                                                         <property name="placeholder-text">np. Jan</property>
+                                                    <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                    
                                                     </object>
                                                 </child>
                                             </object>
@@ -306,7 +318,15 @@
                                                 <property name="orientation">vertical</property>
                                                 <property name="spacing">5</property>
                                                 <child>
-                                                    <object class="GtkLabel"><property name="visible">True</property><property name="label">Płeć</property><property name="halign">start</property></object>
+                                                    <object class="GtkLabel">
+                                                        <property name="visible">True</property>
+                                                        <property name="label">Płeć</property>
+                                                        <property name="halign">start</property>
+                                                    <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                    </object>
+                                                    
                                                 </child>
                                                 <child>
                                                     <object class="GtkBox">
@@ -317,14 +337,21 @@
                                                             <object class="GtkRadioButton" id="radio_male">
                                                                 <property name="visible">True</property>
                                                                 <property name="label">Mężczyzna</property>
-                                                                <property name="draw-indicator">False</property> </object>
+                                                                <property name="draw-indicator">False</property> 
+                                                            <style>
+                                                                <class name="form-radio" />
+                                                            </style></object>
                                                         </child>
                                                         <child>
                                                             <object class="GtkRadioButton" id="radio_female">
                                                                 <property name="visible">True</property>
                                                                 <property name="label">Kobieta</property>
                                                                 <property name="draw-indicator">False</property>
-                                                                <property name="group">radio_male</property> </object>
+                                                                <property name="group">radio_male</property>
+                                                            <style>
+                                                                <class name="form-radio" />
+                                                            </style>
+                                                            </object>
                                                         </child>
                                                     </object>
                                                 </child>
@@ -343,8 +370,23 @@
                                                         <property name="visible">True</property>
                                                         <property name="orientation">vertical</property>
                                                         <property name="spacing">5</property>
-                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Waga (kg)</property><property name="halign">start</property></object></child>
-                                                        <child><object class="GtkEntry" id="entry_weight"><property name="visible">True</property><property name="placeholder-text">80</property></object></child>
+                                                        <child><object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Waga (kg)</property>
+                                                            <property name="halign">start</property>
+                                                        <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                        </object>
+                                                    </child>
+                                                        <child><object class="GtkEntry" id="entry_weight">
+                                                            <property name="visible">True</property>
+                                                            <property name="placeholder-text">80</property>
+                                                        <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                        </object>
+                                                    </child>
                                                     </object>
                                                 </child>
                                                 <child>
@@ -352,8 +394,22 @@
                                                         <property name="visible">True</property>
                                                         <property name="orientation">vertical</property>
                                                         <property name="spacing">5</property>
-                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Wzrost (cm)</property><property name="halign">start</property></object></child>
-                                                        <child><object class="GtkEntry" id="entry_height"><property name="visible">True</property><property name="placeholder-text">178</property></object></child>
+                                                        <child><object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Wzrost (cm)</property>
+                                                            <property name="halign">start</property>
+                                                        <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                        </object></child>
+                                                        <child><object class="GtkEntry" id="entry_height">
+                                                            <property name="visible">True</property>
+                                                            <property name="placeholder-text">178</property>
+                                                            <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                        </object>
+                                                    </child>
                                                     </object>
                                                 </child>
                                             </object>
@@ -389,16 +445,50 @@
                                                 <property name="visible">True</property>
                                                 <property name="orientation">vertical</property>
                                                 <property name="spacing">5</property>
-                                                <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Cel wagowy</property><property name="halign">start</property></object></child>
+                                                <child><object class="GtkLabel">
+                                                    <property name="visible">True</property>
+                                                    <property name="label">Cel wagowy</property>
+                                                    <property name="halign">start</property>
+                                                <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                </object></child>
                                                 <child>
                                                     <object class="GtkBox">
                                                         <property name="visible">True</property>
                                                         <property name="orientation">horizontal</property>
                                                         <property name="spacing">10</property>
                                                         <property name="homogeneous">True</property>
-                                                        <child><object class="GtkRadioButton" id="radio_redukcja"><property name="visible">True</property><property name="label">Redukcja</property><property name="draw-indicator">False</property></object></child>
-                                                        <child><object class="GtkRadioButton" id="radio_utrzymanie"><property name="visible">True</property><property name="label">Utrzymanie</property><property name="draw-indicator">False</property><property name="group">radio_redukcja</property></object></child>
-                                                        <child><object class="GtkRadioButton" id="radio_masa"><property name="visible">True</property><property name="label">Masa</property><property name="draw-indicator">False</property><property name="group">radio_redukcja</property></object></child>
+                                                        <child><object class="GtkRadioButton" id="radio_redukcja">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Redukcja</property>
+                                                            <property name="draw-indicator">False</property>
+                                                    <style>
+                                                                <class name="form-radio" />
+                                                            </style>
+                                                        </object>
+                                                    
+                                                    </child>
+                                                        <child><object class="GtkRadioButton" id="radio_utrzymanie">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Utrzymanie</property>
+                                                            <property name="draw-indicator">False</property>
+                                                            <property name="group">radio_redukcja</property>
+                                                    <style>
+                                                                <class name="form-radio" />
+                                                            </style>
+                                                        </object>
+                                                    </child>
+                                                        <child><object class="GtkRadioButton" id="radio_masa">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Masa</property>
+                                                            <property name="draw-indicator">False</property>
+                                                            <property name="group">radio_redukcja</property>
+                                                            <style>
+                                                                <class name="form-radio" />
+                                                            </style>
+                                                        </object>
+                                                    </child>
                                                     </object>
                                                 </child>
                                             </object>
@@ -409,8 +499,24 @@
                                                 <property name="visible">True</property>
                                                 <property name="orientation">vertical</property>
                                                 <property name="spacing">5</property>
-                                                <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa waga</property><property name="halign">start</property></object></child>
-                                                <child><object class="GtkEntry" id="entry_target_weight"><property name="visible">True</property><property name="placeholder-text">83.0</property></object></child>
+                                                <child><object class="GtkLabel">
+                                                    <property name="visible">True</property>
+                                                    <property name="label">Docelowa waga</property>
+                                                    <property name="halign">start</property>
+                                                    <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                </object>
+                                            </child>
+                                                <child>
+                                                    <object class="GtkEntry" id="entry_target_weight">
+                                                        <property name="visible">True</property>
+                                                        <property name="placeholder-text">83.0</property>
+                                                    <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                    </object>
+                                                </child>
                                             </object>
                                         </child>
 
@@ -426,8 +532,23 @@
                                                         <property name="visible">True</property>
                                                         <property name="orientation">vertical</property>
                                                         <property name="spacing">5</property>
-                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa masa mięśniowa (%)</property><property name="halign">start</property></object></child>
-                                                        <child><object class="GtkEntry" id="entry_target_muscle"><property name="visible">True</property><property name="placeholder-text">73.0</property></object></child>
+                                                        <child><object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Docelowa masa mięśniowa (%)</property>
+                                                            <property name="halign">start</property>
+                                                    <style>
+                                                            <class name="form_label"/>
+                                                        </style>
+                                                        </object>
+                                                    </child>
+                                                        <child>
+                                                            <object class="GtkEntry" id="entry_target_muscle">
+                                                                <property name="visible">True</property>
+                                                                <property name="placeholder-text">73.0</property>
+                                                            <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                            </object></child>
                                                     </object>
                                                 </child>
                                                 <child>
@@ -435,8 +556,22 @@
                                                         <property name="visible">True</property>
                                                         <property name="orientation">vertical</property>
                                                         <property name="spacing">5</property>
-                                                        <child><object class="GtkLabel"><property name="visible">True</property><property name="label">Docelowa tkanka tłuszczowa (%)</property><property name="halign">start</property></object></child>
-                                                        <child><object class="GtkEntry" id="entry_target_fat"><property name="visible">True</property><property name="placeholder-text">18.0</property></object></child>
+                                                        <child><object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="label">Docelowa tkanka tłuszczowa (%)</property>
+                                                            <property name="halign">start</property>
+                                                        <style>
+                                                        <class name="form-label"/>
+                                                    </style>
+                                                        </object></child>
+                                                        <child>
+                                                            <object class="GtkEntry" id="entry_target_fat">
+                                                                <property name="visible">True</property>
+                                                                <property name="placeholder-text">18.0</property>
+                                                            <style>
+                                                        <class name="form-input"/>
+                                                    </style>
+                                                            </object></child>
                                                     </object>
                                                 </child>
                                             </object>
