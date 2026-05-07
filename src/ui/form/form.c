@@ -54,6 +54,7 @@ void enforce_numeric_input(GtkEditable *editable, const gchar *new_text, gint ne
 void on_app_activate(GtkApplication *app, gpointer user_data) {
     load_custom_fonts();
     load_css();
+    init_memory();
 
     GtkBuilder *builder = gtk_builder_new_from_file("src/ui/form/form.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
@@ -73,12 +74,32 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     }
 
     GtkWidget *stack = GTK_WIDGET(gtk_builder_get_object(builder, "main_stack"));
+
+    OnboardingWidgets *ob_widgets = g_new(OnboardingWidgets, 1);
+
+    ob_widgets->stack = GTK_STACK(stack);
+    ob_widgets->entry_name = GTK_WIDGET(gtk_builder_get_object(builder, "entry_name"));
+    ob_widgets->entry_weight = GTK_WIDGET(gtk_builder_get_object(builder, "entry_weight"));
+    ob_widgets->entry_height = GTK_WIDGET(gtk_builder_get_object(builder, "entry_height"));
+    ob_widgets->entry_age = GTK_WIDGET(gtk_builder_get_object(builder, "entry_age"));
+
+    ob_widgets->entry_target_weight = GTK_WIDGET(gtk_builder_get_object(builder, "entry_target_weight"));
+    ob_widgets->entry_target_muscle = GTK_WIDGET(gtk_builder_get_object(builder, "entry_target_muscle"));
+    ob_widgets->entry_target_fat = GTK_WIDGET(gtk_builder_get_object(builder, "entry_target_fat"));
+
+    ob_widgets->entry_kcal = GTK_WIDGET(gtk_builder_get_object(builder, "entry_kcal"));
+    ob_widgets->entry_protein = GTK_WIDGET(gtk_builder_get_object(builder, "entry_protein"));
+    ob_widgets->entry_fat = GTK_WIDGET(gtk_builder_get_object(builder, "entry_fat"));
+    ob_widgets->entry_carbs = GTK_WIDGET(gtk_builder_get_object(builder, "entry_carbs"));
+
     GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_start"));
+    g_signal_connect(btn_start, "clicked", G_CALLBACK(change_view_on_click), stack);
 
     GtkWidget *btn_form_next = GTK_WIDGET(gtk_builder_get_object(builder, "btn_form_next"));
     g_signal_connect(btn_form_next, "clicked", G_CALLBACK(change_to_form_page_2), stack);
 
-    g_signal_connect(btn_start, "clicked", G_CALLBACK(change_view_on_click), stack);
+    GtkWidget *btn_finish = GTK_WIDGET(gtk_builder_get_object(builder, "btn_finish"));
+    g_signal_connect(btn_finish, "clicked", G_CALLBACK(on_finish_button_clicked), ob_widgets);
 
     const char *numeric_entries[] = {"entry_weight", "entry_height", "entry_target_weight", "entry_target_muscle", "entry_target_fat"};
     for (int i = 0; i < 5; i++) {
