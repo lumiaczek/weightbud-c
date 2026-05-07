@@ -1,6 +1,9 @@
 #include "gui.h"
 #include <fontconfig/fontconfig.h>
 #include <gtk/gtk.h>
+#include "events.h"
+
+
 
 static void load_css(void) {
     GtkCssProvider *provider = gtk_css_provider_new();
@@ -51,8 +54,9 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     GtkIconTheme *icon_theme = gtk_icon_theme_get_default();
     gtk_icon_theme_append_search_path(icon_theme, "assets/icons");
 
-    GtkBuilder *builder = gtk_builder_new_from_file("src/gui.ui");
+    GtkBuilder *builder = gtk_builder_new_from_file("gui.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
+    
     gtk_application_add_window(app, GTK_WINDOW(window));
 
     GtkWidget *hero_image = GTK_WIDGET(gtk_builder_get_object(builder, "hero_image"));
@@ -66,6 +70,13 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
         g_printerr("Błąd ładowania hero.png: %s\n", error->message);
         g_error_free(error);
     }
+
+    GtkWidget *stack = GTK_WIDGET(gtk_builder_get_object(builder,"main_stack"));
+    GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder,"btn_start"));
+    
+    g_signal_connect(btn_start,"clicked",G_CALLBACK(change_view_on_click),stack);
+    
+
 
     g_object_unref(builder);
     gtk_widget_show_all(window);
