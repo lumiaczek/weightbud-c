@@ -1,22 +1,45 @@
-:root{
-    --accent: #FF7D00;
-}
+@define-color accent #FF7D00;
+@define-color accent_hover #e06b00;
+@define-color bg_color #FBFAF9;
+@define-color text_dark #3C3C3C;
 
 .main-window {
-    background-color: #FBFAF9;
+    background-color: @bg_color;
 }
 
 .title-label {
-    font-size: 64px;
-    font-weight: 900;
-    color: #FF7D00;
+    font-family: "Bungee", sans-serif;
+    font-size: 72px;
+    font-weight: 500;
+    color: @accent;
     letter-spacing: 2px;
 }
 
 .subtitle-label {
+    font-family: "Montserrat", sans-serif;
     font-size: 26px;
-    color: #3C3C3C;
+    color: @text_dark;
     margin-bottom: 20px;
+}
+
+.module-card label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: @accent;
+}
+
+.module-card border {
+    border: none;
+}
+
+.module-card image {
+    color: @text_dark;
+}
+
+.module-card:hover label,
+.module-card:hover image {
+    color: @accent; 
 }
 
 .module-card {
@@ -29,16 +52,18 @@
 }
 
 .start-button {
-    background-color: #FF7D00;
+    font-family: "Montserrat", sans-serif;
+    background-color: @accent;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 600;
     border-radius: 14px;
-    padding: 12px 60px;
+    padding: 15px 60px;
     border: none;
+    min-width: 200px;
     background-image: none; 
 }
 
 .start-button:hover {
-    background-color: #e06b00;
+    background-color: @accent_hover;
 }

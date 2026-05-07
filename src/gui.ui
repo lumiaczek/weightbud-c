@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+    <requires lib="gtk+" version="3.24" />
+
+    <object class="GtkApplicationWindow" id="main_window">
+        <property name="title">WeightBud</property>
+        <property name="default-width">1400</property>
+        <property name="default-height">950</property>
+        <style>
+      <class name="main-window" />
+    </style>
+
+        <child>
+            <object class="GtkBox" id="main_hbox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">50</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="margin">60</property>
+
+                <child>
+                    <object class="GtkBox" id="left_vbox">
+                        <property name="orientation">vertical</property>
+                        <child>
+                            <object class="GtkImage" id="hero_image" />
+                        </child>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="GtkBox" id="right_vbox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">20</property>
+                        <property name="valign">center</property>
+
+                        <child>
+                            <object class="GtkLabel" id="title_label">
+                                <property name="label">WEIGHTBUD</property>
+                                <style>
+                  <class name="title-label" />
+                </style>
+                            </object>
+                        </child>
+
+                        <child>
+                            <object class="GtkLabel" id="subtitle_label">
+                                <property
+                  name="label"
+                >Osiągaj swoje cele sportowe&#10;szybciej i łatwiej z WeightBud.</property>
+                                <property name="justify">center</property>
+                                <style>
+    <class name="subtitle-label" />
+  </style>
+                            </object>
+                        </child>
+
+                        <child>
+                            <object class="GtkBox" id="cards_hbox">
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">15</property>
+                                <property name="halign">center</property>
+
+                                <child>
+                                    <object class="GtkFrame" id="card_treningi">
+                                        <property name="width-request">200</property>
+                                        <property name="height-request">220</property>
+                                        <style>
+                      <class name="module-card" />
+                    </style>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                                <property name="spacing">20</property>
+                                                <child>
+                                                    <object class="GtkImage">
+                                                    <property name="icon-name">dumbbell-symbolic</property>
+                                                    <property name="pixel-size">64</property>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">Treningi</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+
+                                <child>
+                                    <object class="GtkFrame" id="card_waga">
+                                        <property name="width-request">200</property>
+                                        <property name="height-request">220</property>
+                                        <style>
+                      <class name="module-card" />
+                    </style>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                                <property name="spacing">20</property>
+                                                <child>
+                                                    <object class="GtkImage">
+                                                    <property name="icon-name">biceps-symbolic</property>
+                                                    <property name="pixel-size">64</property>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">Waga</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+
+                                <!-- KARTA 3: Suplementy -->
+                                <child>
+                                    <object class="GtkFrame" id="card_suple">
+                                        <property name="width-request">200</property>
+                                        <property name="height-request">220</property>
+                                        <style>
+                      <class name="module-card" />
+                    </style>
+                                        <child>
+                                            <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                                <property name="spacing">20</property>
+                                                <child>
+                                                    <object class="GtkImage">
+                                                    <property name="icon-name">pill-symbolic</property>
+                                                    <property name="pixel-size">64</property>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="label">Suplementy</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+
+                            </object>
+                        </child>
+
+                        <child>
+                            <object class="GtkButton" id="btn_start">
+                                <property name="label">Rozpocznij</property>
+                                <property name="halign">center</property>
+                                <property
+                  name="margin-top"
+                >10</property> <!-- Dodatkowy odstęp od
+                                kart -->
+                                <style>
+                  <class name="start-button" />
+                </style>
+                            </object>
+                        </child>
+
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>
