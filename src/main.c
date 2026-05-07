@@ -1,7 +1,7 @@
 #include "gui.h"
 #include "data_managment.h"
 #include <gtk/gtk.h>
-
+#include "form.h"
 int main(int argc, char **argv) {
     GtkApplication *app;
     int status;

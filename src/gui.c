@@ -1,6 +1,6 @@
 #include "gui.h"
 #include <stdbool.h>
-
+#include "form.h"
 static void load_css(void) {
     GtkCssProvider *provider = gtk_css_provider_new();
     GdkDisplay *display = gdk_display_get_default();
@@ -12,6 +12,11 @@ static void load_css(void) {
 
     g_object_unref(provider);
 }
+static void go_to_form(GtkWidget*widget, gpointer data){
+    GtkStack *stack = GTK_STACK(data);
+    gtk_stack_set_visible_child_name(stack,"form_view");
+}
+
 
 static GtkWidget *create_card(const char *label_text) {
     GtkWidget *card_frame = gtk_frame_new(NULL);
@@ -29,14 +34,9 @@ static GtkWidget *create_card(const char *label_text) {
     return card_frame;
 }
 
-void on_app_activate(GtkApplication *app, gpointer user_data) {
-    load_css();
-
-    GtkWidget *window = gtk_application_window_new(app);
-
-    gtk_window_set_title(GTK_WINDOW(window), "WeightBud");
-    gtk_window_set_default_size(GTK_WINDOW(window), 1200, 800);
-
+void generate_menu(GtkWidget *window,GtkWidget *stack){
+   load_css();
+   
     GtkWidget *main_hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 50);
     gtk_widget_set_halign(main_hbox, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(main_hbox, GTK_ALIGN_CENTER);
@@ -90,9 +90,32 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     gtk_container_add(GTK_CONTAINER(main_hbox), left_vbox);
     gtk_container_add(GTK_CONTAINER(main_hbox), right_vbox);
-    gtk_container_add(GTK_CONTAINER(window), main_hbox);
+    
 
     gtk_style_context_add_class(gtk_widget_get_style_context(window), "main-window");
+    
+    gtk_stack_add_named(GTK_STACK(stack),main_hbox,"menu_view");
+    
 
+    g_signal_connect(btn_start,"clicked",G_CALLBACK(go_to_form),stack);
+}
+
+void on_app_activate(GtkApplication *app, gpointer user_data) {
+    
+
+    GtkWidget *window = gtk_application_window_new(app);
+
+    gtk_window_set_title(GTK_WINDOW(window), "WeightBud");
+    gtk_window_set_default_size(GTK_WINDOW(window), 1400, 800);
+
+    GtkWidget *stack = gtk_stack_new();
+    generate_menu(window,stack);
+    build_ui(window,stack);
+
+
+    
+  
+    gtk_container_add(GTK_CONTAINER(window),stack);
     gtk_widget_show_all(window);
+    
 }

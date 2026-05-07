@@ -6,8 +6,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
 pkg_check_modules(SQLITE3 REQUIRED IMPORTED_TARGET sqlite3)
 add_executable(weightbud src/main.c src/gui.c
-    src/data_managment.c
-    include/db.h)
+    src/data_managment.c src/form.c
+    include/db.h
+    include/form.h)
 
 target_include_directories(weightbud PRIVATE include)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
@@ -15,7 +16,7 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_
 target_link_libraries(weightbud PRIVATE PkgConfig::GTK3 PkgConfig::SQLITE3)
 
 add_custom_command(TARGET weightbud POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
         ${CMAKE_CURRENT_SOURCE_DIR}/assets
         ${CMAKE_CURRENT_BINARY_DIR}/assets
 )
