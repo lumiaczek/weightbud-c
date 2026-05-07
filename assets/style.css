@@ -116,3 +116,57 @@
     background-color: alpha(@accent, 0.4);
     border: 2.5px solid @accent;
 }
+
+.form-pill {
+    padding: 6px 16px;
+    background-color: @form_fill;
+    border: 1px solid alpha(@text_dark, 0.15);
+    border-radius: 20px;
+    color: @text_dark;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    background-image: none;
+    box-shadow: none;
+}
+
+.form-pill:hover {
+    background-color: #f0f0f0;
+}
+
+.form-pill:checked {
+    background-color: @accent;
+    color: white;
+    border: 1px solid @accent;
+}
+
+.pill-icon {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.add-button {
+    font-family: "Montserrat", sans-serif;
+    background-color: @accent;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: none;
+    background-image: none;
+}
+
+.add-button:hover {
+    background-color: @accent_hover;
+}
+
+separator {
+    min-height: 1px;
+    background-color: alpha(@text_dark, 0.2); 
+    border: none;
+}
+
+.form-card-bottom {
+    min-height: 140px; 
+}

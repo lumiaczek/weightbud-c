@@ -75,6 +75,9 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *stack = GTK_WIDGET(gtk_builder_get_object(builder, "main_stack"));
     GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_start"));
 
+    GtkWidget *btn_form_next = GTK_WIDGET(gtk_builder_get_object(builder, "btn_form_next"));
+    g_signal_connect(btn_form_next, "clicked", G_CALLBACK(change_to_form_page_2), stack);
+
     g_signal_connect(btn_start, "clicked", G_CALLBACK(change_view_on_click), stack);
 
     const char *numeric_entries[] = {"entry_weight", "entry_height", "entry_target_weight", "entry_target_muscle", "entry_target_fat"};
@@ -88,8 +91,8 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     load_svg_icon(builder, "icon_treningi", "assets/icons/dumbbell.svg", 64);
     load_svg_icon(builder, "icon_waga", "assets/icons/biceps.svg", 64);
     load_svg_icon(builder, "icon_suple", "assets/icons/pill.svg", 64);
-    load_svg_icon(builder, "icon_user", "assets/icons/user.svg", 32);
-    load_svg_icon(builder, "icon_target", "assets/icons/target.svg", 32);
+    load_svg_icon(builder, "icon_user", "assets/icons/user.svg", 34);
+    load_svg_icon(builder, "icon_target", "assets/icons/target.svg", 34);
 
     load_svg_icon(builder, "icon_male", "assets/icons/mars.svg", 28);
     load_svg_icon(builder, "icon_female", "assets/icons/venus.svg", 28);
@@ -98,6 +101,10 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     load_svg_icon(builder, "icon_muscle_radio", "assets/icons/biceps.svg", 28);
 
     load_svg_icon(builder, "icon_next_arrow", "assets/icons/move-right.svg", 28);
+
+    load_svg_icon(builder, "icon_pulse", "assets/icons/activity.svg", 34);
+    load_svg_icon(builder, "icon_pill_card", "assets/icons/pill2.svg", 34);
+    load_svg_icon(builder, "icon_apple", "assets/icons/apple.svg", 34);
 
     g_object_unref(builder);
     gtk_widget_show_all(window);
