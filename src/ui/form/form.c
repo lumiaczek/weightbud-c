@@ -1,4 +1,4 @@
-#include "gui.h"
+#include "ui/form/form.h"
 #include "events.h"
 #include <fontconfig/fontconfig.h>
 #include <gtk/gtk.h>
@@ -55,7 +55,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     load_custom_fonts();
     load_css();
 
-    GtkBuilder *builder = gtk_builder_new_from_file("src/gui.ui");
+    GtkBuilder *builder = gtk_builder_new_from_file("src/ui/form/form.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
 
     gtk_application_add_window(app, GTK_WINDOW(window));

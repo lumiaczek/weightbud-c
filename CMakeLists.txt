@@ -8,9 +8,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
 pkg_check_modules(FONTCONFIG REQUIRED IMPORTED_TARGET fontconfig)
 
-add_executable(weightbud src/main.c src/gui.c src/data_managment.c src/events.c)
+add_executable(weightbud src/main.c src/data_managment.c src/events.c src/storage.c src/ui/form/form.c)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/gui.ui ${CMAKE_CURRENT_BINARY_DIR}/gui.ui COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/ui/form/form.ui ${CMAKE_CURRENT_BINARY_DIR}/form.ui COPYONLY)
 
 target_include_directories(weightbud PRIVATE include)
 
