@@ -64,10 +64,18 @@ typedef struct {
     int fat;
     int carbs;
 } Meal;
+// redundanty typ który  nic nie wnosi
+// informacje o goal pobieramy od uzytkownika, a meal istnieje jako typ, wystarczy porownac go z danymi od uzytkownika
+// typedef struct {
+//     Meal meals[MAX_MEALS];
+//     int meals_count;
+//     int goal_kcal;
+//     int goal_protein;
+//     int goal_fat;
+//     int goal_carbs;
+// } Diet;
 
 typedef struct {
-    Meal meals[MAX_MEALS];
-    int meals_count;
     int goal_kcal;
     int goal_protein;
     int goal_fat;
@@ -76,19 +84,17 @@ typedef struct {
 
 typedef struct {
     int date;
-
-    Workout workouts[MAX_WORKOUTS_PER_DAY];
+    int meal_count; // tutaj lepiej 
     int workout_count;
-
-    Habit habits[MAX_HABITS];
     int habit_count;
+    int supplement_count;
+    Workout workouts[MAX_WORKOUTS_PER_DAY];
+    Meal meals[MAX_MEALS];
+    Habit habits[MAX_HABITS];
+    Supplement supplementation[MAX_SUPPLEMENTS];
 
     BodyMeasurement body_measure;
-
-    Supplement supplementation[MAX_SUPPLEMENTS];
-    int supplement_count;
-
-    Diet diet;
+    Diet diet; //jako referencja do wartości "zjedzonej"
 
 } DailyRecord;
 
@@ -112,10 +118,7 @@ typedef struct {
     char supplement_names[MAX_SUPPLEMENTS][32];
     int supplement_count;
 
-    int goal_kcal;
-    int goal_protein;
-    int goal_fat;
-    int goal_carbs;
+    Diet diet; // sam typ wystarczy
 
 } UserSettings;
 
