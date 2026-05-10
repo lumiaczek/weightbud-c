@@ -2,6 +2,7 @@
 @define-color accent_hover #e06b00;
 @define-color bg_color #FBFAF9;
 @define-color text_dark #3C3C3C;
+@define-color form_fill #FDFDFD;
 
 .main-window {
     background-color: @bg_color;
@@ -9,7 +10,7 @@
 
 .title-label {
     font-family: "Bungee", sans-serif;
-    font-size: 72px;
+    font-size: 64px; 
     font-weight: 500;
     color: @accent;
     letter-spacing: 2px;
@@ -17,14 +18,14 @@
 
 .subtitle-label {
     font-family: "Montserrat", sans-serif;
-    font-size: 26px;
+    font-size: 22px; 
     color: @text_dark;
     margin-bottom: 20px;
 }
 
 .module-card label {
     font-family: "Montserrat", sans-serif;
-    font-size: 20px;
+    font-size: 18px; 
     font-weight: 600;
     color: @accent;
 }
@@ -33,21 +34,12 @@
     border: none;
 }
 
-.module-card image {
-    color: @text_dark;
-}
-
-.module-card:hover label,
-.module-card:hover image {
-    color: @accent; 
-}
-
 .module-card {
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
-    padding: 30px 20px;
-    min-width: 100px;
+    padding: 24px 20px; 
+    min-width: 120px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -55,10 +47,10 @@
     font-family: "Montserrat", sans-serif;
     background-color: @accent;
     color: white;
-    font-size: 22px;
+    font-size: 20px; 
     font-weight: 600;
     border-radius: 14px;
-    padding: 15px 60px;
+    padding: 14px 48px; 
     border: none;
     min-width: 200px;
     background-image: none; 
@@ -68,34 +60,43 @@
     background-color: @accent_hover;
 }
 
-
-/*Formularz */
-.form-card{
+.form-card {
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
     padding: 10px 10px;
     min-width: 100px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    min-width: 600px;
-    min-height: 300px;
 }
-.form-text{
-    color: #3C3C3C;
-    font-size: 24px;
+
+.form-text {
+    color: @text_dark;
+    font-size: 22px; 
     font-family: "Montserrat", sans-serif;
 }
 
-.form_label{
-    color: #3C3C3C;
-    font-size: 18px;
+.form_label {
+    color: @text_dark;
+    font-size: 16px; 
     font-family: "Montserrat", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
 }
-.form-input{
-    padding:5px;
-    background-color: #FBFAF9;
-    border: 1px solid #a5b0a3;
+
+.form-sublabel {
+    color: @text_dark;
+    font-size: 13px; 
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+.form-input {
+    padding: 10px; 
+    font-size: 15px; 
+    background-color: @form_fill;
+    border: 1px solid alpha(@text_dark, 0.25);
+    border-radius: 8px;
+    color: @text_dark;
+    caret-color: @text_dark;
     font-family: "Montserrat", sans-serif;
 
 }
@@ -112,11 +113,47 @@
     font-size: 16px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
-    
+    background-image: none;
+    box-shadow: none;
 }
 
-.form-radio:checked{
-    background-color: #ffc38b;
-    border: 2.5px solid #FF7D00;
-   
+.form-pill:hover {
+    background-color: #f0f0f0;
+}
+
+.form-pill:checked {
+    background-color: @accent;
+    color: white;
+    border: 1px solid @accent;
+}
+
+.pill-icon {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.add-button {
+    font-family: "Montserrat", sans-serif;
+    background-color: @accent;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: none;
+    background-image: none;
+}
+
+.add-button:hover {
+    background-color: @accent_hover;
+}
+
+separator {
+    min-height: 1px;
+    background-color: alpha(@text_dark, 0.2); 
+    border: none;
+}
+
+.form-card-bottom {
+    min-height: 140px; 
 }
