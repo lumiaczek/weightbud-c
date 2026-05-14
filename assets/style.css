@@ -10,11 +10,7 @@
 
 .title-label {
     font-family: "Bungee", sans-serif;
-<<<<<<< HEAD
     font-size: 64px;
-=======
-    font-size: 64px; 
->>>>>>> refs/remotes/origin/master
     font-weight: 500;
     color: @accent;
     letter-spacing: 2px;
@@ -22,22 +18,14 @@
 
 .subtitle-label {
     font-family: "Montserrat", sans-serif;
-<<<<<<< HEAD
     font-size: 22px;
-=======
-    font-size: 22px; 
->>>>>>> refs/remotes/origin/master
     color: @text_dark;
     margin-bottom: 20px;
 }
 
 .module-card label {
     font-family: "Montserrat", sans-serif;
-<<<<<<< HEAD
     font-size: 18px;
-=======
-    font-size: 18px; 
->>>>>>> refs/remotes/origin/master
     font-weight: 600;
     color: @accent;
 }
@@ -50,11 +38,7 @@
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
-<<<<<<< HEAD
     padding: 24px 20px;
-=======
-    padding: 24px 20px; 
->>>>>>> refs/remotes/origin/master
     min-width: 120px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -63,17 +47,10 @@
     font-family: "Montserrat", sans-serif;
     background-color: @accent;
     color: white;
-<<<<<<< HEAD
     font-size: 20px;
     font-weight: 600;
     border-radius: 14px;
     padding: 14px 48px;
-=======
-    font-size: 20px; 
-    font-weight: 600;
-    border-radius: 14px;
-    padding: 14px 48px; 
->>>>>>> refs/remotes/origin/master
     border: none;
     min-width: 200px;
     background-image: none; 
@@ -93,7 +70,6 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-<<<<<<< HEAD
 .form-card-bottom {
     min-height: 140px; 
 }
@@ -101,26 +77,15 @@
 .form-text {
     color: @text_dark;
     font-size: 22px;
-=======
-.form-text {
-    color: @text_dark;
-    font-size: 22px; 
->>>>>>> refs/remotes/origin/master
     font-family: "Montserrat", sans-serif;
 }
 
 .form_label {
     color: @text_dark;
-<<<<<<< HEAD
     font-size: 16px;
-=======
-    font-size: 16px; 
->>>>>>> refs/remotes/origin/master
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
 }
-<<<<<<< HEAD
-=======
 
 .form-sublabel {
     color: @text_dark;
@@ -138,7 +103,7 @@
     color: @text_dark;
     caret-color: @text_dark;
     font-family: "Montserrat", sans-serif;
->>>>>>> refs/remotes/origin/master
+}
 
 .form-sublabel {
     color: @text_dark;
@@ -172,7 +137,6 @@
     font-size: 15px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
-<<<<<<< HEAD
 }
 
 .form-radio:checked {
@@ -194,12 +158,6 @@
     box-shadow: none;
 }
 
-=======
-    background-image: none;
-    box-shadow: none;
-}
-
->>>>>>> refs/remotes/origin/master
 .form-pill:hover {
     background-color: #f0f0f0;
 }
@@ -213,14 +171,11 @@
 .pill-icon {
     font-size: 18px;
     font-weight: 700;
-<<<<<<< HEAD
     color: @accent;
 }
 
 .form-pill:checked label {
     color: white;
-=======
->>>>>>> refs/remotes/origin/master
 }
 
 .add-button {
@@ -245,7 +200,6 @@ separator {
     border: none;
 }
 
-<<<<<<< HEAD
 entry {
     background-color: #ffffff;
     color: #3C3C3C;
@@ -254,10 +208,6 @@ entry {
 button, radiobutton {
     background-color: #ffffff;
     color: #3C3C3C;
-=======
-.form-card-bottom {
-    min-height: 140px; 
->>>>>>> refs/remotes/origin/master
 }
 
 .sidebar {
@@ -266,11 +216,7 @@ button, radiobutton {
 }
 
 .sidebar-logo {
-<<<<<<< HEAD
     font-family: "Bungee", "Montserrat", sans-serif;
-=======
-    font-family: "Montserrat", "Ubuntu", sans-serif;
->>>>>>> refs/remotes/origin/master
     font-size: 26px;
     font-weight: 900;
     color: @accent;
@@ -288,11 +234,7 @@ button, radiobutton {
 }
 
 .nav-button label {
-<<<<<<< HEAD
     font-family: "Montserrat", sans-serif;
-=======
-    font-family: "Montserrat", "Ubuntu", sans-serif;
->>>>>>> refs/remotes/origin/master
     font-size: 15px;
     font-weight: 600;
     color: #5c5c5c;
@@ -317,11 +259,7 @@ button, radiobutton {
 }
 
 .welcome-text {
-<<<<<<< HEAD
     font-family: "Montserrat", sans-serif;
-=======
-    font-family: "Montserrat", "Ubuntu", sans-serif;
->>>>>>> refs/remotes/origin/master
     font-size: 16px;
     font-weight: 600;
     color: #5c5c5c;

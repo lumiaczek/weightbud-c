@@ -69,21 +69,18 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     gtk_application_add_window(app, GTK_WINDOW(window));
 
-<<<<<<< HEAD
-    g_object_set(gtk_settings_get_default(), "gtk-application-prefer-dark-theme", FALSE, NULL);
-
-=======
->>>>>>> refs/remotes/origin/master
     GtkWidget *hero_image = GTK_WIDGET(gtk_builder_get_object(builder, "hero_image"));
-    GError *error = NULL;
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 950, -1, TRUE, &error);
+    if (hero_image != NULL) {
+        GError *error = NULL;
+        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 950, -1, TRUE, &error);
 
-    if (pixbuf != NULL) {
-        gtk_image_set_from_pixbuf(GTK_IMAGE(hero_image), pixbuf);
-        g_object_unref(pixbuf);
-    } else {
-        g_printerr("Błąd ładowania hero.png: %s\n", error->message);
-        g_error_free(error);
+        if (pixbuf != NULL) {
+            gtk_image_set_from_pixbuf(GTK_IMAGE(hero_image), pixbuf);
+            g_object_unref(pixbuf);
+        } else {
+            g_printerr("Błąd ładowania hero.png: %s\n", error->message);
+            g_error_free(error);
+        }
     }
 
     GtkWidget *stack = GTK_WIDGET(gtk_builder_get_object(builder, "main_stack"));
