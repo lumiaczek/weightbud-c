@@ -170,3 +170,71 @@ separator {
 .form-card-bottom {
     min-height: 140px; 
 }
+
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #eaeaea;
+}
+
+.sidebar-logo {
+    font-family: "Montserrat", "Ubuntu", sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: @accent;
+    letter-spacing: 1px;
+}
+
+.nav-button {
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin: 5px 20px;
+    box-shadow: none;
+}
+
+.nav-button label {
+    font-family: "Montserrat", "Ubuntu", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #5c5c5c;
+}
+
+.nav-button:hover {
+    background-color: #f2f2f2;
+}
+
+.nav-button.active {
+    background-color: @accent;
+}
+
+.nav-button.active label {
+    color: #ffffff;
+}
+
+.top-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px 25px;
+}
+
+.welcome-text {
+    font-family: "Montserrat", "Ubuntu", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #5c5c5c;
+}
+
+.icon-button {
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.icon-button:hover {
+    background-color: #f2f2f2;
+}
