@@ -64,9 +64,8 @@
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
-    padding: 28px 20px; 
-    min-width: 580px; 
-    min-height: 280px; 
+    padding: 10px 10px;
+    min-width: 100px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -99,31 +98,19 @@
     color: @text_dark;
     caret-color: @text_dark;
     font-family: "Montserrat", sans-serif;
-}
 
-.form-radio {
-    padding: 12px 16px; 
-    background-color: @form_fill;
-    border: 1px solid alpha(@text_dark, 0.25);
-    border-radius: 8px;
-    color: @text_dark;
-    font-size: 15px; 
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif;
 }
-
-.form-radio:checked {
-    background-color: alpha(@accent, 0.4);
-    border: 2.5px solid @accent;
+.form-input:focus{
+    border: 1px solid black;
 }
-
-.form-pill {
-    padding: 6px 16px;
-    background-color: @form_fill;
-    border: 1px solid alpha(@text_dark, 0.15);
-    border-radius: 20px;
-    color: @text_dark;
-    font-size: 13px;
+.form-radio{
+    padding:16px;
+    background-color: #FBFAF9;
+   
+    border: 1px solid #a5b0a3;
+    
+    color: #3C3C3C;
+    font-size: 16px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
     background-image: none;
