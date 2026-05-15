@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+  <requires lib="gtk+" version="3.24" />
+  
+  <object class="GtkApplicationWindow" id="dashboard_window">
+    <property name="title">WeightBud - Dashboard</property>
+    
+    <!-- Twarde wymuszenie stałego rozmiaru -->
+    <property name="width-request">1400</property>
+    <property name="height-request">900</property>
+    <property name="resizable">False</property>
+    
+    <style>
+      <class name="main-window" />
+    </style>
+    
+    <child>
+      <object class="GtkBox" id="main_layout">
+        <property name="orientation">horizontal</property>
+        
+        <!-- ================= SIDEBAR ================= -->
+        <child>
+          <object class="GtkBox" id="sidebar">
+            <property name="orientation">vertical</property>
+            <property name="width-request">260</property>
+            <style><class name="sidebar" /></style>
+            
+            <child>
+              <object class="GtkLabel">
+                <property name="label">WEIGHTBUD</property>
+                <property name="halign">center</property>
+                <property name="margin-top">20</property>
+                <property name="margin-bottom">30</property>
+                <style><class name="sidebar-logo" /></style>
+              </object>
+            </child>
+            
+            <child>
+              <object class="GtkBox" id="nav_menu">
+                <property name="orientation">vertical</property>
+                <property name="spacing">5</property>
+                
+                <child>
+                  <object class="GtkButton" id="btn_nav_dashboard">
+                    <style><class name="nav-button" /><class name="active" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_dashboard" /></child>
+                        <child><object class="GtkLabel"><property name="label">Dashboard</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="btn_nav_nawyki">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_nawyki" /></child>
+                        <child><object class="GtkLabel"><property name="label">Nawyki</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="btn_nav_trening">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_trening" /></child>
+                        <child><object class="GtkLabel"><property name="label">Trening</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                
+                <child>
+                  <object class="GtkButton" id="btn_nav_waga">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_waga" /></child>
+                        <child><object class="GtkLabel"><property name="label">Waga</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="btn_nav_dieta">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_dieta" /></child>
+                        <child><object class="GtkLabel"><property name="label">Dieta</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="btn_nav_suple">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_suple" /></child>
+                        <child><object class="GtkLabel"><property name="label">Suplementacja</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="btn_nav_narzedzia">
+                    <style><class name="nav-button" /></style>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child><object class="GtkImage" id="icon_nav_narzedzia" /></child>
+                        <child><object class="GtkLabel"><property name="label">Narzędzia</property></object></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <!-- ================= MAIN AREA ================= -->
+        <child>
+          <object class="GtkBox" id="content_area">
+            <property name="orientation">vertical</property>
+            <property name="hexpand">True</property> 
+            
+            <child>
+              <object class="GtkBox" id="top_header">
+                <property name="orientation">horizontal</property>
+                <style><class name="top-header" /></style>
+                <child>
+                  <object class="GtkButton" id="btn_toggle_sidebar">
+                    <style><class name="icon-button" /></style>
+                    <child><object class="GtkImage" id="icon_toggle" /></child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Witaj, Daniel!</property>
+                    <property name="hexpand">True</property>
+                    <style><class name="welcome-text" /></style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkButton" id="btn_settings">
+                        <style><class name="icon-button" /></style>
+                        <child><object class="GtkImage" id="icon_settings" /></child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_lock">
+                        <style><class name="icon-button" /></style>
+                        <child><object class="GtkImage" id="icon_lock" /></child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            
+            <!-- STOS KART (PAGES) -->
+            <child>
+              <object class="GtkStack" id="dashboard_stack">
+                <property name="vexpand">True</property>
+                <property name="margin">30</property>
+                <property name="transition-type">crossfade</property>
+                <property name="transition-duration">200</property>
+                
+                <!-- Page: Dashboard -->
+                <child>
+                  <object class="GtkBox" id="page_dashboard">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Dashboard</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_dashboard</property></packing>
+                </child>
+                
+                <!-- Page: Nawyki -->
+                <child>
+                  <object class="GtkBox" id="page_nawyki">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Nawyki</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_nawyki</property></packing>
+                </child>
+
+                <!-- Page: Trening -->
+                <child>
+                  <object class="GtkBox" id="page_trening">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Trening</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_trening</property></packing>
+                </child>
+
+                <!-- Page: Waga -->
+                <child>
+                  <object class="GtkBox" id="page_waga">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Waga</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_waga</property></packing>
+                </child>
+
+                <!-- Page: Dieta -->
+                <child>
+                  <object class="GtkBox" id="page_dieta">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Dieta</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_dieta</property></packing>
+                </child>
+
+                <!-- Page: Suple -->
+                <child>
+                  <object class="GtkBox" id="page_suple">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Suplementacja</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_suple</property></packing>
+                </child>
+
+                <!-- Page: Narzędzia -->
+                <child>
+                  <object class="GtkBox" id="page_narzedzia">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child><object class="GtkLabel"><property name="label">Treść: Narzędzia</property><style><class
+                            name="title-label"
+                          /></style></object></child>
+                  </object>
+                  <packing><property name="name">page_narzedzia</property></packing>
+                </child>
+
+              </object>
+            </child>
+            
+          </object>
+        </child>
+        
+      </object>
+    </child>
+  </object>
+</interface>

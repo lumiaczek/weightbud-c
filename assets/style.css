@@ -10,7 +10,7 @@
 
 .title-label {
     font-family: "Bungee", sans-serif;
-    font-size: 64px; 
+    font-size: 64px;
     font-weight: 500;
     color: @accent;
     letter-spacing: 2px;
@@ -18,14 +18,14 @@
 
 .subtitle-label {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px; 
+    font-size: 22px;
     color: @text_dark;
     margin-bottom: 20px;
 }
 
 .module-card label {
     font-family: "Montserrat", sans-serif;
-    font-size: 18px; 
+    font-size: 18px;
     font-weight: 600;
     color: @accent;
 }
@@ -38,7 +38,7 @@
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
-    padding: 24px 20px; 
+    padding: 24px 20px;
     min-width: 120px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -47,10 +47,10 @@
     font-family: "Montserrat", sans-serif;
     background-color: @accent;
     color: white;
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: 600;
     border-radius: 14px;
-    padding: 14px 48px; 
+    padding: 14px 48px;
     border: none;
     min-width: 200px;
     background-image: none; 
@@ -64,20 +64,25 @@
     background-color: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 14px;
-    padding: 10px 10px;
-    min-width: 100px;
+    padding: 28px 20px;
+    min-width: 580px;
+    min-height: 280px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.form-card-bottom {
+    min-height: 140px; 
 }
 
 .form-text {
     color: @text_dark;
-    font-size: 22px; 
+    font-size: 22px;
     font-family: "Montserrat", sans-serif;
 }
 
 .form_label {
     color: @text_dark;
-    font-size: 16px; 
+    font-size: 16px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
 }
@@ -98,19 +103,55 @@
     color: @text_dark;
     caret-color: @text_dark;
     font-family: "Montserrat", sans-serif;
+}
 
+.form-sublabel {
+    color: @text_dark;
+    font-size: 13px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
 }
-.form-input:focus{
-    border: 1px solid black;
+
+.form-input {
+    padding: 10px;
+    font-size: 15px;
+    background-color: @form_fill;
+    border: 1px solid alpha(@text_dark, 0.25);
+    border-radius: 8px;
+    color: @text_dark;
+    caret-color: @accent;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: none;
 }
-.form-radio{
-    padding:16px;
-    background-color: #FBFAF9;
-   
-    border: 1px solid #a5b0a3;
-    
-    color: #3C3C3C;
-    font-size: 16px;
+
+.form-input:focus {
+    border-color: @accent;
+}
+
+.form-radio {
+    padding: 12px 16px;
+    background-color: @form_fill;
+    border: 1px solid alpha(@text_dark, 0.25);
+    border-radius: 8px;
+    color: @text_dark;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form-radio:checked {
+    background-color: alpha(@accent, 0.4);
+    border: 2.5px solid @accent;
+    color: @text_dark;
+}
+
+.form-pill {
+    padding: 6px 16px;
+    background-color: @form_fill;
+    border: 1px solid alpha(@text_dark, 0.15);
+    border-radius: 20px;
+    color: @text_dark;
+    font-size: 13px;
     font-weight: 500;
     font-family: "Montserrat", sans-serif;
     background-image: none;
@@ -130,6 +171,11 @@
 .pill-icon {
     font-size: 18px;
     font-weight: 700;
+    color: @accent;
+}
+
+.form-pill:checked label {
+    color: white;
 }
 
 .add-button {
@@ -154,6 +200,80 @@ separator {
     border: none;
 }
 
-.form-card-bottom {
-    min-height: 140px; 
+entry {
+    background-color: #ffffff;
+    color: #3C3C3C;
+}
+
+button, radiobutton {
+    background-color: #ffffff;
+    color: #3C3C3C;
+}
+
+.sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #eaeaea;
+}
+
+.sidebar-logo {
+    font-family: "Bungee", "Montserrat", sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: @accent;
+    letter-spacing: 1px;
+}
+
+.nav-button {
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin: 5px 20px;
+    box-shadow: none;
+}
+
+.nav-button label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #5c5c5c;
+}
+
+.nav-button:hover {
+    background-color: #f2f2f2;
+}
+
+.nav-button.active {
+    background-color: @accent;
+}
+
+.nav-button.active label {
+    color: #ffffff;
+}
+
+.top-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px 25px;
+}
+
+.welcome-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #5c5c5c;
+}
+
+.icon-button {
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.icon-button:hover {
+    background-color: #f2f2f2;
 }

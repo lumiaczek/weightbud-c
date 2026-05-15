@@ -1,5 +1,6 @@
 #include "ui/form/form.h"
 #include "events.h"
+#include "ui/dashboard/dashboard.h"
 #include <fontconfig/fontconfig.h>
 #include <gtk/gtk.h>
 
@@ -25,7 +26,7 @@ static void load_custom_fonts(void) {
     }
 }
 
-static void load_svg_icon(GtkBuilder *builder, const char *image_id, const char *filepath, int size) {
+void load_svg_icon(GtkBuilder *builder, const char *image_id, const char *filepath, int size) {
     GtkWidget *image_widget = GTK_WIDGET(gtk_builder_get_object(builder, image_id));
     if (!image_widget)
         return;
@@ -51,6 +52,13 @@ void enforce_numeric_input(GtkEditable *editable, const gchar *new_text, gint ne
     }
 }
 
+static void close_form_and_open_dashboard(GtkButton *btn, gpointer user_data) {
+    GtkWidget *window = GTK_WIDGET(user_data);
+    GtkApplication *app = gtk_window_get_application(GTK_WINDOW(window));
+    show_dashboard_window(app);
+    gtk_widget_destroy(window);
+}
+
 void on_app_activate(GtkApplication *app, gpointer user_data) {
     AppState *state = (AppState *)user_data;
     load_custom_fonts();
@@ -63,15 +71,17 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     gtk_application_add_window(app, GTK_WINDOW(window));
 
     GtkWidget *hero_image = GTK_WIDGET(gtk_builder_get_object(builder, "hero_image"));
-    GError *error = NULL;
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 950, -1, TRUE, &error);
+    if (hero_image != NULL) {
+        GError *error = NULL;
+        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 950, -1, TRUE, &error);
 
-    if (pixbuf != NULL) {
-        gtk_image_set_from_pixbuf(GTK_IMAGE(hero_image), pixbuf);
-        g_object_unref(pixbuf);
-    } else {
-        g_printerr("Błąd ładowania hero.png: %s\n", error->message);
-        g_error_free(error);
+        if (pixbuf != NULL) {
+            gtk_image_set_from_pixbuf(GTK_IMAGE(hero_image), pixbuf);
+            g_object_unref(pixbuf);
+        } else {
+            g_printerr("Błąd ładowania hero.png: %s\n", error->message);
+            g_error_free(error);
+        }
     }
 
     GtkWidget *stack = GTK_WIDGET(gtk_builder_get_object(builder, "main_stack"));
@@ -102,6 +112,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     GtkWidget *btn_finish = GTK_WIDGET(gtk_builder_get_object(builder, "btn_finish"));
     g_signal_connect(btn_finish, "clicked", G_CALLBACK(on_finish_button_clicked), ob_widgets);
+    g_signal_connect(btn_finish, "clicked", G_CALLBACK(close_form_and_open_dashboard), window);
 
     const char *numeric_entries[] = {"entry_weight", "entry_height", "entry_target_weight", "entry_target_muscle", "entry_target_fat"};
     for (int i = 0; i < 5; i++) {
