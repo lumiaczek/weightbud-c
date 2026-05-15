@@ -118,27 +118,26 @@ typedef struct {
     char supplement_names[MAX_SUPPLEMENTS][32];
     int supplement_count;
 
-    Diet diet; // sam typ wystarczy
+    
 
 } UserSettings;
 
+
+void setup_diet(Diet *diet, int _goal_kcal, int _goal_protein,int  _goal_fat, int _goal_carbs);
 void init_daily_record(DailyRecord *record, int target_date, const UserSettings *config);
+
 void setup_user_settings(UserSettings *config, const char *_username,
                          int _age,
                          float _starting_weight,
                          int _height,
-                         float _starting_bf,
-                         float _starting_mm,
+                         float _starting_bf, 
+                         float _starting_mm, 
                          float _goal_weight,
                          float _goal_bf,
                          float _goal_mm,
                          char _habit_names[MAX_HABITS][32],
                          int _habit_count,
                          char _supplement_names[MAX_SUPPLEMENTS][32],
-                         int _supplement_count,
-                         int _goal_kcal,
-                         int _goal_protein,
-                         int _goal_fat,
-                         int _goal_carbs);
+                         int _supplement_count);
 
 #endif
