@@ -21,6 +21,7 @@ typedef struct {
     GtkWidget *entry_carbs;
 
     GtkStack *stack;
+    AppState *state;
 } OnboardingWidgets;
 
 void change_view_on_click(GtkButton *button, gpointer user_data);

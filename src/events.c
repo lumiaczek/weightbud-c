@@ -15,6 +15,7 @@ void change_to_form_page_2(GtkButton *button, gpointer user_data) {
 
 void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     OnboardingWidgets *widgets = (OnboardingWidgets *)user_data;
+    AppState *state = widgets ->state;
 
     const char *name = gtk_entry_get_text(GTK_ENTRY(widgets->entry_name));
 
@@ -34,8 +35,17 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     char empty_habits[MAX_HABITS][32] = {0};
     char empty_supplements[MAX_SUPPLEMENTS][32] = {0};
 
+    
+    
     UserSettings *new_user = g_new(UserSettings, 1);
-
+    Diet *diet = g_new(Diet,1);
+    setup_diet(diet,
+     kcal,
+        protein,
+        fat,
+        carbs   
+    );
+    
     setup_user_settings(
         new_user,
         name,
@@ -50,15 +60,18 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
         empty_habits,
         0,
         empty_supplements,
-        0,
-        kcal,
-        protein,
-        fat,
-        carbs);
+        0);
 
-    g_print("Zapisuję do RAM...\n");
-    ram_store_save("user_settings", new_user);
+    g_print("[Events] Zapisuję do RAM...\n");
+    ram_store_save("user_settings", new_user,state);
+    ram_store_save("user_diet",diet,state);
 
+    if(sync_user_settings_to_db(state)){
+        g_print("[Events] zapisano użytkownika do bazy \n");
+        
+    }else{
+        g_printerr("[Events] Błąd: nie udało się zapisać do bazy danyc \n");
+    }
     g_print("\n========================================\n");
     g_print("   PODSUMOWANIE ZAPISANEGO PROFILU\n");
     g_print("========================================\n");
@@ -74,11 +87,14 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     g_print("  Docelowa BF:    %.1f %%\n", new_user->goal_bf);
     g_print("----------------------------------------\n");
     g_print("MAKROELEMENTY (DIETA):\n");
-    g_print("  Kcal:           %d\n", new_user->goal_kcal);
-    g_print("  Białko:         %d g\n", new_user->goal_protein);
-    g_print("  Tłuszcze:       %d g\n", new_user->goal_fat);
-    g_print("  Węglowodany:    %d g\n", new_user->goal_carbs);
+    g_print("  Kcal:           %d\n", diet->goal_kcal);
+    g_print("  Białko:         %d g\n", diet->goal_protein);
+    g_print("  Tłuszcze:       %d g\n", diet->goal_fat);
+    g_print("  Węglowodany:    %d g\n", diet->goal_carbs);
     g_print("========================================\n\n");
 
+    
+    
+    cleanup_memory(state);
     // gtk_stack_set_visible_child_name(widgets->stack, "dashboard_view");
 }

@@ -52,11 +52,12 @@ void enforce_numeric_input(GtkEditable *editable, const gchar *new_text, gint ne
 }
 
 void on_app_activate(GtkApplication *app, gpointer user_data) {
+    AppState *state = (AppState *)user_data;
     load_custom_fonts();
     load_css();
-    init_memory();
+    
 
-    GtkBuilder *builder = gtk_builder_new_from_file("src/ui/form/form.ui");
+    GtkBuilder *builder = gtk_builder_new_from_file("form.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
 
     gtk_application_add_window(app, GTK_WINDOW(window));
@@ -77,6 +78,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     OnboardingWidgets *ob_widgets = g_new(OnboardingWidgets, 1);
 
+    ob_widgets-> state = state;
     ob_widgets->stack = GTK_STACK(stack);
     ob_widgets->entry_name = GTK_WIDGET(gtk_builder_get_object(builder, "entry_name"));
     ob_widgets->entry_weight = GTK_WIDGET(gtk_builder_get_object(builder, "entry_weight"));

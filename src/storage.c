@@ -16,7 +16,14 @@
  * @brief Funckja inicjalizująca ustawienia użytkownika
  *
  */
-
+void setup_diet( Diet *diet,int _goal_kcal,int _goal_protein,int _goal_fat,int _goal_carbs){
+    memset(diet,0,sizeof(Diet));
+    
+    diet->goal_carbs = _goal_carbs;
+    diet->goal_fat = _goal_fat;
+    diet->goal_kcal = _goal_kcal;
+    diet->goal_protein = _goal_protein;
+}
 void setup_user_settings(UserSettings *config, const char *_username,
                          int _age,
                          float _starting_weight,
@@ -29,11 +36,7 @@ void setup_user_settings(UserSettings *config, const char *_username,
                          char _habit_names[MAX_HABITS][32],
                          int _habit_count,
                          char _supplement_names[MAX_SUPPLEMENTS][32],
-                         int _supplement_count,
-                         int _goal_kcal,
-                         int _goal_protein,
-                         int _goal_fat,
-                         int _goal_carbs)
+                         int _supplement_count)
 
 {
     memset(config, 0, sizeof(UserSettings));
@@ -62,10 +65,7 @@ void setup_user_settings(UserSettings *config, const char *_username,
     }
 
     config->supplement_count = _supplement_count;
-    config->goal_kcal = _goal_kcal;
-    config->goal_protein = _goal_protein;
-    config->goal_fat = _goal_fat;
-    config->goal_carbs = _goal_carbs;
+   
 }
 
 /**
