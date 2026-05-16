@@ -14,7 +14,7 @@ typedef struct AppState AppState;
     "starting_weight REAL,"                    \
     "starting_mm REAL);"
 
-// 2. User Diet Goals (1-to-1 with user_initial)
+// 2. User Diet Goals 
 #define SQL_USER_DIET                                                            \
     "CREATE TABLE IF NOT EXISTS user_diet("                                      \
     "user_id INTEGER PRIMARY KEY REFERENCES user_initial(id) ON DELETE CASCADE," \
@@ -23,7 +23,7 @@ typedef struct AppState AppState;
     "goal_fat INTEGER,"                                                          \
     "goal_carbs INTEGER);"
 
-// 3. User Body Goals (1-to-1 with user_initial)
+// 3. User Body Goals 
 #define SQL_USER_GOAL                                                            \
     "CREATE TABLE IF NOT EXISTS user_goal("                                      \
     "user_id INTEGER PRIMARY KEY REFERENCES user_initial(id) ON DELETE CASCADE," \
@@ -31,7 +31,7 @@ typedef struct AppState AppState;
     "goal_bf REAL,"                                                              \
     "goal_mm REAL);"
 
-// 4. Habit & Supplement DEFINITIONS
+// 4. Habit & Supplement 
 #define SQL_USER_HABIT                                               \
     "CREATE TABLE IF NOT EXISTS user_habits("                        \
     "id INTEGER PRIMARY KEY AUTOINCREMENT,"                          \
@@ -63,7 +63,18 @@ typedef struct AppState AppState;
     "amount_taken REAL,"                                                       \
     "PRIMARY KEY (user_id, supplement_id, log_date));"
 
+
+//create table based on the query given
 gboolean db_create_table(AppState *state, const char *table);
+
+//check id to cross reference with foreign keys
+int db_get_user_id(sqlite3 *db, const char *user_name);
+
+// initialize (call db_create, add to state, add PRAGMA, check for integrity)
 gboolean db_init(AppState *state);
+
+//execute any query
 gboolean db_execute_query(sqlite3 *db, const char *sql, const char *format, ...);
+
+//perform Upsert on form tables (user,diet,goal,supplements)
 gboolean sync_user_settings_to_db(AppState *state);

@@ -18,13 +18,6 @@ void ram_store_save(const char *key, gpointer data, AppState *state) {
     g_hash_table_insert(state->memory_collection, g_strdup(key), data);
 }
 
-gpointer ram_store_get(const char *key, AppState *state) {
-    if (state->memory_collection == NULL)
-        return NULL;
-
-    return g_hash_table_lookup(state->memory_collection, key);
-}
-
 void destroy_user_settings(gpointer data) {
    UserSettings *user = (UserSettings *)data;
    if(user){
@@ -35,9 +28,7 @@ void destroy_user_settings(gpointer data) {
    }
 }
 
-void cleanup_memory(AppState *state) {
-    sync_user_settings_to_db(state);
-
+void free_user_data(AppState *state){
     if (state->memory_collection != NULL) {
         UserSettings *user = g_hash_table_lookup(state->memory_collection, "user_settings");
         if (user){
@@ -47,9 +38,16 @@ void cleanup_memory(AppState *state) {
         if(diet){
             g_free(diet);
         }
+}
+}
+
+void cleanup_memory(AppState *state) {
+    sync_user_settings_to_db(state);
+    free_user_data(state);
+    
         
         g_hash_table_destroy(state->memory_collection);
         state->memory_collection = NULL;
         printf("Pamięć RAM Store wyczyszczona.\n");
     }
-}
+

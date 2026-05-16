@@ -5,13 +5,7 @@
 #include "db.h"
 #include <stdarg.h>
 
-static int print_tables_callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    for(int i = 0; i < argc; i++) {
-        // argv[i] contains the table name
-        printf("- %s\n", argv[i] ? argv[i] : "NULL");
-    }
-    return 0; // Return 0 to tell SQLite to continue processing rows
-}
+
 
 gboolean db_create_table(AppState *state, const char *table){
     char *err_msg = 0;
@@ -23,16 +17,9 @@ gboolean db_create_table(AppState *state, const char *table){
         sqlite3_free(err_msg);
         return FALSE;
     }
-    else{
-        printf(" \n table created");
-        const char *show_tables_sql = "SELECT name FROM sqlite_master WHERE type='table';";
-        int tables_rc = sqlite3_exec(state->db,show_tables_sql,print_tables_callback,0,&err_msg);
-        if(tables_rc != SQLITE_OK){
-            fprintf(stderr, "Failed to show tables: %s\n", err_msg);
-            err_msg = NULL;
-            sqlite3_free(err_msg);
-        }
-    }
+    return TRUE;
+        
+    
 }
 
 int db_get_user_id(sqlite3 *db, const char *user_name){

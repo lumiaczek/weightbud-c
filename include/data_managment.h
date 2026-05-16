@@ -9,9 +9,15 @@
      sqlite3 *db;
 }AppState;
 // zapis danych do store
-void ram_store_save(const char *key, gpointer data, AppState *state);
 void init_memory(AppState *state);
-gpointer ram_store_get(const char *key, AppState *state);
+
+
+void ram_store_save(const char *key, gpointer data, AppState *state);
+
+//called on cleanup
 void destroy_user_settings(gpointer data);
+void free_user_data(AppState *state);
+
+// syncs to db and cleans data based on memory collection
 void cleanup_memory(AppState *state);
 
