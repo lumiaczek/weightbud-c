@@ -6,15 +6,9 @@
 void destroy_user_settings(gpointer data);
 
 void init_memory(AppState *state) {
-<<<<<<< HEAD
-    state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,destroy_user_settings);
-    
-    if(!db_init(state)){
-=======
     state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, destroy_user_settings);
 
     if (!db_init(state)) {
->>>>>>> 9260a3298db82b92e20d171ff5a1f8a6be6b33df
         g_printerr("CRITICAL: Failed to initialize database.\n");
     }
 }

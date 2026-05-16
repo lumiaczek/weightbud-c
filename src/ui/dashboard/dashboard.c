@@ -35,7 +35,7 @@ static void setup_nav_button(GtkBuilder *builder, GtkStack *stack, const char *b
 }
 
 void show_dashboard_window(GtkApplication *app) {
-    GtkBuilder *builder = gtk_builder_new_from_file("src/ui/dashboard/dashboard.ui");
+    GtkBuilder *builder = gtk_builder_new_from_file("dashboard.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_window"));
 
     gtk_application_add_window(app, GTK_WINDOW(window));
