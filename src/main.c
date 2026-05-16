@@ -17,8 +17,7 @@ int main(int argc, char **argv) {
     
     
     cleanup_memory(state);
-    g_free(state);
     g_object_unref(app);
-
+    g_free(state);
     return status;
 }

@@ -7,7 +7,7 @@
 
 void init_memory(AppState *state) {
 
-    state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, NULL);
 
     if (!db_init(state)) {
         g_printerr("CRITICAL: Failed to initialize database.\n");
@@ -18,22 +18,14 @@ void ram_store_save(const char *key, gpointer data, AppState *state) {
     g_hash_table_insert(state->memory_collection, g_strdup(key), data);
 }
 
-void destroy_user_settings(gpointer data) {
-   UserSettings *user = (UserSettings *)data;
-   if(user){
-    if(user->user_name){
-        g_free(user->user_name);
-    }
-    g_free(user);
-   }
-}
 
 void free_user_data(AppState *state){
     if (state->memory_collection != NULL) {
         UserSettings *user = g_hash_table_lookup(state->memory_collection, "user_settings");
-        if (user){
-            destroy_user_settings(user);
-        }
+        if(user){
+    g_free(user);
+   }
+        
         Diet *diet = g_hash_table_lookup(state->memory_collection, "user_diet");
         if(diet){
             g_free(diet);
@@ -48,6 +40,7 @@ void cleanup_memory(AppState *state) {
         
         g_hash_table_destroy(state->memory_collection);
         state->memory_collection = NULL;
+       
         printf("Pamięć RAM Store wyczyszczona.\n");
     }
 
