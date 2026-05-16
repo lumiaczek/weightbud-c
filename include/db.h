@@ -28,7 +28,7 @@ typedef struct AppState AppState;
     "CREATE TABLE IF NOT EXISTS user_goal("                                      \
     "user_id INTEGER PRIMARY KEY REFERENCES user_initial(id) ON DELETE CASCADE," \
     "goal_weight REAL,"                                                          \
-    "goal_bg REAL,"                                                              \
+    "goal_bf REAL,"                                                              \
     "goal_mm REAL);"
 
 // 4. Habit & Supplement DEFINITIONS
@@ -45,15 +45,10 @@ typedef struct AppState AppState;
     "name VARCHAR(32) NOT NULL);" 
 
 
-<<<<<<< HEAD
-#define SQL_DAILY_HABITS \ 
-    "CREATE TABLE IF NOT EXISTS daily_habits(" \
-=======
 // 5. Daily Logs (The "Inner" Tables)
 // CRITICAL: We need a 'log_date' so you can track habits day by day!
 #define SQL_DAILY_HABITS                                             \
     "CREATE TABLE IF NOT EXISTS daily_habits("                       \
->>>>>>> 9260a3298db82b92e20d171ff5a1f8a6be6b33df
     "user_id INTEGER REFERENCES user_initial(id) ON DELETE CASCADE," \
     "habit_id INTEGER REFERENCES user_habits(id) ON DELETE CASCADE," \
     "log_date DATE NOT NULL,"                                        \

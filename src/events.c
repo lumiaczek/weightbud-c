@@ -155,6 +155,7 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     char empty_habits[MAX_HABITS][32] = {0};
     char empty_supplements[MAX_SUPPLEMENTS][32] = {0};
 
+    char *safe_name = g_strdup(name);
     UserSettings *new_user = g_new(UserSettings, 1);
     Diet *diet = g_new(Diet, 1);
     setup_diet(diet,
@@ -165,7 +166,7 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
 
     setup_user_settings(
         new_user,
-        name,
+        safe_name,
         age,
         weight,
         height,
@@ -210,7 +211,7 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     g_print("  Węglowodany:    %d g\n", diet->goal_carbs);
     g_print("========================================\n\n");
 
-    cleanup_memory(state);
+   
 
     GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(button));
     if (GTK_IS_WINDOW(window)) {
