@@ -2,7 +2,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <storage.h>
-
+#include <db.h>
 void change_view_on_click(GtkButton *button, gpointer user_data) {
     GtkStack *stack = GTK_STACK(user_data);
     gtk_stack_set_visible_child_name(stack, "form_view");

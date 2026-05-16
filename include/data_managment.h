@@ -12,4 +12,6 @@
 void ram_store_save(const char *key, gpointer data, AppState *state);
 void init_memory(AppState *state);
 gpointer ram_store_get(const char *key, AppState *state);
+void destroy_user_settings(gpointer data);
 void cleanup_memory(AppState *state);
+

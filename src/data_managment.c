@@ -4,7 +4,7 @@
 #include "db.h"
 
 void init_memory(AppState *state) {
-    state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, destroy_user_settings);
+    state->memory_collection = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,destroy_user_settings);
     
     if(!db_init(state)){
         g_printerr("CRITICAL: Failed to initialize database.\n");

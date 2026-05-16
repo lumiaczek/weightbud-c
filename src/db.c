@@ -15,7 +15,12 @@ gboolean db_create_table(AppState *state, const char *table){
         return FALSE;
     }
     else{
-        return TRUE;
+        printf(" \n table created");
+        int tables = sqlite3_exec(state->db,"Analyze;",0,0,&err_msg);
+        if (tables != SQLITE_OK){
+            printf("Failed to show tables %s \n",err_msg);
+            sqlite3_free(err_msg);
+        }        return TRUE;
     }
 }
 
@@ -34,6 +39,7 @@ gboolean db_init(AppState *state){
         sqlite3_close(state->db);
         return FALSE;
     }
+    printf("[DB] Succsefully intiialized database");
     db_create_table(state,SQL_USER_INITIAL);
     db_create_table(state,SQL_USER_GOAL);
     db_create_table(state,SQL_USER_HABIT);
