@@ -1,0 +1,3 @@
+/home/lumiaczek/Magazyn/Studia/Semestr II/Programownie niskopoziomowe/Projekt/weightbud-c/build/CMakeFiles/weightbud.dir
+/home/lumiaczek/Magazyn/Studia/Semestr II/Programownie niskopoziomowe/Projekt/weightbud-c/build/CMakeFiles/edit_cache.dir
+/home/lumiaczek/Magazyn/Studia/Semestr II/Programownie niskopoziomowe/Projekt/weightbud-c/build/CMakeFiles/rebuild_cache.dir
