@@ -1,15 +1,15 @@
+#include "db.h"
 #include "data_managment.h"
 #include "storage.h"
 #include <gtk/gtk.h>
 #include <sqlite3.h>
-#include "db.h"
 #include <stdarg.h>
 
 
 
 gboolean db_create_table(AppState *state, const char *table){
     char *err_msg = 0;
-    int rc = sqlite3_exec(state->db,table,0,0,&err_msg);
+    int rc = sqlite3_exec(state->db, table, 0, 0, &err_msg);
 
     if(rc != SQLITE_OK){
         fprintf(stderr,"[DB] SQL error during table creation %s\n",err_msg);
@@ -61,7 +61,7 @@ gboolean db_init(AppState *state){
         sqlite3_free(err_msg);
         return FALSE;
     }
-    if(rc !=SQLITE_OK){
+    if (rc != SQLITE_OK) {
         printf("[DB] Błąd przy otwarciu bazy: %s\n", sqlite3_errmsg(state->db));
         sqlite3_close(state->db);
         return FALSE;
@@ -79,56 +79,55 @@ gboolean db_init(AppState *state){
     return TRUE;
 }
 
-
-gboolean db_execute_query(sqlite3 *db, const char *sql,const char *format, ... ){
+gboolean db_execute_query(sqlite3 *db, const char *sql, const char *format, ...) {
 
     sqlite3_stmt *stmt;
 
-    if(sqlite3_prepare_v2(db,sql, -1,&stmt,NULL) != SQLITE_OK){
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         g_printerr("[DB] Failed to prepare statement: %s\n", sqlite3_errmsg(db));
         return FALSE;
     }
     va_list args;
-    va_start(args,format);
+    va_start(args, format);
 
-    for(int i =0; format[i] != '\0'; i++){
+    for (int i = 0; format[i] != '\0'; i++) {
         int bind_idx = i + 1;
 
         switch (format[i]) {
-            case 'i': // Integer
-                sqlite3_bind_int(stmt, bind_idx, va_arg(args, int));
-                break;
-            case 'd': // Double
-                sqlite3_bind_double(stmt, bind_idx, va_arg(args, double));
-                break;
-            case 's': // String (Text)
-                // Using SQLITE_TRANSIENT is safer for strings in case they are freed immediately after
-                sqlite3_bind_text(stmt, bind_idx, va_arg(args, const char *), -1, SQLITE_TRANSIENT);
-                break;
-            default:
-                g_printerr("[DB] Unknown format character '%c'\n", format[i]);
-                sqlite3_finalize(stmt);
-                va_end(args);
-                return FALSE;
+        case 'i': // Integer
+            sqlite3_bind_int(stmt, bind_idx, va_arg(args, int));
+            break;
+        case 'd': // Double
+            sqlite3_bind_double(stmt, bind_idx, va_arg(args, double));
+            break;
+        case 's': // String (Text)
+            // Using SQLITE_TRANSIENT is safer for strings in case they are freed immediately after
+            sqlite3_bind_text(stmt, bind_idx, va_arg(args, const char *), -1, SQLITE_TRANSIENT);
+            break;
+        default:
+            g_printerr("[DB] Unknown format character '%c'\n", format[i]);
+            sqlite3_finalize(stmt);
+            va_end(args);
+            return FALSE;
+        }
     }
+    va_end(args);
 
-}
-va_end(args);
+    int rc = sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
 
- int rc = sqlite3_step(stmt);
- sqlite3_finalize(stmt);
-
- if(rc != SQLITE_DONE){
-    g_printerr("[DB] Execution failed: %s\n", sqlite3_errmsg(db));
+    if (rc != SQLITE_DONE) {
+        g_printerr("[DB] Execution failed: %s\n", sqlite3_errmsg(db));
         return FALSE;
- }
- return TRUE;
+    }
+    return TRUE;
 }
 gboolean sync_user_settings_to_db(AppState *state) {
     UserSettings *user = (UserSettings *)g_hash_table_lookup(state->memory_collection, "user_settings");
     Diet *diet = (Diet *)g_hash_table_lookup(state->memory_collection, "user_diet");
 
-    if (!user || !diet) return FALSE;
+    if (!user || !diet)
+        return FALSE;
 
     // 1. Sync Base User
     const char *sql_user = 

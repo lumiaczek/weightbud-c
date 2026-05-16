@@ -42,8 +42,7 @@ typedef struct AppState AppState;
     "CREATE TABLE IF NOT EXISTS user_supplements("                   \
     "id INTEGER PRIMARY KEY AUTOINCREMENT,"                          \
     "user_id INTEGER REFERENCES user_initial(id) ON DELETE CASCADE," \
-    "name VARCHAR(32) NOT NULL);" 
-
+    "name VARCHAR(32) NOT NULL);"
 
 // 5. Daily Logs (The "Inner" Tables)
 // CRITICAL: We need a 'log_date' so you can track habits day by day!
