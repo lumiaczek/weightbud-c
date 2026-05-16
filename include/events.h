@@ -20,6 +20,23 @@ typedef struct {
     GtkWidget *entry_fat;
     GtkWidget *entry_carbs;
 
+    GtkWidget *radio_male;
+    GtkWidget *radio_female;
+
+    GtkWidget *error_name;
+    GtkWidget *error_gender;
+    GtkWidget *error_weight;
+    GtkWidget *error_height;
+    GtkWidget *error_age;
+    GtkWidget *error_target_weight;
+    GtkWidget *error_target_muscle;
+    GtkWidget *error_target_fat;
+
+    GtkWidget *error_kcal;
+    GtkWidget *error_protein;
+    GtkWidget *error_fat;
+    GtkWidget *error_carbs;
+
     GtkStack *stack;
     AppState *state;
 } OnboardingWidgets;
