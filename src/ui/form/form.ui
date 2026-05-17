@@ -174,7 +174,35 @@
                                         </style>
                                     </object>
                                 </child>
-
+                                <child>
+                                    <object class="GtkButton" id="btn_login">
+                                        <property name="visible">True</property>
+                                        <property name="label">Zaloguj</property>
+                                        <property name="halign">center</property>
+                                        <property name="margin-top">10</property>
+                                        <style>
+                                            <class name="start-button" />
+                                        </style>
+                                    </object>
+                                </child>
+                                <child>
+                                                    <object class="GtkEntry" id="entry_login">
+                                                        <property name="visible">True</property>
+                                                        <property name="placeholder-text">Podaj login</property>
+                                                        <style>
+                                                            <class name="form-input" />
+                                                        </style>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkLabel" id="error_login">
+                                                        <property name="visible">False</property>
+                                                        <property name="label" />
+                                                        <style>
+                                                            <class name="error-text" />
+                                                        </style>
+                                                    </object>
+                                                </child>
                             </object>
                         </child>
                     </object>
@@ -1718,7 +1746,7 @@
                                 </style>
                             </object>
                         </child>
-
+                        
                     </object>
                     <packing>
                         <property name="name">form_view_2</property>
