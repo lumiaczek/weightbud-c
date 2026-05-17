@@ -46,7 +46,7 @@ static gboolean is_text_empty(GtkEntry *entry) {
 void change_to_form_page_2(GtkButton *button, gpointer user_data) {
     OnboardingWidgets *widgets = (OnboardingWidgets *)user_data;
     gboolean valid = TRUE;
-
+   
     clear_error_state(widgets->entry_name, widgets->error_name);
     clear_error_state(widgets->radio_male, widgets->error_gender);
     clear_error_state(widgets->radio_female, NULL);
@@ -61,7 +61,7 @@ void change_to_form_page_2(GtkButton *button, gpointer user_data) {
         set_error_state(widgets->entry_name, widgets->error_name, "Uzupełnij imię.");
         valid = FALSE;
     }
-
+    
     gboolean gender_selected = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widgets->radio_male)) ||
                                gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widgets->radio_female));
     if (!gender_selected) {
@@ -128,6 +128,28 @@ static gboolean validate_form_page_2(OnboardingWidgets *widgets) {
     }
 
     return valid;
+}
+void on_login_button_clicked(GtkButton *button,gpointer user_data){
+
+    OnboardingWidgets *widgets = (OnboardingWidgets *)user_data;
+    AppState *state = widgets->state;
+   
+    const char *entry_login = gtk_entry_get_text(GTK_ENTRY(widgets->user_login));
+    printf("the text %s \n",entry_login);
+    if(is_text_empty(GTK_ENTRY(widgets->user_login))){
+        set_error_state(widgets->user_login,widgets->error_login,"Uzupelnij login");
+        return;
+    }
+     const char *name = db_get_user_name(state->db,entry_login);
+    if(name){
+            printf("pomyslnie zalogowano uzytkownika: %s\n",name);
+            g_free((gpointer)name);
+    }else{
+        set_error_state(widgets->user_login, widgets->error_login, "Uzytkownik nie istnieje");
+    }
+    
+
+    
 }
 
 void on_finish_button_clicked(GtkButton *button, gpointer user_data) {

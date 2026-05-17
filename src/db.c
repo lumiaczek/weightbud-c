@@ -44,6 +44,33 @@ int db_get_user_id(sqlite3 *db, const char *user_name){
 
 
 }
+char *db_get_user_name(sqlite3 *db, const char *user_name){
+    const char *sql = "SELECT user_name FROM user_initial WHERE user_name = ?;";
+    sqlite3_stmt *stmt;
+     char *name = NULL;
+
+    if(sqlite3_prepare_v2(db,sql,-1,&stmt,NULL) == SQLITE_OK){
+        sqlite3_bind_text(stmt, 1, user_name, -1, SQLITE_TRANSIENT);
+        
+        if (sqlite3_step(stmt) == SQLITE_ROW){
+        const unsigned char * fetched_name = sqlite3_column_text(stmt,0);
+
+        if(fetched_name){
+            name = g_strdup((const char *)fetched_name);
+        }
+    }
+       
+    sqlite3_finalize(stmt);
+    }else{
+        g_printerr("Failed to prepare login statement: %s\n",sqlite3_errmsg(db));
+        
+    }
+    printf("the user name is %s \n",name);
+    return name;
+
+
+
+}
 
 gboolean db_init(AppState *state){
 

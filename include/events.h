@@ -36,6 +36,10 @@ typedef struct {
     GtkWidget *error_protein;
     GtkWidget *error_fat;
     GtkWidget *error_carbs;
+    
+
+    GtkWidget *user_login;
+    GtkWidget *error_login;
 
     GtkStack *stack;
     AppState *state;
@@ -44,5 +48,7 @@ typedef struct {
 void change_view_on_click(GtkButton *button, gpointer user_data);
 void change_to_form_page_2(GtkButton *button, gpointer user_data);
 void on_finish_button_clicked(GtkButton *button, gpointer user_data);
+void on_login_button_clicked(GtkButton *button,gpointer user_data);
 
-#endif
+#endif 
+

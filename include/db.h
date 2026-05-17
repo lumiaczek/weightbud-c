@@ -68,6 +68,7 @@ gboolean db_create_table(AppState *state, const char *table);
 
 //check id to cross reference with foreign keys
 int db_get_user_id(sqlite3 *db, const char *user_name);
+char *db_get_user_name(sqlite3 *db, const char*user_name);
 
 // initialize (call db_create, add to state, add PRAGMA, check for integrity)
 gboolean db_init(AppState *state);
