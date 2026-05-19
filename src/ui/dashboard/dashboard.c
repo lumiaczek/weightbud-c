@@ -1,7 +1,7 @@
 #include "ui/dashboard/dashboard.h"
 #include "ui/form/form.h"
 #include <gtk/gtk.h>
-
+#include <db.h>
 static void on_nav_button_clicked(GtkButton *btn, gpointer user_data) {
     GtkStack *stack = GTK_STACK(user_data);
 
@@ -41,6 +41,9 @@ void show_dashboard_window(GtkApplication *app) {
     gtk_application_add_window(app, GTK_WINDOW(window));
 
     GtkStack *stack = GTK_STACK(gtk_builder_get_object(builder, "dashboard_stack"));
+    GtkLabel *user_name_label = GTK_WIDGET(gtk_builder_get_object(builder,"dashboard_user_name"));
+
+    //gtk_label_set_label(user_name_label,)
 
     setup_nav_button(builder, stack, "btn_nav_dashboard", "page_dashboard", "icon_nav_dashboard", "assets/icons/home.svg");
     setup_nav_button(builder, stack, "btn_nav_nawyki", "page_nawyki", "icon_nav_nawyki", "assets/icons/activity.svg");

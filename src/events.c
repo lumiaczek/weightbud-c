@@ -147,9 +147,12 @@ void on_login_button_clicked(GtkButton *button,gpointer user_data){
     }else{
         set_error_state(widgets->user_login, widgets->error_login, "Uzytkownik nie istnieje");
     }
-    
-
-    
+     GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(button));
+    if (GTK_IS_WINDOW(window)) {
+        GtkApplication *app = gtk_window_get_application(GTK_WINDOW(window));
+        show_dashboard_window(app);
+        gtk_widget_destroy(window);
+    }
 }
 
 void on_finish_button_clicked(GtkButton *button, gpointer user_data) {

@@ -160,7 +160,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="dashboard_user_name">
                     <property name="label">Witaj, Daniel!</property>
                     <property name="hexpand">True</property>
                     <style><class name="welcome-text" /></style>
