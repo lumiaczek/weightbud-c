@@ -4,6 +4,12 @@
 @define-color text_dark #3C3C3C;
 @define-color form_fill #FDFDFD;
 
+/* Kolory narzędzi */
+@define-color tool_green #BDE4A8;
+@define-color tool_red #FB3640;
+@define-color tool_blue #35A7FF;
+@define-color tool_orange #FF7D00;
+
 .main-window {
     background-color: @bg_color;
 }
@@ -78,45 +84,28 @@
     color: @text_dark;
     font-size: 22px;
     font-family: "Montserrat", sans-serif;
+    font-weight: 600;
 }
 
 .form_label {
     color: @text_dark;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
 }
 
 .form-sublabel {
-    color: @text_dark;
-    font-size: 13px; 
-    font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-}
-
-.form-input {
-    padding: 10px; 
-    font-size: 15px; 
-    background-color: @form_fill;
-    border: 1px solid alpha(@text_dark, 0.25);
-    border-radius: 8px;
-    color: @text_dark;
-    caret-color: @text_dark;
-    font-family: "Montserrat", sans-serif;
-}
-
-.form-sublabel {
-    color: @text_dark;
+    color: #8A8A8A;
     font-size: 13px;
     font-family: "Montserrat", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .form-input {
     padding: 10px;
     font-size: 15px;
     background-color: @form_fill;
-    border: 1px solid alpha(@text_dark, 0.25);
+    border: 1px solid alpha(@text_dark, 0.15);
     border-radius: 8px;
     color: @text_dark;
     caret-color: @accent;
@@ -130,15 +119,19 @@
 
 .input-error,
 .input-error:focus {
-    border-color: #e63946;
-    box-shadow: 0 0 0 1px rgba(230, 57, 70, 0.25);
+
+border-color: @tool_red;
+box-shadow: 0 0 0 1px rgba(230, 57, 70, 0.25);
+
 }
 
+
 .label.error-text {
-    color: #e63946;
-    font-size: 12px;
-    margin-top: 4px;
-}
+color: @tool_red;
+font-size: 12px;
+margin-top: 4px;
+
+} 
 
 .form-radio {
     padding: 12px 16px;
@@ -289,3 +282,54 @@ button, radiobutton {
 .icon-button:hover {
     background-color: #f2f2f2;
 }
+
+/* ========================================== */
+/* STYLE DLA NARZĘDZI (DASHBOARD)             */
+/* ========================================== */
+
+.tool-header-wrap {
+    background-color: alpha(@accent, 0.2);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.tool-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: @text_dark;
+}
+
+.result-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #5C5C5C;
+    margin-bottom: 4px;
+}
+
+.tool-card {
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.tool-card-orange { background-color: alpha(@tool_orange, 0.08); border: 1px solid alpha(@tool_orange, 0.2); }
+.icon-wrap-orange { background-color: alpha(@tool_orange, 0.2); border-radius: 12px; padding: 10px; }
+.result-box-orange { background-color: alpha(@tool_orange, 0.15); border-radius: 12px; padding: 16px; }
+.result-val-orange { color: @tool_orange; font-size: 24px; font-weight: 800; font-family: "Montserrat", sans-serif; }
+
+.tool-card-green { background-color: alpha(@tool_green, 0.25); border: 1px solid alpha(@tool_green, 0.6); }
+.icon-wrap-green { background-color: alpha(@tool_green, 0.6); border-radius: 12px; padding: 10px; }
+.hr-list-text { font-family: "Montserrat", sans-serif; font-size: 13px; color: #5C5C5C; font-weight: 500;}
+.hr-list-val { font-family: "Montserrat", sans-serif; font-size: 13px; font-weight: 600; color: #5C5C5C; }
+
+.tool-card-blue { background-color: alpha(@tool_blue, 0.1); border: 1px solid alpha(@tool_blue, 0.2); }
+.icon-wrap-blue { background-color: alpha(@tool_blue, 0.2); border-radius: 12px; padding: 10px; }
+.result-box-blue { background-color: alpha(@tool_blue, 0.15); border-radius: 12px; padding: 16px; }
+.result-val-blue { color: @tool_blue; font-size: 24px; font-weight: 800; font-family: "Montserrat", sans-serif; }
+
+.tool-card-red { background-color: alpha(@tool_red, 0.1); border: 1px solid alpha(@tool_red, 0.2); }
+.icon-wrap-red { background-color: alpha(@tool_red, 0.2); border-radius: 12px; padding: 10px; }
+.result-box-red { background-color: alpha(@tool_red, 0.15); border-radius: 12px; padding: 16px; }
+.result-val-red { color: @tool_red; font-size: 24px; font-weight: 800; font-family: "Montserrat", sans-serif; }

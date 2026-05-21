@@ -72,7 +72,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *hero_image = GTK_WIDGET(gtk_builder_get_object(builder, "hero_image"));
     if (hero_image != NULL) {
         GError *error = NULL;
-        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 950, -1, TRUE, &error);
+        GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale("assets/images/hero.png", 820, -1, TRUE, &error);
 
         if (pixbuf != NULL) {
             gtk_image_set_from_pixbuf(GTK_IMAGE(hero_image), pixbuf);
@@ -89,7 +89,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     ob_widgets->state = state;
     ob_widgets->stack = GTK_STACK(stack);
-    ob_widgets -> user_login = GTK_WIDGET(gtk_builder_get_object(builder,"entry_login"));
+    ob_widgets->user_login = GTK_WIDGET(gtk_builder_get_object(builder, "entry_login"));
     ob_widgets->entry_name = GTK_WIDGET(gtk_builder_get_object(builder, "entry_name"));
     ob_widgets->entry_weight = GTK_WIDGET(gtk_builder_get_object(builder, "entry_weight"));
     ob_widgets->entry_height = GTK_WIDGET(gtk_builder_get_object(builder, "entry_height"));
@@ -107,7 +107,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     ob_widgets->radio_male = GTK_WIDGET(gtk_builder_get_object(builder, "radio_male"));
     ob_widgets->radio_female = GTK_WIDGET(gtk_builder_get_object(builder, "radio_female"));
 
-    ob_widgets->error_login = GTK_WIDGET(gtk_builder_get_object(builder,"error_login"));
+    ob_widgets->error_login = GTK_WIDGET(gtk_builder_get_object(builder, "error_login"));
     ob_widgets->error_name = GTK_WIDGET(gtk_builder_get_object(builder, "error_name"));
     ob_widgets->error_gender = GTK_WIDGET(gtk_builder_get_object(builder, "error_gender"));
     ob_widgets->error_weight = GTK_WIDGET(gtk_builder_get_object(builder, "error_weight"));
@@ -121,7 +121,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     ob_widgets->error_protein = GTK_WIDGET(gtk_builder_get_object(builder, "error_protein"));
     ob_widgets->error_fat = GTK_WIDGET(gtk_builder_get_object(builder, "error_fat"));
     ob_widgets->error_carbs = GTK_WIDGET(gtk_builder_get_object(builder, "error_carbs"));
-    
+
     GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_start"));
     g_signal_connect(btn_start, "clicked", G_CALLBACK(change_view_on_click), stack);
 
@@ -131,9 +131,8 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *btn_finish = GTK_WIDGET(gtk_builder_get_object(builder, "btn_finish"));
     g_signal_connect(btn_finish, "clicked", G_CALLBACK(on_finish_button_clicked), ob_widgets);
 
-    GtkWidget *btn_login = GTK_WIDGET(gtk_builder_get_object(builder,"btn_login"));
-    g_signal_connect(btn_login,"clicked",G_CALLBACK(on_login_button_clicked),ob_widgets);
-
+    GtkWidget *btn_login = GTK_WIDGET(gtk_builder_get_object(builder, "btn_login"));
+    g_signal_connect(btn_login, "clicked", G_CALLBACK(on_login_button_clicked), ob_widgets);
 
     const char *numeric_entries[] = {"entry_weight", "entry_height", "entry_target_weight", "entry_target_muscle", "entry_target_fat"};
     for (int i = 0; i < 5; i++) {

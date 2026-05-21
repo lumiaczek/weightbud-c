@@ -5,9 +5,8 @@
   <object class="GtkApplicationWindow" id="dashboard_window">
     <property name="title">WeightBud - Dashboard</property>
     
-    <!-- Twarde wymuszenie stałego rozmiaru -->
-    <property name="width-request">1400</property>
-    <property name="height-request">900</property>
+    <property name="default-width">1600</property>
+    <property name="default-height">950</property>
     <property name="resizable">False</property>
     
     <style>
@@ -18,7 +17,6 @@
       <object class="GtkBox" id="main_layout">
         <property name="orientation">horizontal</property>
         
-        <!-- ================= SIDEBAR ================= -->
         <child>
           <object class="GtkBox" id="sidebar">
             <property name="orientation">vertical</property>
@@ -143,7 +141,6 @@
           </object>
         </child>
 
-        <!-- ================= MAIN AREA ================= -->
         <child>
           <object class="GtkBox" id="content_area">
             <property name="orientation">vertical</property>
@@ -187,15 +184,14 @@
               </object>
             </child>
             
-            <!-- STOS KART (PAGES) -->
             <child>
               <object class="GtkStack" id="dashboard_stack">
                 <property name="vexpand">True</property>
                 <property name="margin">30</property>
+                <property name="visible-child-name">page_dashboard</property>
                 <property name="transition-type">crossfade</property>
                 <property name="transition-duration">200</property>
                 
-                <!-- Page: Dashboard -->
                 <child>
                   <object class="GtkBox" id="page_dashboard">
                     <property name="orientation">vertical</property>
@@ -207,7 +203,6 @@
                   <packing><property name="name">page_dashboard</property></packing>
                 </child>
                 
-                <!-- Page: Nawyki -->
                 <child>
                   <object class="GtkBox" id="page_nawyki">
                     <property name="orientation">vertical</property>
@@ -219,7 +214,6 @@
                   <packing><property name="name">page_nawyki</property></packing>
                 </child>
 
-                <!-- Page: Trening -->
                 <child>
                   <object class="GtkBox" id="page_trening">
                     <property name="orientation">vertical</property>
@@ -231,7 +225,6 @@
                   <packing><property name="name">page_trening</property></packing>
                 </child>
 
-                <!-- Page: Waga -->
                 <child>
                   <object class="GtkBox" id="page_waga">
                     <property name="orientation">vertical</property>
@@ -243,7 +236,6 @@
                   <packing><property name="name">page_waga</property></packing>
                 </child>
 
-                <!-- Page: Dieta -->
                 <child>
                   <object class="GtkBox" id="page_dieta">
                     <property name="orientation">vertical</property>
@@ -255,7 +247,6 @@
                   <packing><property name="name">page_dieta</property></packing>
                 </child>
 
-                <!-- Page: Suple -->
                 <child>
                   <object class="GtkBox" id="page_suple">
                     <property name="orientation">vertical</property>
@@ -267,14 +258,704 @@
                   <packing><property name="name">page_suple</property></packing>
                 </child>
 
-                <!-- Page: Narzędzia -->
                 <child>
                   <object class="GtkBox" id="page_narzedzia">
                     <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child><object class="GtkLabel"><property name="label">Treść: Narzędzia</property><style><class
-                            name="title-label"
-                          /></style></object></child>
+                    <property name="valign">start</property>
+                    <property name="spacing">30</property>
+                    
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">15</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <style><class name="tool-header-wrap" /></style>
+                            <child>
+                              <object class="GtkImage" id="icon_header_tools">
+                                <property name="visible">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">2</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">Narzędzia</property>
+                                <property name="halign">start</property>
+                                <style><class name="form-text" /></style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">Zestaw narzędzi ułatwiający planowanie treningów</property>
+                                <property name="halign">start</property>
+                                <style><class name="form-sublabel" /></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">25</property>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">25</property>
+                            <property name="homogeneous">True</property>
+                            
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">20</property>
+                                <style><class name="tool-card" /><class name="tool-card-orange" /></style>
+                                
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <style><class name="icon-wrap-orange" /></style>
+                                        <child><object class="GtkImage" id="icon_tool_1rm"><property
+                                              name="visible"
+                                            >True</property></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Kalkulator 1RM</property><property
+                                              name="halign"
+                                            >start</property><style><class name="tool-title" /></style></object></child>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property
+                                              name="label"
+                                            >Oblicz ciężar maksymalny na bazie powtórzeń</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="form-sublabel"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Ciężar (kg)</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_1rm_weight"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 100</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Powtórzenia</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_1rm_reps"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 5</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkButton" id="btn_calc_1rm">
+                                    <property name="visible">True</property>
+                                    <property name="label">Oblicz</property>
+                                    <property name="halign">center</property>
+                                    <style><class name="add-button" /></style>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <style><class name="result-box-orange" /></style>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Epley</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-title"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_1rm_epley"><property
+                                              name="visible"
+                                            >True</property><property name="label">123.34kg</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-val-orange"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <style><class name="result-box-orange" /></style>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Brzycki</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-title"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_1rm_brzycki"><property
+                                              name="visible"
+                                            >True</property><property name="label">121.14kg</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-val-orange"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">20</property>
+                                <style><class name="tool-card" /><class name="tool-card-green" /></style>
+                                
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <style><class name="icon-wrap-green" /></style>
+                                        <child><object class="GtkImage" id="icon_tool_hr"><property
+                                              name="visible"
+                                            >True</property></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Strefy tętna</property><property
+                                              name="halign"
+                                            >start</property><style><class name="tool-title" /></style></object></child>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property
+                                              name="label"
+                                            >Oblicz swoje strefy tętna</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="form-sublabel"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">5</property>
+                                    <child><object class="GtkLabel"><property name="visible">True</property><property
+                                          name="label"
+                                        >Wiek</property><property name="halign">start</property><style><class
+                                            name="form_label"
+                                          /></style></object></child>
+                                    <child><object class="GtkEntry" id="entry_hr_age"><property
+                                          name="visible"
+                                        >True</property><property name="placeholder-text">np. 21</property><style><class
+                                            name="form-input"
+                                          /></style></object></child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkButton" id="btn_calc_hr">
+                                    <property name="visible">True</property>
+                                    <property name="label">Oblicz</property>
+                                    <property name="halign">center</property>
+                                    <style><class name="add-button" /></style>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">8</property>
+                                    <property name="margin-left">10</property>
+                                    <property name="margin-right">10</property>
+                                    <property name="margin-top">10</property>
+                                    <child>
+                                      <object class="GtkBox"><property name="visible">True</property><property
+                                          name="orientation"
+                                        >horizontal</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="use-markup">True</property><property
+                                              name="label"
+                                              translatable="yes"
+                                            >&lt;span foreground='#5c5c5c'&gt;●&lt;/span&gt; Z1 - Regeneracja</property><property
+                                              name="halign"
+                                            >start</property><property name="hexpand">True</property><style><class
+                                                name="hr-list-text"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_hr_z1"><property
+                                              name="visible"
+                                            >True</property><property name="label">120 bpm</property><style><class
+                                                name="hr-list-val"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox"><property name="visible">True</property><property
+                                          name="orientation"
+                                        >horizontal</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="use-markup">True</property><property
+                                              name="label"
+                                              translatable="yes"
+                                            >&lt;span foreground='#35A7FF'&gt;●&lt;/span&gt; Z2 - Spalanie</property><property
+                                              name="halign"
+                                            >start</property><property name="hexpand">True</property><style><class
+                                                name="hr-list-text"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_hr_z2"><property
+                                              name="visible"
+                                            >True</property><property name="label">121 - 149 bpm</property><style><class
+                                                name="hr-list-val"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox"><property name="visible">True</property><property
+                                          name="orientation"
+                                        >horizontal</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="use-markup">True</property><property
+                                              name="label"
+                                              translatable="yes"
+                                            >&lt;span foreground='#BDE4A8'&gt;●&lt;/span&gt; Z3 - Tlenowe</property><property
+                                              name="halign"
+                                            >start</property><property name="hexpand">True</property><style><class
+                                                name="hr-list-text"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_hr_z3"><property
+                                              name="visible"
+                                            >True</property><property name="label">150 - 169 bpm</property><style><class
+                                                name="hr-list-val"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox"><property name="visible">True</property><property
+                                          name="orientation"
+                                        >horizontal</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="use-markup">True</property><property
+                                              name="label"
+                                              translatable="yes"
+                                            >&lt;span foreground='#FF7D00'&gt;●&lt;/span&gt; Z4 - Próg</property><property
+                                              name="halign"
+                                            >start</property><property name="hexpand">True</property><style><class
+                                                name="hr-list-text"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_hr_z4"><property
+                                              name="visible"
+                                            >True</property><property name="label">171 - 183 bpm</property><style><class
+                                                name="hr-list-val"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox"><property name="visible">True</property><property
+                                          name="orientation"
+                                        >horizontal</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="use-markup">True</property><property
+                                              name="label"
+                                              translatable="yes"
+                                            >&lt;span foreground='#FB3640'&gt;●&lt;/span&gt; Z5 - VO2Max</property><property
+                                              name="halign"
+                                            >start</property><property name="hexpand">True</property><style><class
+                                                name="hr-list-text"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_hr_z5"><property
+                                              name="visible"
+                                            >True</property><property name="label">184 bpm</property><style><class
+                                                name="hr-list-val"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">25</property>
+                            <property name="homogeneous">True</property>
+                            
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">20</property>
+                                <style><class name="tool-card" /><class name="tool-card-blue" /></style>
+                                
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <style><class name="icon-wrap-blue" /></style>
+                                        <child><object class="GtkImage" id="icon_tool_pace"><property
+                                              name="visible"
+                                            >True</property></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Tempo biegu</property><property
+                                              name="halign"
+                                            >start</property><style><class name="tool-title" /></style></object></child>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property
+                                              name="label"
+                                            >Oblicz tempo biegu na dystansie</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="form-sublabel"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Czas (min)</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_pace_time"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 50</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Dystans (km)</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_pace_distance"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 10</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkButton" id="btn_calc_pace">
+                                    <property name="visible">True</property>
+                                    <property name="label">Oblicz</property>
+                                    <property name="halign">center</property>
+                                    <style><class name="add-button" /></style>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">5</property>
+                                    <property name="vexpand">True</property>
+                                    <property name="valign">end</property>
+                                    <style><class name="result-box-blue" /></style>
+                                    <child><object class="GtkLabel"><property name="visible">True</property><property
+                                          name="label"
+                                        >Pace (min/km)</property><property name="halign">start</property><style><class
+                                            name="result-title"
+                                          /></style></object></child>
+                                    <child><object class="GtkLabel" id="lbl_pace_result"><property
+                                          name="visible"
+                                        >True</property><property name="label">5:00 /km</property><property
+                                          name="halign"
+                                        >start</property><style><class
+                                            name="result-val-blue"
+                                          /></style></object></child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">20</property>
+                                <style><class name="tool-card" /><class name="tool-card-red" /></style>
+                                
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <style><class name="icon-wrap-red" /></style>
+                                        <child><object class="GtkImage" id="icon_tool_bmi"><property
+                                              name="visible"
+                                            >True</property></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">BMI / BMR</property><property
+                                              name="halign"
+                                            >start</property><style><class name="tool-title" /></style></object></child>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property
+                                              name="label"
+                                            >Wskaźniki podstawowe</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="form-sublabel"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Wzrost (cm)</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_bmi_height"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 178</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">Waga (kg)</property><property
+                                              name="halign"
+                                            >start</property><style><class name="form_label" /></style></object></child>
+                                        <child><object class="GtkEntry" id="entry_bmi_weight"><property
+                                              name="visible"
+                                            >True</property><property name="placeholder-text">np. 78</property><style
+                                            ><class name="form-input" /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">5</property>
+                                    <child><object class="GtkLabel"><property name="visible">True</property><property
+                                          name="label"
+                                        >Wiek</property><property name="halign">start</property><style><class
+                                            name="form_label"
+                                          /></style></object></child>
+                                    <child><object class="GtkEntry" id="entry_bmi_age"><property
+                                          name="visible"
+                                        >True</property><property name="placeholder-text">np. 25</property><style><class
+                                            name="form-input"
+                                          /></style></object></child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkButton" id="btn_calc_bmi">
+                                    <property name="visible">True</property>
+                                    <property name="label">Oblicz</property>
+                                    <property name="halign">center</property>
+                                    <style><class name="add-button" /></style>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <style><class name="result-box-red" /></style>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">BMI</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-title"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_bmi_result"><property
+                                              name="visible"
+                                            >True</property><property name="label">24.1</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-val-red"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <style><class name="result-box-red" /></style>
+                                        <child><object class="GtkLabel"><property
+                                              name="visible"
+                                            >True</property><property name="label">BMR</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-title"
+                                              /></style></object></child>
+                                        <child><object class="GtkLabel" id="lbl_bmr_result"><property
+                                              name="visible"
+                                            >True</property><property name="label">1603 kcal</property><property
+                                              name="halign"
+                                            >start</property><style><class
+                                                name="result-val-red"
+                                              /></style></object></child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
                   </object>
                   <packing><property name="name">page_narzedzia</property></packing>
                 </child>

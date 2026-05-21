@@ -6,6 +6,7 @@
         <property name="title">WeightBud</property>
         <property name="default-width">1400</property>
         <property name="default-height">950</property>
+        <property name="resizable">False</property>
         <style>
             <class name="main-window" />
         </style>
