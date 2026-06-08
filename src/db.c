@@ -5,85 +5,69 @@
 #include <sqlite3.h>
 #include <stdarg.h>
 
-
-
-gboolean db_create_table(AppState *state, const char *table){
+gboolean db_create_table(AppState *state, const char *table) {
     char *err_msg = 0;
     int rc = sqlite3_exec(state->db, table, 0, 0, &err_msg);
 
-    if(rc != SQLITE_OK){
-        fprintf(stderr,"[DB] SQL error during table creation %s\n",err_msg);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "[DB] SQL error during table creation %s\n", err_msg);
         err_msg = NULL;
         sqlite3_free(err_msg);
         return FALSE;
     }
     return TRUE;
-        
-    
 }
 
-int db_get_user_id(sqlite3 *db, const char *user_name){
+int db_get_user_id(sqlite3 *db, const char *user_name) {
     const char *sql = "SELECT id FROM user_initial WHERE user_name = ?;";
     sqlite3_stmt *stmt;
     int id = -1;
 
-    if(sqlite3_prepare_v2(db,sql,-1,&stmt,NULL) == SQLITE_OK){
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
         sqlite3_bind_text(stmt, 1, user_name, -1, SQLITE_TRANSIENT);
-        
-        if (sqlite3_step(stmt) == SQLITE_ROW){
-            id = sqlite3_column_int(stmt,0);
 
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            id = sqlite3_column_int(stmt, 0);
         }
         sqlite3_finalize(stmt);
-    
-    }else{
+
+    } else {
         g_printerr("Failed to prepare select for user ID");
     }
     return id;
-
-
-
 }
-char *db_get_user_name(sqlite3 *db, const char *user_name){
+char *db_get_user_name(sqlite3 *db, const char *user_name) {
     const char *sql = "SELECT user_name FROM user_initial WHERE user_name = ?;";
     sqlite3_stmt *stmt;
-     char *name = NULL;
+    char *name = NULL;
 
-    if(sqlite3_prepare_v2(db,sql,-1,&stmt,NULL) == SQLITE_OK){
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
         sqlite3_bind_text(stmt, 1, user_name, -1, SQLITE_TRANSIENT);
-        
-        if (sqlite3_step(stmt) == SQLITE_ROW){
-        const unsigned char * fetched_name = sqlite3_column_text(stmt,0);
 
-        if(fetched_name){
-            name = g_strdup((const char *)fetched_name);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            const unsigned char *fetched_name = sqlite3_column_text(stmt, 0);
+
+            if (fetched_name) {
+                name = g_strdup((const char *)fetched_name);
+            }
         }
+
+        sqlite3_finalize(stmt);
+    } else {
+        g_printerr("Failed to prepare login statement: %s\n", sqlite3_errmsg(db));
     }
-       
-    sqlite3_finalize(stmt);
-    }else{
-        g_printerr("Failed to prepare login statement: %s\n",sqlite3_errmsg(db));
-        
-    }
-    printf("the user name is %s \n",name);
+    printf("the user name is %s \n", name);
     return name;
-
-
-
 }
 
-gboolean db_init(AppState *state){
+gboolean db_init(AppState *state) {
 
-
-
-    int rc = sqlite3_open("weightbud.db",&state->db);
+    int rc = sqlite3_open("weightbud.db", &state->db);
     char *err_msg = 0;
-    int pragma = sqlite3_exec(state->db,"PRAGMA foreign_keys = ON",0,0,&err_msg);
-    
- 
-    
-    if (pragma != SQLITE_OK){
-        printf("[DB]: Fail on calling pragma %s\n",err_msg);
+    int pragma = sqlite3_exec(state->db, "PRAGMA foreign_keys = ON", 0, 0, &err_msg);
+
+    if (pragma != SQLITE_OK) {
+        printf("[DB]: Fail on calling pragma %s\n", err_msg);
         err_msg = NULL;
         sqlite3_free(err_msg);
         return FALSE;
@@ -94,14 +78,10 @@ gboolean db_init(AppState *state){
         return FALSE;
     }
     printf("[DB] Succsefully intiialized database");
-    db_create_table(state,SQL_USER_INITIAL);
-    db_create_table(state,SQL_USER_DIET);
-    db_create_table(state,SQL_USER_GOAL);
-    db_create_table(state,SQL_USER_HABIT);
-    db_create_table(state,SQL_USER_SUPPLEMENTS);
-    db_create_table(state,SQL_DAILY_HABITS);
-    db_create_table(state,SQL_DAILY_SUPPLEMETS);
-
+    db_create_table(state, SQL_USER_INITIAL);
+    db_create_table(state, SQL_USER_GOAL);
+    db_create_table(state, SQL_USER_HABIT);
+    db_create_table(state, SQL_DAILY_HABITS);
 
     return TRUE;
 }
@@ -151,13 +131,12 @@ gboolean db_execute_query(sqlite3 *db, const char *sql, const char *format, ...)
 }
 gboolean sync_user_settings_to_db(AppState *state) {
     UserSettings *user = (UserSettings *)g_hash_table_lookup(state->memory_collection, "user_settings");
-    Diet *diet = (Diet *)g_hash_table_lookup(state->memory_collection, "user_diet");
 
-    if (!user || !diet)
+    if (!user)
         return FALSE;
 
     // 1. Sync Base User
-    const char *sql_user = 
+    const char *sql_user =
         "INSERT INTO user_initial (user_name, age, height, starting_weight, starting_mm) "
         "VALUES (?, ?, ?, ?, ?) "
         "ON CONFLICT(user_name) DO UPDATE SET "
@@ -166,38 +145,19 @@ gboolean sync_user_settings_to_db(AppState *state) {
         "starting_weight = excluded.starting_weight, "
         "starting_mm = excluded.starting_mm;";
 
-    if (!db_execute_query(state->db, sql_user, "siidd", 
-                          user->user_name, user->age, user->height, 
+    if (!db_execute_query(state->db, sql_user, "siidd",
+                          user->user_name, user->age, user->height,
                           (double)user->starting_weight, (double)user->starting_mm)) {
         return FALSE; // Fail early if the main user insert fails
     }
-    int current_user_id = db_get_user_id(state->db,user->user_name);
-    if(current_user_id == -1){
-        g_printerr("Could not find user ID for %s to link foreign key \n",user->user_name);
+    int current_user_id = db_get_user_id(state->db, user->user_name);
+    if (current_user_id == -1) {
+        g_printerr("Could not find user ID for %s to link foreign key \n", user->user_name);
         return FALSE;
     }
 
-    // 2. Sync Diet
-   const char *sql_diet = 
-        "INSERT INTO user_diet (user_id, goal_kcal, goal_protein, goal_fat, goal_carbs) "
-        "VALUES (?, ?, ?, ?, ?) "
-        "ON CONFLICT(user_id) DO UPDATE SET "
-        "goal_kcal = excluded.goal_kcal, "
-        "goal_protein = excluded.goal_protein, "
-        "goal_fat = excluded.goal_fat, "
-        "goal_carbs = excluded.goal_carbs;";
-
-    // Assuming you have the user_id (you might need to fetch it after step 1 if it's a new user)
-    
-    
-    if (!db_execute_query(state->db, sql_diet, "iiiii", 
-                          current_user_id, diet->goal_kcal, diet->goal_protein, 
-                          diet->goal_fat, diet->goal_carbs)) {
-        return FALSE;
-    }
-
-    // 3. Sync Goals
-   const char *sql_goal = 
+    // 2. Sync Goals
+    const char *sql_goal =
         "INSERT INTO user_goal (user_id, goal_weight, goal_bf, goal_mm) "
         "VALUES (?, ?, ?, ?) "
         "ON CONFLICT(user_id) DO UPDATE SET "
@@ -205,8 +165,8 @@ gboolean sync_user_settings_to_db(AppState *state) {
         "goal_bf = excluded.goal_bf, "
         "goal_mm = excluded.goal_mm;";
 
-    if (!db_execute_query(state->db, sql_goal, "iddd", 
-                          current_user_id, (double)user->goal_weight, 
+    if (!db_execute_query(state->db, sql_goal, "iddd",
+                          current_user_id, (double)user->goal_weight,
                           (double)user->goal_bf, (double)user->goal_mm)) {
         return FALSE;
     }

@@ -16,14 +16,6 @@
  * @brief Funckja inicjalizująca ustawienia użytkownika
  *
  */
-void setup_diet( Diet *diet,int _goal_kcal,int _goal_protein,int _goal_fat,int _goal_carbs){
-    memset(diet,0,sizeof(Diet));
-    
-    diet->goal_carbs = _goal_carbs;
-    diet->goal_fat = _goal_fat;
-    diet->goal_kcal = _goal_kcal;
-    diet->goal_protein = _goal_protein;
-}
 void setup_user_settings(UserSettings *config, const char *_username,
                          int _age,
                          float _starting_weight,
@@ -34,9 +26,7 @@ void setup_user_settings(UserSettings *config, const char *_username,
                          float _goal_bf,
                          float _goal_mm,
                          char _habit_names[MAX_HABITS][32],
-                         int _habit_count,
-                         char _supplement_names[MAX_SUPPLEMENTS][32],
-                         int _supplement_count)
+                         int _habit_count)
 
 {
     memset(config, 0, sizeof(UserSettings));
@@ -59,13 +49,6 @@ void setup_user_settings(UserSettings *config, const char *_username,
     }
 
     config->habit_count = _habit_count;
-
-    for (int i = 0; i < _supplement_count; i++) {
-        strncpy(config->supplement_names[i], _supplement_names[i], 31);
-    }
-
-    config->supplement_count = _supplement_count;
-   
 }
 
 /**
@@ -84,12 +67,5 @@ void init_daily_record(DailyRecord *record, int target_date, const UserSettings 
     for (int i = 0; i < record->habit_count; i++) {
         strncpy(record->habits[i].name, config->habit_names[i], 31);
         record->habits[i].completed = false;
-    }
-
-    record->supplement_count = config->supplement_count;
-    for (int i = 0; i < record->supplement_count; i++) {
-        strncpy(record->supplementation[i].name, config->supplement_names[i], 31);
-        record->supplementation[i].taken_morning = false;
-        record->supplementation[i].taken_evening = false;
     }
 }

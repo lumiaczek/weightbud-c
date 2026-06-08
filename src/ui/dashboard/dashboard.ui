@@ -95,34 +95,6 @@
                 </child>
 
                 <child>
-                  <object class="GtkButton" id="btn_nav_dieta">
-                    <style><class name="nav-button" /></style>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">15</property>
-                        <child><object class="GtkImage" id="icon_nav_dieta" /></child>
-                        <child><object class="GtkLabel"><property name="label">Dieta</property></object></child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkButton" id="btn_nav_suple">
-                    <style><class name="nav-button" /></style>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">15</property>
-                        <child><object class="GtkImage" id="icon_nav_suple" /></child>
-                        <child><object class="GtkLabel"><property name="label">Suplementacja</property></object></child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-                <child>
                   <object class="GtkButton" id="btn_nav_narzedzia">
                     <style><class name="nav-button" /></style>
                     <child>
@@ -236,27 +208,6 @@
                   <packing><property name="name">page_waga</property></packing>
                 </child>
 
-                <child>
-                  <object class="GtkBox" id="page_dieta">
-                    <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child><object class="GtkLabel"><property name="label">Treść: Dieta</property><style><class
-                            name="title-label"
-                          /></style></object></child>
-                  </object>
-                  <packing><property name="name">page_dieta</property></packing>
-                </child>
-
-                <child>
-                  <object class="GtkBox" id="page_suple">
-                    <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child><object class="GtkLabel"><property name="label">Treść: Suplementacja</property><style><class
-                            name="title-label"
-                          /></style></object></child>
-                  </object>
-                  <packing><property name="name">page_suple</property></packing>
-                </child>
 
                 <child>
                   <object class="GtkBox" id="page_narzedzia">

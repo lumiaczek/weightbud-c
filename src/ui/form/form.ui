@@ -132,35 +132,6 @@
                                                 </child>
                                             </object>
                                         </child>
-
-                                        <child>
-                                            <object class="GtkFrame" id="card_suple">
-                                                <property name="visible">True</property>
-                                                <property name="width-request">200</property>
-                                                <property name="height-request">220</property>
-                                                <style>
-                                                    <class name="module-card" />
-                                                </style>
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="halign">center</property>
-                                                        <property name="valign">center</property>
-                                                        <property name="spacing">20</property>
-                                                        <child>
-                                                            <object class="GtkImage" id="icon_suple" />
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Suplementy</property>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-                                            </object>
-                                        </child>
                                     </object>
                                 </child>
 
@@ -175,6 +146,7 @@
                                         </style>
                                     </object>
                                 </child>
+                                
                                 <child>
                                     <object class="GtkButton" id="btn_login">
                                         <property name="visible">True</property>
@@ -186,24 +158,26 @@
                                         </style>
                                     </object>
                                 </child>
+                                
                                 <child>
-                                                    <object class="GtkEntry" id="entry_login">
-                                                        <property name="visible">True</property>
-                                                        <property name="placeholder-text">Podaj login</property>
-                                                        <style>
-                                                            <class name="form-input" />
-                                                        </style>
-                                                    </object>
-                                                </child>
-                                                <child>
-                                                    <object class="GtkLabel" id="error_login">
-                                                        <property name="visible">False</property>
-                                                        <property name="label" />
-                                                        <style>
-                                                            <class name="error-text" />
-                                                        </style>
-                                                    </object>
-                                                </child>
+                                    <object class="GtkEntry" id="entry_login">
+                                        <property name="visible">True</property>
+                                        <property name="placeholder-text">Podaj login</property>
+                                        <style>
+                                            <class name="form-input" />
+                                        </style>
+                                    </object>
+                                </child>
+                                
+                                <child>
+                                    <object class="GtkLabel" id="error_login">
+                                        <property name="visible">False</property>
+                                        <property name="label" />
+                                        <style>
+                                            <class name="error-text" />
+                                        </style>
+                                    </object>
+                                </child>
                             </object>
                         </child>
                     </object>
@@ -556,7 +530,6 @@
                                                 </child>
                                             </object>
                                         </child>
-
                                     </object>
                                 </child>
 
@@ -928,621 +901,197 @@
                             <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="orientation">vertical</property>
-                                <property name="spacing">30</property>
-                                <property name="halign">center</property>
+                                <property name="spacing">15</property>
+                                <property name="width-request">450</property>
+                                <style><class name="form-card" /></style>
 
                                 <child>
                                     <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="orientation">horizontal</property>
-                                        <property name="spacing">30</property>
-
+                                        <property name="spacing">15</property>
+                                        <child>
+                                            <object class="GtkImage" id="icon_pulse">
+                                                <property name="visible">True</property>
+                                            </object>
+                                        </child>
                                         <child>
                                             <object class="GtkBox">
                                                 <property name="visible">True</property>
                                                 <property name="orientation">vertical</property>
-                                                <property name="spacing">15</property>
-                                                <property name="width-request">450</property>
-                                                <style><class name="form-card" /></style>
+                                                <property name="spacing">2</property>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="visible">True</property>
+                                                        <property name="label">Nawyki</property>
+                                                        <property name="halign">start</property>
+                                                        <style><class name="form-text" /></style>
+                                                    </object>
+                                                </child>
+                                                <child>
+                                                    <object class="GtkLabel">
+                                                        <property name="visible">True</property>
+                                                        <property name="label">Wybierz lub dodaj swoje nawyki</property>
+                                                        <property name="halign">start</property>
+                                                        <style><class name="form-sublabel" /></style>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
 
+                                <child>
+                                    <object class="GtkFlowBox">
+                                        <property name="visible">True</property>
+                                        <property name="selection-mode">none</property>
+                                        <property name="max-children-per-line">3</property>
+                                        <property name="row-spacing">10</property>
+                                        <property name="column-spacing">10</property>
+                                        
+                                        <child>
+                                            <object class="GtkToggleButton">
+                                                <property name="visible">True</property>
+                                                <style><class name="form-pill" /></style>
                                                 <child>
                                                     <object class="GtkBox">
                                                         <property name="visible">True</property>
                                                         <property name="orientation">horizontal</property>
-                                                        <property name="spacing">15</property>
-                                                        <child>
-                                                            <object class="GtkImage" id="icon_pulse">
-                                                                <property name="visible">True</property>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkBox">
-                                                                <property name="visible">True</property>
-                                                                <property name="orientation">vertical</property>
-                                                                <property name="spacing">2</property>
-                                                                <child>
-                                                                    <object class="GtkLabel">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="label">Nawyki</property>
-                                                                        <property name="halign">start</property>
-                                                                        <style><class name="form-text" /></style>
-                                                                    </object>
-                                                                </child>
-                                                                <child>
-                                                                    <object class="GtkLabel">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="label"
-                                    >Wybierz lub dodaj swoje nawyki</property>
-                                                                        <property name="halign">start</property>
-                                                                        <style><class name="form-sublabel" /></style>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkFlowBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="selection-mode">none</property>
-                                                        <property name="max-children-per-line">3</property>
-                                                        <property name="row-spacing">10</property>
-                                                        <property name="column-spacing">10</property>
-                                                        
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Picie 2L wody</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">8h snu</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >10k kroków</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Czytanie 30 min</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Brak cukru</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Brak fastfoodów</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkSeparator">
-                                                        <property name="visible">True</property>
-                                                        <property name="margin-top">10</property>
-                                                        <property name="margin-bottom">10</property>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
+                                                        <property name="spacing">6</property>
+                                                        <property name="halign">start</property>
                                                         <child>
                                                             <object class="GtkLabel">
                                                                 <property name="visible">True</property>
-                                                                <property name="label">Dodaj własny nawyk</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form-sublabel" /></style>
+                                                                <property name="label">+</property>
+                                                                <style><class name="pill-icon" /></style>
                                                             </object>
                                                         </child>
                                                         <child>
-                                                            <object class="GtkBox">
+                                                            <object class="GtkLabel">
                                                                 <property name="visible">True</property>
-                                                                <property name="orientation">horizontal</property>
-                                                                <property name="spacing">10</property>
-                                                                <child>
-                                                                    <object class="GtkEntry">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="hexpand">True</property>
-                                                                        <property
-                                      name="placeholder-text"
-                                    >np. odłożenie telefonu...</property>
-                                                                        <style><class name="form-input" /></style>
-                                                                    </object>
-                                                                </child>
-                                                                <child>
-                                                                    <object class="GtkButton">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="label">+ Dodaj</property>
-                                                                        <style><class name="add-button" /></style>
-                                                                    </object>
-                                                                </child>
+                                                                <property name="label">Picie 2L wody</property>
                                                             </object>
                                                         </child>
                                                     </object>
                                                 </child>
                                             </object>
                                         </child>
-
                                         <child>
-                                            <object class="GtkBox">
+                                            <object class="GtkToggleButton">
                                                 <property name="visible">True</property>
-                                                <property name="orientation">vertical</property>
-                                                <property name="spacing">15</property>
-                                                <property name="width-request">450</property>
-                                                <style><class name="form-card" /></style>
-
+                                                <style><class name="form-pill" /></style>
                                                 <child>
                                                     <object class="GtkBox">
                                                         <property name="visible">True</property>
                                                         <property name="orientation">horizontal</property>
-                                                        <property name="spacing">15</property>
-                                                        <child>
-                                                            <object class="GtkImage" id="icon_pill_card">
-                                                                <property name="visible">True</property>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkBox">
-                                                                <property name="visible">True</property>
-                                                                <property name="orientation">vertical</property>
-                                                                <property name="spacing">2</property>
-                                                                <child>
-                                                                    <object class="GtkLabel">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="label">Suplementacja</property>
-                                                                        <property name="halign">start</property>
-                                                                        <style><class name="form-text" /></style>
-                                                                    </object>
-                                                                </child>
-                                                                <child>
-                                                                    <object class="GtkLabel">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="label"
-                                    >Wybierz lub dodaj co przyjmujesz</property>
-                                                                        <property name="halign">start</property>
-                                                                        <style><class name="form-sublabel" /></style>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkFlowBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="selection-mode">none</property>
-                                                        <property name="max-children-per-line">3</property>
-                                                        <property name="row-spacing">10</property>
-                                                        <property name="column-spacing">10</property>
-                                                        
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Kreatyna</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">Magnez</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Witamina D3</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Omega 3</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Przedtreningówka</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkToggleButton">
-                                                                <property name="visible">True</property>
-                                                                <style><class name="form-pill" /></style>
-                                                                <child>
-                                                                    <object class="GtkBox">
-                                                                        <property name="visible">True</property>
-                                                                        <property
-                                      name="orientation"
-                                    >horizontal</property>
-                                                                        <property name="spacing">6</property>
-                                                                        <property name="halign">start</property>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property name="label">+</property>
-                                                                                <style><class
-                                            name="pill-icon"
-                                          /></style>
-                                                                            </object>
-                                                                        </child>
-                                                                        <child>
-                                                                            <object class="GtkLabel">
-                                                                                <property name="visible">True</property>
-                                                                                <property
-                                          name="label"
-                                        >Odżywka białkowa</property>
-                                                                            </object>
-                                                                        </child>
-                                                                    </object>
-                                                                </child>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkSeparator">
-                                                        <property name="visible">True</property>
-                                                        <property name="margin-top">10</property>
-                                                        <property name="margin-bottom">10</property>
-                                                    </object>
-                                                </child>
-
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
+                                                        <property name="spacing">6</property>
+                                                        <property name="halign">start</property>
                                                         <child>
                                                             <object class="GtkLabel">
                                                                 <property name="visible">True</property>
-                                                                <property name="label">Dodaj własny suplement</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form-sublabel" /></style>
+                                                                <property name="label">+</property>
+                                                                <style><class name="pill-icon" /></style>
                                                             </object>
                                                         </child>
                                                         <child>
-                                                            <object class="GtkBox">
+                                                            <object class="GtkLabel">
                                                                 <property name="visible">True</property>
-                                                                <property name="orientation">horizontal</property>
-                                                                <property name="spacing">10</property>
-                                                                <child>
-                                                                    <object class="GtkEntry">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="hexpand">True</property>
-                                                                        <property
-                                      name="placeholder-text"
-                                    >np. Ashwagandha</property>
-                                                                        <style><class name="form-input" /></style>
-                                                                    </object>
-                                                                </child>
-                                                                <child>
-                                                                    <object class="GtkButton">
-                                                                        <property name="visible">True</property>
-                                                                        <property name="label">+ Dodaj</property>
-                                                                        <style><class name="add-button" /></style>
-                                                                    </object>
-                                                                </child>
+                                                                <property name="label">8h snu</property>
                                                             </object>
                                                         </child>
                                                     </object>
                                                 </child>
                                             </object>
                                         </child>
+                                        <child>
+                                            <object class="GtkToggleButton">
+                                                <property name="visible">True</property>
+                                                <style><class name="form-pill" /></style>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">horizontal</property>
+                                                        <property name="spacing">6</property>
+                                                        <property name="halign">start</property>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">+</property>
+                                                                <style><class name="pill-icon" /></style>
+                                                            </object>
+                                                        </child>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Czytanie 30 min</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkToggleButton">
+                                                <property name="visible">True</property>
+                                                <style><class name="form-pill" /></style>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">horizontal</property>
+                                                        <property name="spacing">6</property>
+                                                        <property name="halign">start</property>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">+</property>
+                                                                <style><class name="pill-icon" /></style>
+                                                            </object>
+                                                        </child>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Brak cukru</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkToggleButton">
+                                                <property name="visible">True</property>
+                                                <style><class name="form-pill" /></style>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">horizontal</property>
+                                                        <property name="spacing">6</property>
+                                                        <property name="halign">start</property>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">+</property>
+                                                                <style><class name="pill-icon" /></style>
+                                                            </object>
+                                                        </child>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Brak fastfoodów</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
 
+                                <child>
+                                    <object class="GtkSeparator">
+                                        <property name="visible">True</property>
+                                        <property name="margin-top">10</property>
+                                        <property name="margin-bottom">10</property>
                                     </object>
                                 </child>
 
@@ -1550,189 +1099,41 @@
                                     <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="orientation">vertical</property>
-                                        <property name="spacing">15</property>
-                                        <property name="halign">center</property>
-                                        <property name="width-request">620</property>
-                                        <style>
-                                            <class name="form-card" />
-                                            <class name="form-card-bottom" />
-                                        </style>
-
+                                        <property name="spacing">5</property>
+                                        <child>
+                                            <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="label">Dodaj własny nawyk</property>
+                                                <property name="halign">start</property>
+                                                <style><class name="form-sublabel" /></style>
+                                            </object>
+                                        </child>
                                         <child>
                                             <object class="GtkBox">
                                                 <property name="visible">True</property>
                                                 <property name="orientation">horizontal</property>
-                                                <property name="spacing">15</property>
+                                                <property name="spacing">10</property>
                                                 <child>
-                                                    <object class="GtkImage" id="icon_apple">
+                                                    <object class="GtkEntry">
                                                         <property name="visible">True</property>
+                                                        <property name="hexpand">True</property>
+                                                        <property
+                              name="placeholder-text"
+                            >np. odłożenie telefonu...</property>
+                                                        <style><class name="form-input" /></style>
                                                     </object>
                                                 </child>
                                                 <child>
-                                                    <object class="GtkBox">
+                                                    <object class="GtkButton">
                                                         <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">2</property>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Dieta</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form-text" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property
-                                  name="label"
-                                >Określ swoje cele żywieniowe</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form-sublabel" /></style>
-                                                            </object>
-                                                        </child>
+                                                        <property name="label">+ Dodaj</property>
+                                                        <style><class name="add-button" /></style>
                                                     </object>
                                                 </child>
                                             </object>
                                         </child>
-
-                                        <child>
-                                            <object class="GtkBox">
-                                                <property name="visible">True</property>
-                                                <property name="orientation">horizontal</property>
-                                                <property name="spacing">20</property>
-                                                <property name="homogeneous">True</property>
-                                                
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Kalorie (kcal)</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form_label" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkEntry" id="entry_kcal">
-                                                                <property name="visible">True</property>
-                                                                <property name="placeholder-text">2400</property>
-                                                                <style><class name="form-input" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel" id="error_kcal">
-                                                                <property name="visible">False</property>
-                                                                <property name="label" />
-                                                                <style>
-                                                                    <class name="error-text" />
-                                                                </style>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Białko (g)</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form_label" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkEntry" id="entry_protein">
-                                                                <property name="visible">True</property>
-                                                                <property name="placeholder-text">160</property>
-                                                                <style><class name="form-input" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel" id="error_protein">
-                                                                <property name="visible">False</property>
-                                                                <property name="label" />
-                                                                <style>
-                                                                    <class name="error-text" />
-                                                                </style>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Tłuszcze (g)</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form_label" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkEntry" id="entry_fat">
-                                                                <property name="visible">True</property>
-                                                                <property name="placeholder-text">60</property>
-                                                                <style><class name="form-input" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel" id="error_fat">
-                                                                <property name="visible">False</property>
-                                                                <property name="label" />
-                                                                <style>
-                                                                    <class name="error-text" />
-                                                                </style>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-                                                <child>
-                                                    <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <property name="spacing">5</property>
-                                                        <child>
-                                                            <object class="GtkLabel">
-                                                                <property name="visible">True</property>
-                                                                <property name="label">Węglowodany (g)</property>
-                                                                <property name="halign">start</property>
-                                                                <style><class name="form_label" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkEntry" id="entry_carbs">
-                                                                <property name="visible">True</property>
-                                                                <property name="placeholder-text">280</property>
-                                                                <style><class name="form-input" /></style>
-                                                            </object>
-                                                        </child>
-                                                        <child>
-                                                            <object class="GtkLabel" id="error_carbs">
-                                                                <property name="visible">False</property>
-                                                                <property name="label" />
-                                                                <style>
-                                                                    <class name="error-text" />
-                                                                </style>
-                                                            </object>
-                                                        </child>
-                                                    </object>
-                                                </child>
-                                            </object>
-                                        </child>
-
                                     </object>
                                 </child>
-
                             </object>
                         </child>
 

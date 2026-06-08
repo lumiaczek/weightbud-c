@@ -281,8 +281,6 @@ void show_dashboard_window(GtkApplication *app) {
     setup_nav_button(builder, stack, "btn_nav_nawyki", "page_nawyki", "icon_nav_nawyki", "assets/icons/dashboard/activity.svg");
     setup_nav_button(builder, stack, "btn_nav_trening", "page_trening", "icon_nav_trening", "assets/icons/dashboard/dumbbell.svg");
     setup_nav_button(builder, stack, "btn_nav_waga", "page_waga", "icon_nav_waga", "assets/icons/dashboard/weight.svg");
-    setup_nav_button(builder, stack, "btn_nav_dieta", "page_dieta", "icon_nav_dieta", "assets/icons/dashboard/apple.svg");
-    setup_nav_button(builder, stack, "btn_nav_suple", "page_suple", "icon_nav_suple", "assets/icons/dashboard/pill.svg");
     setup_nav_button(builder, stack, "btn_nav_narzedzia", "page_narzedzia", "icon_nav_narzedzia", "assets/icons/dashboard/wrench.svg");
 
     load_svg_icon(builder, "icon_toggle", "assets/icons/sidebar.svg", 24);

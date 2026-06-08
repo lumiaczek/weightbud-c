@@ -99,11 +99,6 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     ob_widgets->entry_target_muscle = GTK_WIDGET(gtk_builder_get_object(builder, "entry_target_muscle"));
     ob_widgets->entry_target_fat = GTK_WIDGET(gtk_builder_get_object(builder, "entry_target_fat"));
 
-    ob_widgets->entry_kcal = GTK_WIDGET(gtk_builder_get_object(builder, "entry_kcal"));
-    ob_widgets->entry_protein = GTK_WIDGET(gtk_builder_get_object(builder, "entry_protein"));
-    ob_widgets->entry_fat = GTK_WIDGET(gtk_builder_get_object(builder, "entry_fat"));
-    ob_widgets->entry_carbs = GTK_WIDGET(gtk_builder_get_object(builder, "entry_carbs"));
-
     ob_widgets->radio_male = GTK_WIDGET(gtk_builder_get_object(builder, "radio_male"));
     ob_widgets->radio_female = GTK_WIDGET(gtk_builder_get_object(builder, "radio_female"));
 
@@ -116,11 +111,6 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
     ob_widgets->error_target_weight = GTK_WIDGET(gtk_builder_get_object(builder, "error_target_weight"));
     ob_widgets->error_target_muscle = GTK_WIDGET(gtk_builder_get_object(builder, "error_target_muscle"));
     ob_widgets->error_target_fat = GTK_WIDGET(gtk_builder_get_object(builder, "error_target_fat"));
-
-    ob_widgets->error_kcal = GTK_WIDGET(gtk_builder_get_object(builder, "error_kcal"));
-    ob_widgets->error_protein = GTK_WIDGET(gtk_builder_get_object(builder, "error_protein"));
-    ob_widgets->error_fat = GTK_WIDGET(gtk_builder_get_object(builder, "error_fat"));
-    ob_widgets->error_carbs = GTK_WIDGET(gtk_builder_get_object(builder, "error_carbs"));
 
     GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_start"));
     g_signal_connect(btn_start, "clicked", G_CALLBACK(change_view_on_click), stack);

@@ -5,7 +5,7 @@
  * @version 0.1
  * @date 2026-04-14
  * Plik zawiera deklaracje wszystkich struktur potrzebnych do przechowywania danych:
- * Habit Tracker, Workout Tracker, Diet Tracker oraz konfigurację użytkownika.
+ * Habit Tracker, Workout Tracker oraz konfigurację użytkownika.
  *
  * @copyright Copyright (c) 2026
  *
@@ -17,7 +17,6 @@
 #include <stdbool.h>
 
 #define MAX_HABITS 10
-#define MAX_SUPPLEMENTS 10
 #define MAX_WORKOUTS_PER_DAY 3
 #define MAX_MEALS 10
 
@@ -53,49 +52,22 @@ typedef struct {
 
 typedef struct {
     char name[32];
-    bool taken_morning;
-    bool taken_evening;
-} Supplement;
-
-typedef struct {
-    char name[32];
     int kcal;
     int protein;
     int fat;
     int carbs;
 } Meal;
-// redundanty typ który  nic nie wnosi
-// informacje o goal pobieramy od uzytkownika, a meal istnieje jako typ, wystarczy porownac go z danymi od uzytkownika
-// typedef struct {
-//     Meal meals[MAX_MEALS];
-//     int meals_count;
-//     int goal_kcal;
-//     int goal_protein;
-//     int goal_fat;
-//     int goal_carbs;
-// } Diet;
-
-typedef struct {
-    int goal_kcal;
-    int goal_protein;
-    int goal_fat;
-    int goal_carbs;
-} Diet;
 
 typedef struct {
     int date;
-    int meal_count; // tutaj lepiej 
+    int meal_count; // tutaj lepiej
     int workout_count;
     int habit_count;
-    int supplement_count;
     Workout workouts[MAX_WORKOUTS_PER_DAY];
     Meal meals[MAX_MEALS];
     Habit habits[MAX_HABITS];
-    Supplement supplementation[MAX_SUPPLEMENTS];
 
     BodyMeasurement body_measure;
-    Diet diet; //jako referencja do wartości "zjedzonej"
-
 } DailyRecord;
 
 typedef struct {
@@ -114,30 +86,20 @@ typedef struct {
 
     char habit_names[MAX_HABITS][32];
     int habit_count;
-
-    char supplement_names[MAX_SUPPLEMENTS][32];
-    int supplement_count;
-
-    
-
 } UserSettings;
 
-
-void setup_diet(Diet *diet, int _goal_kcal, int _goal_protein,int  _goal_fat, int _goal_carbs);
 void init_daily_record(DailyRecord *record, int target_date, const UserSettings *config);
 
 void setup_user_settings(UserSettings *config, const char *_username,
                          int _age,
                          float _starting_weight,
                          int _height,
-                         float _starting_bf, 
-                         float _starting_mm, 
+                         float _starting_bf,
+                         float _starting_mm,
                          float _goal_weight,
                          float _goal_bf,
                          float _goal_mm,
                          char _habit_names[MAX_HABITS][32],
-                         int _habit_count,
-                         char _supplement_names[MAX_SUPPLEMENTS][32],
-                         int _supplement_count);
+                         int _habit_count);
 
 #endif

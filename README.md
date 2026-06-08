@@ -13,13 +13,7 @@ Zapisywanie danych o treningach. Obecnie obsługiwane typy aktywności to **tria
 ### ⚖️ Body Tracker
 Śledzenie pomiarów ciała (waga, obwody, BF%, MM%) i wizualizacja postępów w dążeniu do zamierzonego celu sylwetkowego.
 
-### 💊 Supplement Tracker
-Monitorowanie dziennego przyjmowania suplementów (maksymalnie **10** preparatów) z podziałem na odpowiednie pory dnia (np. rano/wieczór).
-
-### 🥗 Diet Tracker
-Śledzenie spożywanych posiłków. Moduł na bieżąco oblicza przyjęte **kilokalorie oraz makroskładniki** (białko, tłuszcze, węglowodany) i porównuje je z wybranym celem dziennym.
-
-### 🛠️ Tools
+### ️ Tools
 Zestaw wbudowanych narzędzi ułatwiających planowanie treningów i analizę postępów (m.in. kalkulator **1RM** - ciężaru maksymalnego, kalkulator **stref tętna** itp.).
 
 ---
