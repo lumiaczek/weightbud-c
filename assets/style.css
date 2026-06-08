@@ -4,7 +4,6 @@
 @define-color text_dark #3C3C3C;
 @define-color form_fill #FDFDFD;
 
-/* Kolory narzędzi */
 @define-color tool_green #BDE4A8;
 @define-color tool_red #FB3640;
 @define-color tool_blue #35A7FF;
@@ -122,9 +121,7 @@
 
 border-color: @tool_red;
 box-shadow: 0 0 0 1px rgba(230, 57, 70, 0.25);
-
 }
-
 
 .label.error-text {
 color: @tool_red;
@@ -283,9 +280,58 @@ button, radiobutton {
     background-color: #f2f2f2;
 }
 
-/* ========================================== */
-/* STYLE DLA NARZĘDZI (DASHBOARD)             */
-/* ========================================== */
+.dash-widget-orange {
+    background-color: alpha(@tool_orange, 0.15);
+    border: 1px solid alpha(@tool_orange, 0.4);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.dash-widget-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8A8A8A;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+}
+
+.dash-widget-value {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: @tool_orange;
+}
+
+.dash-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    border-top: none; 
+}
+
+.dash-card.border-blue { border-top: 4px solid @tool_blue; }
+.dash-card.border-red { border-top: 4px solid @tool_red; }
+.dash-card.border-green { border-top: 4px solid @tool_green; }
+.dash-card.border-orange { border-top: 4px solid @tool_orange; }
+
+.dash-card-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8A8A8A;
+}
+
+.dash-card-value {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: @text_dark;
+    margin-top: 12px;
+}
+
 
 .tool-header-wrap {
     background-color: alpha(@accent, 0.2);

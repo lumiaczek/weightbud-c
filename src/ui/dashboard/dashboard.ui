@@ -166,11 +166,305 @@
                 
                 <child>
                   <object class="GtkBox" id="page_dashboard">
+                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child><object class="GtkLabel"><property name="label">Treść: Dashboard</property><style><class
-                            name="title-label"
-                          /></style></object></child>
+                    <property name="valign">start</property>
+                    <property name="spacing">30</property>
+                    <property name="margin-top">10</property>
+                    
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">20</property>
+                        <property name="homogeneous">True</property>
+                        
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">15</property>
+                            <style><class name="dash-widget-orange" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <style><class name="icon-wrap-orange" /></style>
+                                <child>
+                                  <object class="GtkImage" id="icon_dash_calendar">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">AKCJA</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">Rozpocznij dzień</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-value" /></style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">15</property>
+                            <style><class name="dash-widget-orange" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <style><class name="icon-wrap-orange" /></style>
+                                <child>
+                                  <object class="GtkImage" id="icon_dash_weight">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">WAGA POCZĄTKOWA</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">97.7 kg</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-value" /></style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">15</property>
+                            <style><class name="dash-widget-orange" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <style><class name="icon-wrap-orange" /></style>
+                                <child>
+                                  <object class="GtkImage" id="icon_dash_muscle">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">vertical</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">OBECNE BF | MM</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">--- % | --- %</property>
+                                    <property name="halign">start</property>
+                                    <style><class name="dash-widget-value" /></style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">20</property>
+                        <property name="homogeneous">True</property>
+                        
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <style><class name="dash-card" /><class name="border-blue" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">Waga aktualna</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <style><class name="dash-card-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="icon_stat_trend_blue">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">89.32 kg</property>
+                                <property name="halign">start</property>
+                                <style><class name="dash-card-value" /></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <style><class name="dash-card" /><class name="border-red" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">Nawyki dzisiaj</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <style><class name="dash-card-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="icon_stat_check_red">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">3 / 9</property>
+                                <property name="halign">start</property>
+                                <style><class name="dash-card-value" /></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <style><class name="dash-card" /><class name="border-green" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">Suplementy dzisiaj</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <style><class name="dash-card-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="icon_stat_pill_green">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">2 / 5</property>
+                                <property name="halign">start</property>
+                                <style><class name="dash-card-value" /></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <style><class name="dash-card" /><class name="border-orange" /></style>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="label">Kalorie dziś</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <style><class name="dash-card-label" /></style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="icon_stat_fire_orange">
+                                    <property name="visible">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">1450 kcal</property>
+                                <property name="halign">start</property>
+                                <style><class name="dash-card-value" /></style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
                   </object>
                   <packing><property name="name">page_dashboard</property></packing>
                 </child>
@@ -355,14 +649,6 @@
                                   </object>
                                 </child>
 
-                                <child>
-                                  <object class="GtkButton" id="btn_calc_1rm">
-                                    <property name="visible">True</property>
-                                    <property name="label">Oblicz</property>
-                                    <property name="halign">center</property>
-                                    <style><class name="add-button" /></style>
-                                  </object>
-                                </child>
 
                                 <child>
                                   <object class="GtkBox">
@@ -481,14 +767,7 @@
                                   </object>
                                 </child>
 
-                                <child>
-                                  <object class="GtkButton" id="btn_calc_hr">
-                                    <property name="visible">True</property>
-                                    <property name="label">Oblicz</property>
-                                    <property name="halign">center</property>
-                                    <style><class name="add-button" /></style>
-                                  </object>
-                                </child>
+
 
                                 <child>
                                   <object class="GtkBox">
@@ -702,14 +981,6 @@
                                   </object>
                                 </child>
 
-                                <child>
-                                  <object class="GtkButton" id="btn_calc_pace">
-                                    <property name="visible">True</property>
-                                    <property name="label">Oblicz</property>
-                                    <property name="halign">center</property>
-                                    <style><class name="add-button" /></style>
-                                  </object>
-                                </child>
 
                                 <child>
                                   <object class="GtkBox">
@@ -839,14 +1110,7 @@
                                   </object>
                                 </child>
 
-                                <child>
-                                  <object class="GtkButton" id="btn_calc_bmi">
-                                    <property name="visible">True</property>
-                                    <property name="label">Oblicz</property>
-                                    <property name="halign">center</property>
-                                    <style><class name="add-button" /></style>
-                                  </object>
-                                </child>
+
 
                                 <child>
                                   <object class="GtkBox">
