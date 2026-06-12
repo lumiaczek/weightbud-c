@@ -1,5 +1,7 @@
 #include "ui/dashboard/dashboard.h"
 #include "ui/form/form.h"
+#include <data_managment.h>
+#include <db.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
@@ -28,6 +30,27 @@ typedef struct {
     GtkLabel *lbl_hr_z4;
     GtkLabel *lbl_hr_z5;
 } ToolWidgets;
+
+typedef struct {
+    AppState *state;
+    GtkBuilder *builder;
+} DashboardContext;
+
+static int get_today_date() {
+    GDateTime *now = g_date_time_new_now_local();
+    int date = g_date_time_get_year(now) * 10000 + g_date_time_get_month(now) * 100 + g_date_time_get_day_of_month(now);
+    g_date_time_unref(now);
+    return date;
+}
+
+static void get_today_date_string(char *buffer, size_t size) {
+    GDateTime *now = g_date_time_new_now_local();
+    g_snprintf(buffer, size, "%02d.%02d.%04d",
+               g_date_time_get_day_of_month(now),
+               g_date_time_get_month(now),
+               g_date_time_get_year(now));
+    g_date_time_unref(now);
+}
 
 static gboolean enforce_numeric_input(GtkEditable *editable, const gchar *new_text, gint new_text_length, gint *position, gpointer user_data) {
     for (int i = 0; i < new_text_length; i++) {
@@ -272,13 +295,131 @@ static void setup_nav_button(GtkBuilder *builder, GtkStack *stack, const char *b
     }
 }
 
-void show_dashboard_window(GtkApplication *app) {
+static void refresh_dashboard_stats(DashboardContext *ctx) {
+    char buffer[64];
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    double start_w = 0, curr_w = 0, curr_bf = -1, curr_mm = -1, vo2max = 0;
+    int workouts_week = 0;
+
+    if (db_get_dashboard_data(ctx->state->db, username, &start_w, &curr_w, &curr_bf, &curr_mm, &vo2max, &workouts_week)) {
+
+        g_snprintf(buffer, sizeof(buffer), "%.1f kg", start_w);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_dash_start_weight")), buffer);
+
+        g_snprintf(buffer, sizeof(buffer), "%.2f kg", curr_w);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_stat_weight")), buffer);
+
+        if (curr_bf >= 0 && curr_mm >= 0)
+            g_snprintf(buffer, sizeof(buffer), "%.1f %% | %.1f %%", curr_bf, curr_mm);
+        else
+            g_snprintf(buffer, sizeof(buffer), "--- %% | --- %%");
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_dash_bf_mm")), buffer);
+
+        g_snprintf(buffer, sizeof(buffer), "%d / 5", workouts_week);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_stat_workouts")), buffer);
+
+        if (vo2max > 0)
+            g_snprintf(buffer, sizeof(buffer), "%.1f ml/kg/min", vo2max);
+        else
+            g_snprintf(buffer, sizeof(buffer), "Brak danych");
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_stat_vo2max")), buffer);
+    }
+
+    DailyRecord *record = g_hash_table_lookup(ctx->state->memory_collection, "current_daily_record");
+    GtkWidget *btn_dash_start = GTK_WIDGET(gtk_builder_get_object(ctx->builder, "btn_dash_start_day"));
+    GtkWidget *row_today = GTK_WIDGET(gtk_builder_get_object(ctx->builder, "row_today_habits"));
+
+    if (record) {
+        int habits_done = 0;
+        for (int i = 0; i < record->habit_count; i++) {
+            if (record->habits[i].completed)
+                habits_done++;
+        }
+        g_snprintf(buffer, sizeof(buffer), "%d / %d", habits_done, record->habit_count);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_stat_habits")), buffer);
+
+        char date_str[32];
+        get_today_date_string(date_str, sizeof(date_str));
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_dash_action_val")), date_str);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_habit_status_title")), "Nawyki · dzień w toku");
+
+        if (row_today) {
+            char final_str[64];
+            g_snprintf(final_str, sizeof(final_str), "📄 %s (Dziś)", date_str);
+            set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_today_row_date")), final_str);
+            gtk_widget_show(row_today);
+        }
+
+        if (btn_dash_start)
+            gtk_widget_set_sensitive(btn_dash_start, FALSE);
+
+    } else {
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_stat_habits")), "0 / 0");
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_dash_action_val")), "Rozpocznij dzień");
+        set_label_text(GTK_LABEL(gtk_builder_get_object(ctx->builder, "lbl_habit_status_title")), "Nawyki · dzień nierozpoczęty");
+
+        if (row_today)
+            gtk_widget_hide(row_today);
+
+        if (btn_dash_start)
+            gtk_widget_set_sensitive(btn_dash_start, TRUE);
+    }
+}
+
+static void on_start_day_clicked(GtkButton *btn, gpointer user_data) {
+    DashboardContext *ctx = (DashboardContext *)user_data;
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+
+    UserSettings *user = g_hash_table_lookup(ctx->state->memory_collection, "user_settings");
+    if (!user) {
+        user = g_new0(UserSettings, 1);
+        db_load_user_settings(ctx->state->db, username, user);
+        ram_store_save("user_settings", user, ctx->state);
+    }
+
+    int today = get_today_date();
+    DailyRecord *record = g_new0(DailyRecord, 1);
+
+    init_daily_record(record, today, user);
+    ram_store_save("current_daily_record", record, ctx->state);
+
+    db_mark_day_started(ctx->state->db, username, today);
+
+    char date_str[32];
+    get_today_date_string(date_str, sizeof(date_str));
+    g_print("\n========================================\n");
+    g_print("[Dashboard] Prawidłowo rozpoczęto dzień!\n");
+    g_print("Data: %s\n", date_str);
+    g_print("Użytkownik: %s\n", user->user_name);
+    g_print("========================================\n\n");
+
+    gtk_widget_set_sensitive(GTK_WIDGET(btn), FALSE);
+    refresh_dashboard_stats(ctx);
+}
+
+void show_dashboard_window(GtkApplication *app, AppState *state) {
     GtkBuilder *builder = gtk_builder_new_from_file("dashboard.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_window"));
+
+    DashboardContext *ctx = g_new0(DashboardContext, 1);
+    ctx->state = state;
+    ctx->builder = builder;
+    g_object_set_data_full(G_OBJECT(window), "dashboard-context", ctx, g_free);
 
     gtk_application_add_window(app, GTK_WINDOW(window));
 
     GtkStack *stack = GTK_STACK(gtk_builder_get_object(builder, "dashboard_stack"));
+
+    GtkWidget *btn_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_dash_start_day"));
+    if (btn_start)
+        g_signal_connect(btn_start, "clicked", G_CALLBACK(on_start_day_clicked), ctx);
+
+    GtkWidget *btn_habit_start = GTK_WIDGET(gtk_builder_get_object(builder, "btn_habit_start_day"));
+    if (btn_habit_start)
+        g_signal_connect(btn_habit_start, "clicked", G_CALLBACK(on_start_day_clicked), ctx);
 
     setup_nav_button(builder, stack, "btn_nav_dashboard", "page_dashboard", "icon_nav_dashboard", "assets/icons/dashboard/home.svg");
     setup_nav_button(builder, stack, "btn_nav_nawyki", "page_nawyki", "icon_nav_nawyki", "assets/icons/dashboard/activity.svg");
@@ -297,15 +438,41 @@ void show_dashboard_window(GtkApplication *app) {
     load_svg_icon(builder, "icon_tool_bmi", "assets/icons/tools/weight.svg", 20);
 
     load_svg_icon(builder, "icon_dash_calendar", "assets/icons/dashboard/calendar.svg", 20);
-    load_svg_icon(builder, "icon_dash_weight", "assets/icons/dashboard/weight.svg", 20);
+    load_svg_icon(builder, "icon_dash_weight", "assets/icons/dashboard/weight_card.svg", 20);
     load_svg_icon(builder, "icon_dash_muscle", "assets/icons/dashboard/muscle.svg", 20);
     load_svg_icon(builder, "icon_stat_trend_blue", "assets/icons/dashboard/trend.svg", 16);
     load_svg_icon(builder, "icon_stat_check_red", "assets/icons/dashboard/check.svg", 16);
-    load_svg_icon(builder, "icon_stat_pill_green", "assets/icons/dashboard/pill.svg", 16);
-    load_svg_icon(builder, "icon_stat_fire_orange", "assets/icons/dashboard/fire.svg", 16);
+    load_svg_icon(builder, "icon_stat_dumbbell_green", "assets/icons/dashboard/sport-shoe.svg", 16);
+    load_svg_icon(builder, "icon_stat_pulse_orange", "assets/icons/dashboard/gauge.svg", 16);
+
+    load_svg_icon(builder, "icon_header_habits", "assets/icons/activity_n.svg", 28);
 
     connect_tool_callbacks(builder, window);
 
-    g_object_unref(builder);
+    const char *current_user = (const char *)g_hash_table_lookup(state->memory_collection, "current_user");
+
+    if (current_user) {
+        char buffer[64];
+        g_snprintf(buffer, sizeof(buffer), "Witaj, %s!", current_user);
+        set_label_text(GTK_LABEL(gtk_builder_get_object(builder, "dashboard_user_name")), buffer);
+
+        int today = get_today_date();
+        if (db_is_day_started(state->db, current_user, today)) {
+            g_print("[Dashboard] Wykryto już rozpoczęty dzień w bazie (Log_Date: %d).\n", today);
+
+            DailyRecord *record = g_new0(DailyRecord, 1);
+            UserSettings *user = g_hash_table_lookup(state->memory_collection, "user_settings");
+            if (!user) {
+                user = g_new0(UserSettings, 1);
+                db_load_user_settings(state->db, current_user, user);
+                ram_store_save("user_settings", user, state);
+            }
+            init_daily_record(record, today, user);
+            ram_store_save("current_daily_record", record, state);
+        }
+    }
+
+    refresh_dashboard_stats(ctx);
+
     gtk_widget_show_all(window);
 }

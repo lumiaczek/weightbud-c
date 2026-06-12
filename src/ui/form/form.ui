@@ -4,7 +4,7 @@
 
     <object class="GtkApplicationWindow" id="main_window">
         <property name="title">WeightBud</property>
-        <property name="default-width">1400</property>
+        <property name="default-width">1500</property>
         <property name="default-height">950</property>
         <property name="resizable">False</property>
         <style>
@@ -126,6 +126,35 @@
                                                             <object class="GtkLabel">
                                                                 <property name="visible">True</property>
                                                                 <property name="label">Waga</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
+
+                                        <child>
+                                            <object class="GtkFrame" id="card_nawyki">
+                                                <property name="visible">True</property>
+                                                <property name="width-request">200</property>
+                                                <property name="height-request">220</property>
+                                                <style>
+                                                    <class name="module-card" />
+                                                </style>
+                                                <child>
+                                                    <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="halign">center</property>
+                                                        <property name="valign">center</property>
+                                                        <property name="spacing">20</property>
+                                                        <child>
+                                                            <object class="GtkImage" id="icon_nawyki" />
+                                                        </child>
+                                                        <child>
+                                                            <object class="GtkLabel">
+                                                                <property name="visible">True</property>
+                                                                <property name="label">Nawyki</property>
                                                             </object>
                                                         </child>
                                                     </object>

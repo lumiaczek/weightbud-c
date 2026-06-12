@@ -117,15 +117,17 @@ void on_login_button_clicked(GtkButton *button, gpointer user_data) {
     }
     const char *name = db_get_user_name(state->db, entry_login);
     if (name) {
-        printf("pomyslnie zalogowano uzytkownika: %s\n", name);
+        printf("Pomyslnie zalogowano uzytkownika: %s\n", name);
+        ram_store_save("current_user", g_strdup(name), state);
         g_free((gpointer)name);
     } else {
         set_error_state(widgets->user_login, widgets->error_login, "Uzytkownik nie istnieje");
+        return;
     }
     GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(button));
     if (GTK_IS_WINDOW(window)) {
         GtkApplication *app = gtk_window_get_application(GTK_WINDOW(window));
-        show_dashboard_window(app);
+        show_dashboard_window(app, state);
         gtk_widget_destroy(window);
     }
 }
@@ -175,25 +177,12 @@ void on_finish_button_clicked(GtkButton *button, gpointer user_data) {
     } else {
         g_printerr("[Events] Błąd: nie udało się zapisać do bazy danyc \n");
     }
-    g_print("\n========================================\n");
-    g_print("   PODSUMOWANIE ZAPISANEGO PROFILU\n");
-    g_print("========================================\n");
-    g_print("DANE PODSTAWOWE:\n");
-    g_print("  Imię:           %s\n", new_user->user_name);
-    g_print("  Wiek:           %d\n", new_user->age);
-    g_print("  Waga (start):   %.1f kg\n", new_user->starting_weight);
-    g_print("  Wzrost:         %d cm\n", new_user->height);
-    g_print("----------------------------------------\n");
-    g_print("CELE WAGOWE/SYLWETKOWE:\n");
-    g_print("  Docelowa waga:  %.1f kg\n", new_user->goal_weight);
-    g_print("  Docelowa MM:    %.1f %%\n", new_user->goal_mm);
-    g_print("  Docelowa BF:    %.1f %%\n", new_user->goal_bf);
-    g_print("========================================\n\n");
+    ram_store_save("current_user", g_strdup(new_user->user_name), state);
 
     GtkWidget *window = gtk_widget_get_toplevel(GTK_WIDGET(button));
     if (GTK_IS_WINDOW(window)) {
         GtkApplication *app = gtk_window_get_application(GTK_WINDOW(window));
-        show_dashboard_window(app);
+        show_dashboard_window(app, state);
         gtk_widget_destroy(window);
     }
 }

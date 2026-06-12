@@ -55,7 +55,7 @@ void enforce_numeric_input(GtkEditable *editable, const gchar *new_text, gint ne
 static void close_form_and_open_dashboard(GtkButton *btn, gpointer user_data) {
     GtkWidget *window = GTK_WIDGET(user_data);
     GtkApplication *app = gtk_window_get_application(GTK_WINDOW(window));
-    show_dashboard_window(app);
+    show_dashboard_window(app, NULL);
     gtk_widget_destroy(window);
 }
 
@@ -134,6 +134,7 @@ void on_app_activate(GtkApplication *app, gpointer user_data) {
 
     load_svg_icon(builder, "icon_treningi", "assets/icons/dumbbell.svg", 64);
     load_svg_icon(builder, "icon_waga", "assets/icons/biceps.svg", 64);
+    load_svg_icon(builder, "icon_nawyki", "assets/icons/activity_g.svg", 64);
     load_svg_icon(builder, "icon_suple", "assets/icons/pill.svg", 64);
     load_svg_icon(builder, "icon_user", "assets/icons/user.svg", 34);
     load_svg_icon(builder, "icon_target", "assets/icons/target.svg", 34);

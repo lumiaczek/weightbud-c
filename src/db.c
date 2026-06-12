@@ -82,6 +82,8 @@ gboolean db_init(AppState *state) {
     db_create_table(state, SQL_USER_GOAL);
     db_create_table(state, SQL_USER_HABIT);
     db_create_table(state, SQL_DAILY_HABITS);
+    db_create_table(state, SQL_DAILY_MEASUREMENTS);
+    db_create_table(state, SQL_WORKOUTS);
 
     return TRUE;
 }
@@ -101,14 +103,13 @@ gboolean db_execute_query(sqlite3 *db, const char *sql, const char *format, ...)
         int bind_idx = i + 1;
 
         switch (format[i]) {
-        case 'i': // Integer
+        case 'i':
             sqlite3_bind_int(stmt, bind_idx, va_arg(args, int));
             break;
-        case 'd': // Double
+        case 'd':
             sqlite3_bind_double(stmt, bind_idx, va_arg(args, double));
             break;
-        case 's': // String (Text)
-            // Using SQLITE_TRANSIENT is safer for strings in case they are freed immediately after
+        case 's':
             sqlite3_bind_text(stmt, bind_idx, va_arg(args, const char *), -1, SQLITE_TRANSIENT);
             break;
         default:
@@ -135,7 +136,6 @@ gboolean sync_user_settings_to_db(AppState *state) {
     if (!user)
         return FALSE;
 
-    // 1. Sync Base User
     const char *sql_user =
         "INSERT INTO user_initial (user_name, age, height, starting_weight, starting_mm) "
         "VALUES (?, ?, ?, ?, ?) "
@@ -148,7 +148,7 @@ gboolean sync_user_settings_to_db(AppState *state) {
     if (!db_execute_query(state->db, sql_user, "siidd",
                           user->user_name, user->age, user->height,
                           (double)user->starting_weight, (double)user->starting_mm)) {
-        return FALSE; // Fail early if the main user insert fails
+        return FALSE;
     }
     int current_user_id = db_get_user_id(state->db, user->user_name);
     if (current_user_id == -1) {
@@ -156,7 +156,6 @@ gboolean sync_user_settings_to_db(AppState *state) {
         return FALSE;
     }
 
-    // 2. Sync Goals
     const char *sql_goal =
         "INSERT INTO user_goal (user_id, goal_weight, goal_bf, goal_mm) "
         "VALUES (?, ?, ?, ?) "
@@ -173,4 +172,123 @@ gboolean sync_user_settings_to_db(AppState *state) {
 
     g_print("[DB] All user settings synced successfully!\n");
     return TRUE;
+}
+
+gboolean db_load_user_settings(sqlite3 *db, const char *username, UserSettings *config) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    memset(config, 0, sizeof(UserSettings));
+    strncpy(config->user_name, username, 31);
+
+    const char *sql_user = "SELECT age, height, starting_weight, starting_mm FROM user_initial WHERE id = ?;";
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, sql_user, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            config->age = sqlite3_column_int(stmt, 0);
+            config->height = sqlite3_column_int(stmt, 1);
+            config->starting_weight = sqlite3_column_double(stmt, 2);
+            config->starting_mm = sqlite3_column_double(stmt, 3);
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    const char *sql_habits = "SELECT name FROM user_habits WHERE user_id = ? LIMIT 10;";
+    if (sqlite3_prepare_v2(db, sql_habits, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        int i = 0;
+        while (sqlite3_step(stmt) == SQLITE_ROW && i < MAX_HABITS) {
+            const unsigned char *h_name = sqlite3_column_text(stmt, 0);
+            if (h_name)
+                strncpy(config->habit_names[i], (const char *)h_name, 31);
+            i++;
+        }
+        config->habit_count = i;
+        sqlite3_finalize(stmt);
+    }
+    return TRUE;
+}
+
+gboolean db_get_dashboard_data(sqlite3 *db, const char *username, double *start_w, double *curr_w, double *curr_bf, double *curr_mm, double *vo2max, int *workouts_week) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    *start_w = 0.0;
+    *curr_w = 0.0;
+    *curr_bf = -1.0;
+    *curr_mm = -1.0;
+    *vo2max = 0.0;
+    *workouts_week = 0;
+
+    const char *sql_initial = "SELECT starting_weight FROM user_initial WHERE id = ?;";
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, sql_initial, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            *start_w = sqlite3_column_double(stmt, 0);
+            *curr_w = *start_w;
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    const char *sql_daily = "SELECT weight, bf, mm, vo2max FROM daily_measurements WHERE user_id = ? ORDER BY log_date DESC LIMIT 1;";
+    if (sqlite3_prepare_v2(db, sql_daily, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            *curr_w = sqlite3_column_double(stmt, 0);
+            *curr_bf = sqlite3_column_double(stmt, 1);
+            *curr_mm = sqlite3_column_double(stmt, 2);
+            *vo2max = sqlite3_column_double(stmt, 3);
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    GDateTime *now = g_date_time_new_now_local();
+    GDateTime *week_ago = g_date_time_add_days(now, -7);
+    int week_ago_int = g_date_time_get_year(week_ago) * 10000 + g_date_time_get_month(week_ago) * 100 + g_date_time_get_day_of_month(week_ago);
+    g_date_time_unref(now);
+    g_date_time_unref(week_ago);
+
+    const char *sql_workouts = "SELECT COUNT(*) FROM workouts WHERE user_id = ? AND log_date >= ?;";
+    if (sqlite3_prepare_v2(db, sql_workouts, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, week_ago_int);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            *workouts_week = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    return TRUE;
+}
+
+gboolean db_is_day_started(sqlite3 *db, const char *username, int date) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    const char *sql = "SELECT COUNT(*) FROM daily_measurements WHERE user_id = ? AND log_date = ?;";
+    sqlite3_stmt *stmt;
+    gboolean started = FALSE;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, date);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            started = (sqlite3_column_int(stmt, 0) > 0);
+        }
+        sqlite3_finalize(stmt);
+    }
+    return started;
+}
+
+gboolean db_mark_day_started(sqlite3 *db, const char *username, int date) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    const char *sql = "INSERT OR IGNORE INTO daily_measurements (user_id, log_date) VALUES (?, ?);";
+    return db_execute_query(db, sql, "ii", user_id, date);
 }
