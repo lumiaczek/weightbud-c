@@ -34,6 +34,12 @@ typedef struct {
 typedef struct {
     AppState *state;
     GtkBuilder *builder;
+    GtkBox *habits_box;
+    GtkBox *weight_box;
+    int loaded_days_habits[30];
+    int loaded_days_weight[30];
+    int habits_count;
+    int weight_count;
 } DashboardContext;
 
 static int get_today_date() {
@@ -400,6 +406,255 @@ static void on_start_day_clicked(GtkButton *btn, gpointer user_data) {
     refresh_dashboard_stats(ctx);
 }
 
+// Konwertuj datę z formatu YYYYMMDD na string "DD.MM.YYYY"
+static void format_date_from_int(int date, char *buffer, size_t size) {
+    int year = date / 10000;
+    int month = (date / 100) % 100;
+    int day = date % 100;
+    g_snprintf(buffer, size, "%02d.%02d.%04d", day, month, year);
+}
+
+// Załaduj i wyświetl poprzednie dni nawyków
+static void load_and_display_previous_days_habits(DashboardContext *ctx) {
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    int dates[30];
+    int count = 0;
+    if (!db_get_recent_days(ctx->state->db, username, 30, dates, &count)) {
+        g_print("[Dashboard] Brak poprzednich dni w bazie\n");
+        return;
+    }
+
+    // Przechowaj załadowane dni
+    ctx->habits_count = count;
+    for (int i = 0; i < count; i++) {
+        ctx->loaded_days_habits[i] = dates[i];
+    }
+
+    // Załaduj i wyświetl dane w UI
+    UserSettings *user = g_hash_table_lookup(ctx->state->memory_collection, "user_settings");
+    if (!user) {
+        user = g_new0(UserSettings, 1);
+        db_load_user_settings(ctx->state->db, username, user);
+        ram_store_save("user_settings", user, ctx->state);
+    }
+
+    // Załaduj ostatni dzień i aktualizuj UI
+    if (count > 0) {
+        int date = dates[0];
+        int today = get_today_date();
+
+        // Jeśli ostatni dzień to nie dzisiaj, wyświetl jego dane
+        if (date != today) {
+            DailyRecord *record = g_new0(DailyRecord, 1);
+            if (db_load_daily_record(ctx->state->db, username, date, record)) {
+                char date_str[32];
+                format_date_from_int(date, date_str, sizeof(date_str));
+
+                // Przygotuj dane do wyświetlenia w UI
+                int habits_done = 0;
+                for (int i = 0; i < record->habit_count; i++) {
+                    if (record->habits[i].completed)
+                        habits_done++;
+                }
+
+                g_print("[Dashboard] Ostatni dzień - %s: %d / %d nawyków\n",
+                        date_str, habits_done, record->habit_count);
+            }
+            g_free(record);
+        }
+    }
+
+    g_print("[Dashboard] Załadowano %d poprzednich dni (nawyki)\n", count);
+}
+
+// Załaduj i wyświetl poprzednie dni wagi
+static void load_and_display_previous_days_weight(DashboardContext *ctx) {
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    int dates[30];
+    int count = 0;
+    if (!db_get_recent_days(ctx->state->db, username, 30, dates, &count)) {
+        g_print("[Dashboard] Brak poprzednich dni w bazie\n");
+        return;
+    }
+
+    // Przechowaj załadowane dni
+    ctx->weight_count = count;
+    for (int i = 0; i < count; i++) {
+        ctx->loaded_days_weight[i] = dates[i];
+    }
+
+    // Załaduj ostatni dzień i wyświetl dane
+    if (count > 0) {
+        int date = dates[0];
+        int today = get_today_date();
+
+        // Jeśli ostatni dzień to nie dzisiaj, wyświetl jego dane
+        if (date != today) {
+            DailyRecord *record = g_new0(DailyRecord, 1);
+            if (db_load_daily_record(ctx->state->db, username, date, record)) {
+                char date_str[32];
+                format_date_from_int(date, date_str, sizeof(date_str));
+
+                if (record->body_measure.weight > 0) {
+                    g_print("[Dashboard] Ostatni dzień - %s: Waga: %.1f kg, BF: %.1f%%, MM: %.1f%%\n",
+                            date_str, record->body_measure.weight,
+                            record->body_measure.bodyfat_pct,
+                            record->body_measure.musclemass_pct);
+                }
+            }
+            g_free(record);
+        }
+    }
+
+    g_print("[Dashboard] Załadowano %d poprzednich dni (waga)\n", count);
+}
+
+// Callback dla zmiany nawyka
+static void on_habit_toggled(GtkToggleButton *btn, gpointer user_data) {
+    DashboardContext *ctx = (DashboardContext *)user_data;
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    // Pobierz dane z przycisku
+    const char *habit_name = g_object_get_data(G_OBJECT(btn), "habit_name");
+    int date = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(btn), "date"));
+
+    gboolean completed = gtk_toggle_button_get_active(btn);
+
+    // Zapisz do bazy
+    db_save_habit_completion(ctx->state->db, username, date, habit_name, completed);
+    // Zaktualizuj aktualny dzień w pamięci
+    DailyRecord *record = g_hash_table_lookup(ctx->state->memory_collection, "current_daily_record");
+    if (record && record->date == date) {
+        for (int i = 0; i < record->habit_count; i++) {
+            if (g_strcmp0(record->habits[i].name, habit_name) == 0) {
+                record->habits[i].completed = completed;
+                break;
+            }
+        }
+        refresh_dashboard_stats(ctx);
+    }
+    g_print("[Dashboard] Nawyк '%s' na dzień %d: %s\n", habit_name, date, completed ? "zaznaczony" : "niezaznaczony");
+}
+
+// Callback dla zmiany wagi
+static void on_weight_changed(GtkSpinButton *btn, gpointer user_data) {
+    DashboardContext *ctx = (DashboardContext *)user_data;
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    int date = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(btn), "date"));
+    const char *field = g_object_get_data(G_OBJECT(btn), "field");
+    double value = gtk_spin_button_get_value(btn);
+
+    // Pobierz aktualny rekord
+    DailyRecord *record = g_new0(DailyRecord, 1);
+    if (db_load_daily_record(ctx->state->db, username, date, record)) {
+        if (g_strcmp0(field, "weight") == 0) {
+            record->body_measure.weight = value;
+        } else if (g_strcmp0(field, "bf") == 0) {
+            record->body_measure.bodyfat_pct = value;
+        } else if (g_strcmp0(field, "mm") == 0) {
+            record->body_measure.musclemass_pct = value;
+        }
+        db_save_daily_record(ctx->state->db, username, record);
+    }
+    g_free(record);
+
+    g_print("[Dashboard] Zmieniono %s dla dnia %d na %.2f\n", field, date, value);
+}
+
+// Podłącz wszystkie checkboxy nawyków i pola wagi do callbacków
+static void setup_habit_and_weight_callbacks(GtkBuilder *builder, DashboardContext *ctx) {
+    const char *username = g_hash_table_lookup(ctx->state->memory_collection, "current_user");
+    if (!username)
+        return;
+
+    int today = get_today_date();
+    UserSettings *user = g_hash_table_lookup(ctx->state->memory_collection, "user_settings");
+    if (!user) {
+        user = g_new0(UserSettings, 1);
+        db_load_user_settings(ctx->state->db, username, user);
+    }
+
+    // Podłącz checkboxy dla dzisiaj
+    for (int i = 0; i < user->habit_count && i < 8; i++) {
+        char checkbox_id[32];
+        g_snprintf(checkbox_id, sizeof(checkbox_id), "chk_habit_%d_today", i);
+        GtkCheckButton *chk = GTK_CHECK_BUTTON(gtk_builder_get_object(builder, checkbox_id));
+        if (chk) {
+            g_object_set_data(G_OBJECT(chk), "habit_name", g_strdup(user->habit_names[i]));
+            g_object_set_data(G_OBJECT(chk), "date", GINT_TO_POINTER(today));
+            g_signal_connect(chk, "toggled", G_CALLBACK(on_habit_toggled), ctx);
+        }
+    }
+
+    // Podłącz checkboxy dla poprzednich dni
+    for (int day_idx = 0; day_idx < 2 && day_idx + 1 < ctx->habits_count; day_idx++) {
+        int date = ctx->loaded_days_habits[day_idx + 1];
+        for (int i = 0; i < user->habit_count && i < 8; i++) {
+            char checkbox_id[32];
+            g_snprintf(checkbox_id, sizeof(checkbox_id), "chk_habit_%d_day%d", i, day_idx);
+            GtkCheckButton *chk = GTK_CHECK_BUTTON(gtk_builder_get_object(builder, checkbox_id));
+            if (chk) {
+                g_object_set_data(G_OBJECT(chk), "habit_name", g_strdup(user->habit_names[i]));
+                g_object_set_data(G_OBJECT(chk), "date", GINT_TO_POINTER(date));
+                g_signal_connect(chk, "toggled", G_CALLBACK(on_habit_toggled), ctx);
+            }
+        }
+    }
+
+    // Podłącz SpinButton dla wagi - dzisiaj
+    GtkSpinButton *spin_weight_today = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "spin_weight_today"));
+    if (spin_weight_today) {
+        g_object_set_data(G_OBJECT(spin_weight_today), "date", GINT_TO_POINTER(today));
+        g_object_set_data(G_OBJECT(spin_weight_today), "field", "weight");
+        g_signal_connect(spin_weight_today, "value-changed", G_CALLBACK(on_weight_changed), ctx);
+    }
+
+    GtkSpinButton *spin_bf_today = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "spin_bf_today"));
+    if (spin_bf_today) {
+        g_object_set_data(G_OBJECT(spin_bf_today), "date", GINT_TO_POINTER(today));
+        g_object_set_data(G_OBJECT(spin_bf_today), "field", "bf");
+        g_signal_connect(spin_bf_today, "value-changed", G_CALLBACK(on_weight_changed), ctx);
+    }
+
+    GtkSpinButton *spin_mm_today = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "spin_mm_today"));
+    if (spin_mm_today) {
+        g_object_set_data(G_OBJECT(spin_mm_today), "date", GINT_TO_POINTER(today));
+        g_object_set_data(G_OBJECT(spin_mm_today), "field", "mm");
+        g_signal_connect(spin_mm_today, "value-changed", G_CALLBACK(on_weight_changed), ctx);
+    }
+
+    // Podłącz SpinButton dla wagi - poprzednie dni
+    const char *spin_field_names[] = {"weight", "bf", "mm"};
+    const char *spin_prefixes[] = {"spin_weight_day", "spin_bf_day", "spin_mm_day"};
+
+    for (int day_idx = 0; day_idx < 3 && day_idx < ctx->weight_count; day_idx++) {
+        int date = ctx->loaded_days_weight[day_idx];
+        for (int field = 0; field < 3; field++) {
+            char spin_id[32];
+            g_snprintf(spin_id, sizeof(spin_id), "%s%d", spin_prefixes[field], day_idx);
+            GtkSpinButton *spin = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spin_id));
+            if (spin) {
+                g_object_set_data(G_OBJECT(spin), "date", GINT_TO_POINTER(date));
+                g_object_set_data(G_OBJECT(spin), "field", (gpointer)spin_field_names[field]);
+                g_signal_connect(spin, "value-changed", G_CALLBACK(on_weight_changed), ctx);
+            }
+        }
+    }
+
+    g_print("[Dashboard] Podłączono callbacki dla %d checkboksów i spinbuttonów\n", user->habit_count * 3 + 3);
+}
+
 void show_dashboard_window(GtkApplication *app, AppState *state) {
     GtkBuilder *builder = gtk_builder_new_from_file("dashboard.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_window"));
@@ -446,6 +701,7 @@ void show_dashboard_window(GtkApplication *app, AppState *state) {
     load_svg_icon(builder, "icon_stat_pulse_orange", "assets/icons/dashboard/gauge.svg", 16);
 
     load_svg_icon(builder, "icon_header_habits", "assets/icons/activity_n.svg", 28);
+    load_svg_icon(builder, "icon_header_weight_page", "assets/icons/dashboard/weight.svg", 28);
 
     connect_tool_callbacks(builder, window);
 
@@ -473,6 +729,13 @@ void show_dashboard_window(GtkApplication *app, AppState *state) {
     }
 
     refresh_dashboard_stats(ctx);
+
+    // Załaduj poprzednie dni dla dziennika
+    load_and_display_previous_days_habits(ctx);
+    load_and_display_previous_days_weight(ctx);
+
+    // Podłącz wszystkie callbacki dla nawyków i wagi
+    setup_habit_and_weight_callbacks(builder, ctx);
 
     gtk_widget_show_all(window);
 }

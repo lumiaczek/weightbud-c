@@ -69,3 +69,10 @@ gboolean db_load_user_settings(sqlite3 *db, const char *username, UserSettings *
 gboolean db_get_dashboard_data(sqlite3 *db, const char *username, double *start_w, double *curr_w, double *curr_bf, double *curr_mm, double *vo2max, int *workouts_week);
 gboolean db_is_day_started(sqlite3 *db, const char *username, int date);
 gboolean db_mark_day_started(sqlite3 *db, const char *username, int date);
+
+// Funkcje obsługi dziennika nawyków i wagi
+gboolean db_load_daily_record(sqlite3 *db, const char *username, int date, DailyRecord *record);
+gboolean db_save_daily_record(sqlite3 *db, const char *username, const DailyRecord *record);
+gboolean db_get_recent_days(sqlite3 *db, const char *username, int limit, int *dates, int *count);
+gboolean db_save_habit_completion(sqlite3 *db, const char *username, int date, const char *habit_name, gboolean completed);
+gboolean db_save_weight_measurement(sqlite3 *db, const char *username, int date, double weight, double bf, double mm);

@@ -800,6 +800,166 @@
                                       name="draw-indicator"
                                     >True</property><style><class name="habit-box" /></style></object></child>
                                 <child><object class="GtkCheckButton" id="chk_habit_2_today"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_3_today"><property
+                                      name="visible"
+                                    >True</property><property name="active">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class name="habit-box" /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_4_today"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_5_today"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_6_today"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_7_today"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <style><class name="table-row" /></style>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">📄 Dzień 14 tygodnia 2</property>
+                                <property name="halign">start</property>
+                                <property name="width-request">180</property>
+                                <style><class name="table-row-text" /></style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <property name="homogeneous">True</property>
+                                <property name="hexpand">True</property>
+                                <child><object class="GtkCheckButton" id="chk_habit_0_day1"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_1_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_2_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_3_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_4_day1"
+                                  ><property name="visible">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_5_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_6_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_7_day1"
+                                  ><property name="visible">True</property><property
+                                      name="active"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <style><class name="table-row" /></style>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">📄 Dzień 13 tygodnia 2</property>
+                                <property name="halign">start</property>
+                                <property name="width-request">180</property>
+                                <style><class name="table-row-text" /></style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <property name="homogeneous">True</property>
+                                <property name="hexpand">True</property>
+                                <child><object class="GtkCheckButton" id="chk_habit_0_day2"><property
+                                      name="visible"
+                                    >True</property><property name="active">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_1_day2"
+                                  ><property name="visible">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_2_day2"
+                                  ><property name="visible">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
+                                    class="GtkCheckButton"
+                                    id="chk_habit_3_day2"
+                                  ><property name="visible">True</property><property
+                                      name="draw-indicator"
+                                    >True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>\n                                <child><object
                                     class="GtkCheckButton"
                                     id="chk_habit_4_day2"
                                   ><property name="visible">True</property><property
@@ -1314,6 +1474,51 @@
                           </object>
                         </child>
 
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="orientation">horizontal</property>
+                            <style><class name="table-row" /></style>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="label">📄 Dzień 13 tygodnia 2</property>
+                                <property name="halign">start</property>
+                                <property name="width-request">280</property>
+                                <style><class name="table-row-text" /></style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="orientation">horizontal</property>
+                                <property name="homogeneous">True</property>
+                                <property name="hexpand">True</property>
+                                <child><object class="GtkSpinButton" id="spin_weight_day2"><property
+                                      name="visible"
+                                    >True</property><property name="adjustment">adj_weight</property><property
+                                      name="digits"
+                                    >1</property><property name="value">78.7</property><style><class
+                                        name="form-input"
+                                      /></style></object></child>
+                                <child><object class="GtkSpinButton" id="spin_bf_day2"><property
+                                      name="visible"
+                                    >True</property><property name="adjustment">adj_bf</property><property
+                                      name="digits"
+                                    >1</property><property name="value">26.5</property><style><class
+                                        name="form-input"
+                                      /></style></object></child>
+                                <child><object class="GtkSpinButton" id="spin_mm_day2"><property
+                                      name="visible"
+                                    >True</property><property name="adjustment">adj_mm</property><property
+                                      name="digits"
+                                    >1</property><property name="value">69.1</property><style><class
+                                        name="form-input"
+                                      /></style></object></child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
 
                       </object>
                     </child>

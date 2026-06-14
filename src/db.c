@@ -292,3 +292,166 @@ gboolean db_mark_day_started(sqlite3 *db, const char *username, int date) {
     const char *sql = "INSERT OR IGNORE INTO daily_measurements (user_id, log_date) VALUES (?, ?);";
     return db_execute_query(db, sql, "ii", user_id, date);
 }
+
+// Załadowanie rekordu dziennego z bazy danych
+gboolean db_load_daily_record(sqlite3 *db, const char *username, int date, DailyRecord *record) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    memset(record, 0, sizeof(DailyRecord));
+    record->date = date;
+
+    sqlite3_stmt *stmt;
+
+    // Załaduj pomiary wagi
+    const char *sql_measurements = "SELECT weight, bf, mm FROM daily_measurements WHERE user_id = ? AND log_date = ?;";
+    if (sqlite3_prepare_v2(db, sql_measurements, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, date);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            record->body_measure.weight = sqlite3_column_double(stmt, 0);
+            record->body_measure.bodyfat_pct = sqlite3_column_double(stmt, 1);
+            record->body_measure.musclemass_pct = sqlite3_column_double(stmt, 2);
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    // Załaduj nawyki
+    const char *sql_habits = "SELECT h.name, dh.is_completed FROM user_habits h "
+                             "LEFT JOIN daily_habits dh ON h.id = dh.habit_id AND dh.log_date = ? "
+                             "WHERE h.user_id = ? LIMIT 10;";
+    if (sqlite3_prepare_v2(db, sql_habits, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, date);
+        sqlite3_bind_int(stmt, 2, user_id);
+        int i = 0;
+        while (sqlite3_step(stmt) == SQLITE_ROW && i < MAX_HABITS) {
+            const unsigned char *h_name = sqlite3_column_text(stmt, 0);
+            if (h_name) {
+                strncpy(record->habits[i].name, (const char *)h_name, 31);
+                record->habits[i].completed = sqlite3_column_int(stmt, 1);
+                i++;
+            }
+        }
+        record->habit_count = i;
+        sqlite3_finalize(stmt);
+    }
+
+    return TRUE;
+}
+
+// Zapisanie rekordu dziennego do bazy danych
+gboolean db_save_daily_record(sqlite3 *db, const char *username, const DailyRecord *record) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    // Zapisz pomiary
+    if (record->body_measure.weight > 0) {
+        db_save_weight_measurement(db, username, record->date,
+                                   record->body_measure.weight,
+                                   record->body_measure.bodyfat_pct,
+                                   record->body_measure.musclemass_pct);
+    }
+
+    // Zapisz nawyki
+    for (int i = 0; i < record->habit_count; i++) {
+        db_save_habit_completion(db, username, record->date,
+                                 record->habits[i].name,
+                                 record->habits[i].completed);
+    }
+
+    return TRUE;
+}
+
+// Pobierz listę ostatnich dni
+gboolean db_get_recent_days(sqlite3 *db, const char *username, int limit, int *dates, int *count) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    *count = 0;
+    const char *sql = "SELECT DISTINCT log_date FROM daily_measurements WHERE user_id = ? "
+                      "ORDER BY log_date DESC LIMIT ?;";
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, limit);
+        int i = 0;
+        while (sqlite3_step(stmt) == SQLITE_ROW && i < limit) {
+            dates[i] = sqlite3_column_int(stmt, 0);
+            i++;
+        }
+        *count = i;
+        sqlite3_finalize(stmt);
+    }
+
+    return *count > 0;
+}
+
+// Zapisz status nawyka dla konkretnego dnia
+gboolean db_save_habit_completion(sqlite3 *db, const char *username, int date, const char *habit_name, gboolean completed) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    // Najpierw znajdź habit_id
+    const char *sql_find = "SELECT id FROM user_habits WHERE user_id = ? AND name = ?;";
+    sqlite3_stmt *stmt;
+    int habit_id = -1;
+    if (sqlite3_prepare_v2(db, sql_find, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_text(stmt, 2, habit_name, -1, SQLITE_TRANSIENT);
+        if (sqlite3_step(stmt) == SQLITE_ROW) {
+            habit_id = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+    }
+
+    if (habit_id == -1)
+        return FALSE;
+
+    // Wstaw lub zaktualizuj
+    const char *sql = "INSERT INTO daily_habits (user_id, habit_id, log_date, is_completed) "
+                      "VALUES (?, ?, ?, ?) "
+                      "ON CONFLICT(user_id, habit_id, log_date) DO UPDATE SET is_completed = ?;";
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, habit_id);
+        sqlite3_bind_int(stmt, 3, date);
+        sqlite3_bind_int(stmt, 4, completed ? 1 : 0);
+        sqlite3_bind_int(stmt, 5, completed ? 1 : 0);
+        int rc = sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+        return (rc == SQLITE_DONE);
+    }
+
+    return FALSE;
+}
+
+// Zapisz pomiar wagi
+gboolean db_save_weight_measurement(sqlite3 *db, const char *username, int date, double weight, double bf, double mm) {
+    int user_id = db_get_user_id(db, username);
+    if (user_id == -1)
+        return FALSE;
+
+    sqlite3_stmt *stmt;
+    const char *sql = "INSERT INTO daily_measurements (user_id, log_date, weight, bf, mm) "
+                      "VALUES (?, ?, ?, ?, ?) "
+                      "ON CONFLICT(user_id, log_date) DO UPDATE SET weight = ?, bf = ?, mm = ?;";
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) == SQLITE_OK) {
+        sqlite3_bind_int(stmt, 1, user_id);
+        sqlite3_bind_int(stmt, 2, date);
+        sqlite3_bind_double(stmt, 3, weight);
+        sqlite3_bind_double(stmt, 4, bf);
+        sqlite3_bind_double(stmt, 5, mm);
+        sqlite3_bind_double(stmt, 6, weight);
+        sqlite3_bind_double(stmt, 7, bf);
+        sqlite3_bind_double(stmt, 8, mm);
+        int rc = sqlite3_step(stmt);
+        sqlite3_finalize(stmt);
+        return (rc == SQLITE_DONE);
+    }
+
+    return FALSE;
+}
