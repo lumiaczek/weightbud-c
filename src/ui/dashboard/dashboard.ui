@@ -130,7 +130,7 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="dashboard_user_name">
-                    <property name="label">Witaj, Daniel!</property>
+                    <property name="label">Witaj!</property>
                     <property name="hexpand">True</property>
                     <style><class name="welcome-text" /></style>
                   </object>
@@ -207,7 +207,7 @@
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="visible">True</property>
-                                        <property name="label">AKCJA</property>
+                                        <property name="label">DZISIAJ</property>
                                         <property name="halign">start</property>
                                         <style><class name="dash-widget-label" /></style>
                                       </object>
@@ -800,11 +800,13 @@
                                       name="draw-indicator"
                                     >True</property><style><class name="habit-box" /></style></object></child>
                                 <child><object class="GtkCheckButton" id="chk_habit_2_today"><property
-                                    class="GtkCheckButton"
-                                    id="chk_habit_4_day2"
-                                  ><property name="visible">True</property><property
-                                      name="draw-indicator"
-                                    >True</property><style><class
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
+                                        name="habit-box"
+                                      /></style></object></child>
+                                <child><object class="GtkCheckButton" id="chk_habit_4_day2"><property
+                                      name="visible"
+                                    >True</property><property name="draw-indicator">True</property><style><class
                                         name="habit-box"
                                       /></style></object></child>\n                                <child><object
                                     class="GtkCheckButton"
@@ -843,7 +845,7 @@
                   <object class="GtkBox" id="page_trening">
                     <property name="orientation">vertical</property>
                     <property name="valign">center</property>
-                    <child><object class="GtkLabel"><property name="label">Treść: Trening</property><style><class
+                    <child><object class="GtkLabel"><property name="label">Panel treningów</property><style><class
                             name="title-label"
                           /></style></object></child>
                   </object>
@@ -927,7 +929,7 @@
                             <child>
                               <object class="GtkLabel" id="lbl_weight_page_start">
                                 <property name="visible">True</property>
-                                <property name="label">89.7 kg</property>
+                                <property name="label">-- kg</property>
                                 <property name="halign">start</property>
                                 <style><class name="stat-huge-blue" /></style>
                               </object>
@@ -952,7 +954,7 @@
                             <child>
                               <object class="GtkLabel" id="lbl_weight_page_current">
                                 <property name="visible">True</property>
-                                <property name="label">78.6 kg</property>
+                                <property name="label">-- kg</property>
                                 <property name="halign">start</property>
                                 <style><class name="stat-huge-orange" /></style>
                               </object>
@@ -977,7 +979,7 @@
                             <child>
                               <object class="GtkLabel" id="lbl_weight_page_togo">
                                 <property name="visible">True</property>
-                                <property name="label">0.6 kg</property>
+                                <property name="label">-- kg</property>
                                 <property name="halign">start</property>
                                 <style><class name="stat-huge-red" /></style>
                               </object>
@@ -985,7 +987,7 @@
                             <child>
                               <object class="GtkLabel" id="lbl_weight_page_target">
                                 <property name="visible">True</property>
-                                <property name="label">cel: 78 kg</property>
+                                <property name="label">cel: -- kg</property>
                                 <property name="halign">start</property>
                                 <property name="margin-top">4</property>
                                 <style><class name="form-sublabel" /></style>
@@ -1489,7 +1491,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_1rm_epley"><property
                                               name="visible"
-                                            >True</property><property name="label">123.34kg</property><property
+                                            >True</property><property name="label">-- kg</property><property
                                               name="halign"
                                             >start</property><style><class
                                                 name="result-val-orange"
@@ -1511,7 +1513,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_1rm_brzycki"><property
                                               name="visible"
-                                            >True</property><property name="label">121.14kg</property><property
+                                            >True</property><property name="label">-- kg</property><property
                                               name="halign"
                                             >start</property><style><class
                                                 name="result-val-orange"
@@ -1609,7 +1611,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_hr_z1"><property
                                               name="visible"
-                                            >True</property><property name="label">120 bpm</property><style><class
+                                            >True</property><property name="label">-- bpm</property><style><class
                                                 name="hr-list-val"
                                               /></style></object></child>
                                       </object>
@@ -1630,7 +1632,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_hr_z2"><property
                                               name="visible"
-                                            >True</property><property name="label">121 - 149 bpm</property><style><class
+                                            >True</property><property name="label">--</property><style><class
                                                 name="hr-list-val"
                                               /></style></object></child>
                                       </object>
@@ -1651,7 +1653,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_hr_z3"><property
                                               name="visible"
-                                            >True</property><property name="label">150 - 169 bpm</property><style><class
+                                            >True</property><property name="label">--</property><style><class
                                                 name="hr-list-val"
                                               /></style></object></child>
                                       </object>
@@ -1672,7 +1674,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_hr_z4"><property
                                               name="visible"
-                                            >True</property><property name="label">171 - 183 bpm</property><style><class
+                                            >True</property><property name="label">--</property><style><class
                                                 name="hr-list-val"
                                               /></style></object></child>
                                       </object>
@@ -1693,7 +1695,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_hr_z5"><property
                                               name="visible"
-                                            >True</property><property name="label">184 bpm</property><style><class
+                                            >True</property><property name="label">-- bpm</property><style><class
                                                 name="hr-list-val"
                                               /></style></object></child>
                                       </object>
@@ -1812,7 +1814,7 @@
                                           /></style></object></child>
                                     <child><object class="GtkLabel" id="lbl_pace_result"><property
                                           name="visible"
-                                        >True</property><property name="label">5:00 /km</property><property
+                                        >True</property><property name="label">-- /km</property><property
                                           name="halign"
                                         >start</property><style><class
                                             name="result-val-blue"
@@ -1946,7 +1948,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_bmi_result"><property
                                               name="visible"
-                                            >True</property><property name="label">24.1</property><property
+                                            >True</property><property name="label">--</property><property
                                               name="halign"
                                             >start</property><style><class
                                                 name="result-val-red"
@@ -1968,7 +1970,7 @@
                                               /></style></object></child>
                                         <child><object class="GtkLabel" id="lbl_bmr_result"><property
                                               name="visible"
-                                            >True</property><property name="label">1603 kcal</property><property
+                                            >True</property><property name="label">-- kcal</property><property
                                               name="halign"
                                             >start</property><style><class
                                                 name="result-val-red"
